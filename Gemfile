@@ -19,6 +19,8 @@ group :development, :test do
   gem "rails", "~> 7.0"
   gem "web-console"
   gem "nokogiri", "~> 1.16"
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
 end
 
 group :test do

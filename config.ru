@@ -12,7 +12,7 @@ require 'action_view/railtie'
 require 'web_console'
 require 'view_component'
 require 'lookbook'
-require 'design/engine'
+require 'atomic_design/engine'
 
 # 簡単なRailsアプリケーション
 module ComponentDemo
@@ -35,8 +35,8 @@ module ComponentDemo
 
       # https://lookbook.build/guide/config
       # config.view_component.default_preview_layout = "component_preview"
-      config.lookbook.project_name = "Component Preview"
-      config.lookbook.preview_collection_label = "Component"
+      config.lookbook.project_name = "AtomicDesign Preview"
+      config.lookbook.preview_collection_label = "Components"
       config.lookbook.project_logo = false
       config.lookbook.ui_favicon = false
       config.lookbook.reload_on_change = false
@@ -47,7 +47,7 @@ module ComponentDemo
 end
 
 puts "🚀 Initializing Rails application..."
-puts "📚 Lookbook preview_path #{File.expand_path('previews/design/component', __dir__)}"
+puts "📚 Lookbook preview_path #{File.expand_path('previews/atomic_design/component', __dir__)}"
 
 ComponentDemo::Application.initialize!
 

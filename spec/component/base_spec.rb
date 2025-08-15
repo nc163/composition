@@ -5,8 +5,8 @@ require "design/component/default_layout"
 require "design/component/property"
 require "design/component/base"
 
-describe Design::Component::Base, type: :component do
-  let(:component_class) { Design::Component::Base }
+describe AtomicDesign::Component::Base, type: :component do
+  let(:component_class) { AtomicDesign::Component::Base }
 
   describe "initialization" do
     context "引数なしで初期化" do
@@ -168,7 +168,7 @@ describe Design::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: Design::Helpers::AtomicDesign::FormBuilder
+        builder: AtomicDesign::Helpers::FormBuilder
       )
       
       component.form_with
@@ -179,7 +179,7 @@ describe Design::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'custom-form',
         local: true,
-        builder: Design::Helpers::AtomicDesign::FormBuilder,
+        builder: AtomicDesign::Helpers::FormBuilder,
         method: :post
       )
       
@@ -191,7 +191,7 @@ describe Design::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: Design::Helpers::AtomicDesign::FormBuilder
+        builder: AtomicDesign::Helpers::FormBuilder
       ).and_yield
       
       component.form_with(&block)
@@ -307,10 +307,10 @@ describe Design::Component::Base, type: :component do
     end
 
     describe ".lambda_slots_component_handler" do
-      let(:valid_component_class) { Class.new(Design::Component::Base) }
+      let(:valid_component_class) { Class.new(AtomicDesign::Component::Base) }
       let(:invalid_component_class) { Class.new }
 
-      it "Design::Component::Baseを継承していないクラスでArgumentErrorが発生する" do
+      it "AtomicDesign::Component::Baseを継承していないクラスでArgumentErrorが発生する" do
         expect {
           component_class.send(:lambda_slots_component_handler, invalid_component_class)
         }.to raise_error(ArgumentError)
@@ -341,11 +341,11 @@ describe Design::Component::Base, type: :component do
     end
 
     it "DefaultLayoutモジュールがincludeされている" do
-      expect(component_class.included_modules).to include(Design::Component::DefaultLayout)
+      expect(component_class.included_modules).to include(AtomicDesign::Component::DefaultLayout)
     end
 
     it "Propertyモジュールがincludeされている" do
-      expect(component_class.included_modules).to include(Design::Component::Property)
+      expect(component_class.included_modules).to include(AtomicDesign::Component::Property)
     end
   end
 

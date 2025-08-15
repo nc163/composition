@@ -1,7 +1,0 @@
-<div style="display: flex; gap: 1rem; align-items: center;">
-  <% Design::Component::Example::ButtonComponent::SIZES.each do |size| %>
-    <%= render Design::Component::Example::ButtonComponent.new(size: size) do %>
-      <%= size.capitalize %>
-    <% end %>
-  <% end %>
-</div>

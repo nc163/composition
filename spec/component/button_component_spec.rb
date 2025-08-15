@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-describe Design::Component::ButtonComponent, type: :component do
+describe AtomicDesign::Component::ButtonComponent, type: :component do
   
   describe "initialization" do
     it "creates a button with default attributes" do
