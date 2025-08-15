@@ -1,0 +1,7 @@
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+  <% Design::Component::Example::ButtonComponent::VARIANTS.each do |variant| %>
+    <%= render Design::Component::Example::ButtonComponent.new(variant: variant) do %>
+      <%= variant.capitalize %>
+    <% end %>
+  <% end %>
+</div>
