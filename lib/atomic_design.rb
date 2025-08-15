@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative "atomic_design/version"
-require_relative "atomic_design/configuration"
 
 module AtomicDesign
   autoload :Engine, "atomic_design/engine"
