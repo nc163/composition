@@ -5,7 +5,7 @@ require 'atomic_design/component/property'
 
 module AtomicDesign
   module Component
-    # コンポーネント基底クラス
+    # AtomicDesign コンポーネント基底クラス
     class Base < ViewComponent::Base
       include DefaultLayout
       include Property
@@ -91,7 +91,7 @@ module AtomicDesign
       def form_with(options = {}, &block)
         options[:class] ||= 'form'
         options[:local] ||= true
-        options[:builder] ||= Design::Helpers::AtomicDesign::FormBuilder
+        options[:builder] ||= ::AtomicDesign::Helpers::FormHelper::FormBuilder
         helpers.form_with(**options, &block)
       end
 

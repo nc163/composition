@@ -13,6 +13,19 @@ bundle exec rackup preview.ru
 bundle exec rspec
 ```
 
+## 使い方
+ApplicationHelper に追加
+```ruby
+module ApplicationHelper
+  include AtomicDesign::Helpers
+  ...
+```
+view
+```erb
+<%= atomic_design.organism.card_table %>
+```
+
+
 ## TODO
 jsを使い回すようになったら、manifest.js に 追加するジェネレーターを作らないとかも。。
 ```javascript

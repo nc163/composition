@@ -9,5 +9,9 @@ module AtomicDesign
       autoload :ComponentHelper
       autoload :FormHelper
     end
+
+    extend ActiveSupport::Concern
+    include ComponentHelper
+    include FormHelper
   end
 end

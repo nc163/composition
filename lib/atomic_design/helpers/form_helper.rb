@@ -116,6 +116,12 @@ module AtomicDesign
           @template.render component.new(method, **options), &block
         end
       end
+
+      # def atomic_design_form_with
+      #   options = {}
+      #   options[:form] = self
+      #   @template.render AtomicDesign::Component::Atom::Form.new(**options)
+      # end
     end
   end
 end
