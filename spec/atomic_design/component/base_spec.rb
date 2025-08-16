@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'atomic_design/component/default_layout'
-require 'atomic_design/component/property'
 require 'atomic_design/component/base'
 
 describe AtomicDesign::Component::Base, type: :component do
