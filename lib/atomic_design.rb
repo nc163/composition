@@ -1,10 +1,17 @@
 # frozen_string_literal: true
 
-require_relative "atomic_design/version"
+require_relative 'atomic_design/version'
 
 module AtomicDesign
-  autoload :Engine, "atomic_design/engine"
+  extend ActiveSupport::Autoload
+  # autoload :Engine, 'atomic_design/engine'
 
+  eager_autoload do
+    autoload :Helpers
+    autoload :Component
+  end
+
+  # = AtomicDesign Configuration
   class Configuration
     attr_accessor :component_design
 
@@ -24,6 +31,4 @@ module AtomicDesign
   end
 end
 
-if defined?(Rails)
-  require "atomic_design/engine"
-end
+require 'atomic_design/engine' if defined?(Rails)

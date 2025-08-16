@@ -2,12 +2,19 @@
 
 AtomicDesignは、Railsアプリケーション用の再利用可能なUIコンポーネントライブラリです。
 
+## Lookbook
 ```bash
-bundle exec rackup config.ru -o 0.0.0.0 -p 9292
+bundle exec rackup preview.ru
+```
+ブラウザで開く http://0.0.0.0:8080
+
+## テスト
+```bash
+bundle exec rspec
 ```
 
 ## TODO
-manifest.js に 追加するジェネレーターを作らないと
+jsを使い回すようになったら、manifest.js に 追加するジェネレーターを作らないとかも。。
 ```javascript
 //= link_tree ../../../app/components .js
 ```

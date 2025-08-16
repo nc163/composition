@@ -3,9 +3,10 @@
 module AtomicDesign
   # = AtomicDesign Helpers
   module Helpers
+    # = AtomicDesign Form Helpers
+    module FormHelper
       # see: https://api.rubyonrails.org/v8.0/classes/ActionView/Helpers/FormBuilder.html
       class FormBuilder < ::ActionView::Helpers::FormBuilder
-
         # フィールドタイプとメソッドのマッピング
         FIELD_MAPPINGS = {
           string: :text_field,
@@ -20,18 +21,11 @@ module AtomicDesign
           select: :select
         }.freeze
 
-        # def field(type, method, **options)
-        #   field_method = FIELD_MAPPINGS[type]
-        #   raise ArgumentError, "Unknown form field type: #{type}" unless field_method
-
-        #   self.method(field_method).call(method, **options)
-        # end
-
-        def field(type, ...)
+        def any_field(type, ...)
           field_method = FIELD_MAPPINGS[type]
           raise ArgumentError, "Unknown form field type: #{type}" unless field_method
 
-          self.method(field_method).call(...)
+          method(field_method).call(...)
         end
 
         def text_field(method, **options)
@@ -43,7 +37,6 @@ module AtomicDesign
           end
         end
 
-
         def text_area(method, **options)
           if options.delete(:use_default)
             super(method, **options)
@@ -52,7 +45,6 @@ module AtomicDesign
             @template.render AtomicDesign::Component::Atom::Form::TextArea.new(method, **options)
           end
         end
-
 
         def check_box(method, **options)
           if options.delete(:use_default)
@@ -63,7 +55,6 @@ module AtomicDesign
           end
         end
 
-
         def date_field(method, **options)
           if options.delete(:use_default)
             super(method, **options)
@@ -73,7 +64,6 @@ module AtomicDesign
           end
         end
 
-
         def time_field(method, **options)
           if options.delete(:use_default)
             super(method, **options)
@@ -82,7 +72,6 @@ module AtomicDesign
             @template.render AtomicDesign::Component::Atom::Form::TimeField.new(method, **options)
           end
         end
-
 
         def datetime_field(method, **options)
           if options.delete(:use_default)
@@ -119,12 +108,14 @@ module AtomicDesign
         def component(component_name, method = nil, **options, &block)
           component = component_name.to_s.camelize.safe_constantize
           raise "Forget to define #{component_name} ?" if component.nil?
-          raise "#{component}(#{component_name}) must inherit from ApplicationComponent." unless component < AtomicDesign::Component::Base
+          unless component < AtomicDesign::Component::Base
+            raise "#{component}(#{component_name}) must inherit from ApplicationComponent."
+          end
 
           options[:form] = self
           @template.render component.new(method, **options), &block
         end
-
       end
+    end
   end
 end

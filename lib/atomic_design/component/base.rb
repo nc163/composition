@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
-#
+require 'atomic_design/component/default_layout'
+require 'atomic_design/component/property'
+
 module AtomicDesign
-  #
   module Component
     # コンポーネント基底クラス
     class Base < ViewComponent::Base
-
       include DefaultLayout
       include Property
 
       INVALID_OPTIONS_KEYWORDS = %i[properties attributes].freeze
 
-      attr_accessor :context, :options
-      attr_accessor :form
+      attr_accessor :context, :options, :form
 
       # View Context
       #
@@ -33,12 +32,12 @@ module AtomicDesign
         super
 
         if block_given?
-        # if !context_or_form_method_or_options.nil? && options.empty? && block_given?
+          # if !context_or_form_method_or_options.nil? && options.empty? && block_given?
           options = context_or_form_method_or_options || {}
           context_or_form_method_or_options = nil
         end
 
-        raise ArgumentError, "Invalid arguments" if options.keys.any? { |k| INVALID_OPTIONS_KEYWORDS.include?(k) }
+        raise ArgumentError, 'Invalid arguments' if options.keys.any? { |k| INVALID_OPTIONS_KEYWORDS.include?(k) }
 
         other = partition_by_attr_accessor_for_send(options || {})
         @options = partition_by(other)
@@ -48,7 +47,6 @@ module AtomicDesign
       # == Class Methods
 
       class << self
-
         def options_for_self
           to_options_for_self.compact.reduce(&:merge)
         end
@@ -60,7 +58,7 @@ module AtomicDesign
         def lambda_slots_component_handler(component_class)
           raise ArgumentError unless component_class < AtomicDesign::Component::Base
 
-          Proc.new do |context_or_form_method_or_options = nil, options = {}, &block|
+          proc do |context_or_form_method_or_options = nil, options = {}, &block|
             component_class.new(context_or_form_method_or_options, options, &block)
           end
         end
@@ -72,7 +70,6 @@ module AtomicDesign
 
           options
         end
-
       end
 
       def context?
@@ -131,7 +128,7 @@ module AtomicDesign
 
       # 色々なHTML属性のマージを頑張る
       def merge_html_attributes(key, old_value, new_value)
-        raise ArgumentError, "Key must be a Symbol" unless key.is_a?(Symbol)
+        raise ArgumentError, 'Key must be a Symbol' unless key.is_a?(Symbol)
 
         case key
         when :class
@@ -143,7 +140,6 @@ module AtomicDesign
         else raise "Invalid key: #{key}"
         end
       end
-
     end
   end
 end

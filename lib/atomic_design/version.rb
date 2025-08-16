@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-#
-module AtomicDesign
-  VERSION = "0.1.0"
+module AtomicDesign # :nodoc:
+  VERSION = '0.1.0'
+
+  def self.gem_version
+    Gem::Version.new(VERSION)
+  end
 end

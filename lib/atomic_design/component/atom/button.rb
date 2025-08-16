@@ -2,9 +2,9 @@
 
 module AtomicDesign
   module Component
-    module Atom
-      class Button < Component
-
+    module Atom # :nodoc:
+      #
+      class Button < ::AtomicDesign::Component::Base
         default_layout class: 'btn'
 
         property :color, primary: { class: 'text-bg-primary' },
@@ -23,7 +23,6 @@ module AtomicDesign
             content_tag :span, context, attributes
           end
         end
-
       end
     end
   end

@@ -3,8 +3,144 @@
 module AtomicDesign
   # = AtomicDesign Helpers
   module Helpers
-    #
-    module ComponentHelper
+    module ComponentHelper # :nodoc:
+      extend ActiveSupport::Concern
+
+      class AtomicDesignBuilder # :nodoc:
+        def initialize(view_context)
+          @view_context = view_context
+        end
+
+        class ComponentBuilder # :nodoc:
+          def initialize(view_context, component_type)
+            @view_context = view_context
+            @component_type = component_type
+          end
+
+          def build(name)
+            component_string = "atomic_design/component/#{@component_type}/#{name.to_s.dasherize}".camelize
+            component = component_string.safe_constantize
+
+            raise "#{component_string} is not defined." if component.nil?
+            unless component < AtomicDesign::Component::Base
+              raise "#{component.name} must inherit from AtomicDesign::Component::Base"
+            end
+
+            component
+          end
+
+          def tag_options(options, escape = true)
+            return if options.blank?
+
+            output = +''
+            sep    = ' '
+            options.each_pair do |key, value|
+              type = TAG_TYPES[key]
+              if type == :data && value.is_a?(Hash)
+                value.each_pair do |k, v|
+                  next if v.nil?
+
+                  output << sep
+                  output << prefix_tag_option(key, k, v, escape)
+                end
+              elsif type == :aria && value.is_a?(Hash)
+                value.each_pair do |k, v|
+                  next if v.nil?
+
+                  case v
+                  when Array, Hash
+                    tokens = TagHelper.build_tag_values(v)
+                    next if tokens.none?
+
+                    v = safe_join(tokens, ' ')
+                  else
+                    v = v.to_s
+                  end
+
+                  output << sep
+                  output << prefix_tag_option(key, k, v, escape)
+                end
+              elsif type == :boolean
+                if value
+                  output << sep
+                  output << boolean_tag_option(key)
+                end
+              elsif !value.nil?
+                output << sep
+                output << tag_option(key, value, escape)
+              end
+            end
+            output unless output.empty?
+          end
+
+          def boolean_tag_option(key)
+            %(#{key}="#{key}")
+          end
+
+          def tag_option(key, value, escape)
+            case value
+            when Array, Hash
+              value = TagHelper.build_tag_values(value) if key.to_s == 'class'
+              value = escape ? safe_join(value, ' ') : value.join(' ')
+            else
+              value = escape ? ERB::Util.unwrapped_html_escape(value) : value.to_s
+            end
+            value = value.gsub('"', '&quot;') if value.include?('"')
+            %(#{key}="#{value}")
+          end
+
+          private
+
+          def prefix_tag_option(prefix, key, value, escape)
+            key = "#{prefix}-#{key.to_s.dasherize}"
+            value = value.to_json unless value.is_a?(String) || value.is_a?(Symbol) || value.is_a?(BigDecimal)
+            tag_option(key, value, escape)
+          end
+
+          def respond_to_missing?(*args)
+            true
+          end
+
+          def method_missing(called, *args, **options, &block)
+            component = build(called)
+
+            @view_context.render component.new(*args, **options), &block
+          end
+        end
+
+        def atom
+          component_builder(@view_context, :atom)
+        end
+
+        def molecule
+          component_builder(@view_context, :molecule)
+        end
+
+        def organism
+          component_builder(@view_context, :organism)
+        end
+
+        def template
+          component_builder(@view_context, :template)
+        end
+
+        def page
+          component_builder(@view_context, :page)
+        end
+
+        private
+
+        def component_builder(view_context, component_type)
+          @component_builder ||= ComponentBuilder.new(view_context, component_type)
+        end
+      end
+
+      # コンポーネントを生成する
+      # atomic_design.organism.modal(options)
+      # => render AtomicDesign::Component::Organism::Modal.new(options)
+      def atomic_design
+        atomic_design_builder
+      end
 
       # DSL for rendering AtomicDesignComponent based components.
       #
@@ -36,18 +172,18 @@ module AtomicDesign
         component = component_full_name.camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
-        raise "#{component}(#{name}) must inherit from AtomicDesignComponent." unless component < AtomicDesign::Component::Base
+        unless component < AtomicDesign::Component::Base
+          raise "#{component}(#{name}) must inherit from AtomicDesignComponent."
+        end
 
         render component.new(context_or_options, **options), &block
       end
-       
-      # 
-      class ComponentBuilder
-        
-
-      end
 
       private
+
+      def atomic_design_builder
+        @atomic_design_builder ||= AtomicDesignBuilder.new(self)
+      end
 
       # def form_with_component(options={})
       #   options[:class] ||= 'form'
@@ -70,18 +206,17 @@ module AtomicDesign
 
       def component_name_space
         @component_name_space ||= case AtomicDesign.configuration.component_design
-        when :atomic_design
-          "atomic_design/component/#{AtomicDesign.configuration.component_design}/organisms"
-        else
-          "atomic_design/component/#{AtomicDesign.configuration.component_design}"
-        end
+                                  when :atomic_design
+                                    "atomic_design/component/#{AtomicDesign.configuration.component_design}/organisms"
+                                  else
+                                    "atomic_design/component/#{AtomicDesign.configuration.component_design}"
+                                  end
       end
 
       #
       def resolve_component_full_name(name, default: nil)
         "#{component_name_space}/#{name}"
       end
-
     end
   end
 end

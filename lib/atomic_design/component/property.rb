@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Component
     module Property
-
       PROPERTY_DEFAULT_KEYWORDS = :default
 
       def self.included(base)
@@ -110,7 +108,6 @@ module AtomicDesign
 
           options << properties.reduce({}) { |r, (k, v)| { k => v.keys } }
         end
-
 
         private
 

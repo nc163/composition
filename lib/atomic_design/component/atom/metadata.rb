@@ -3,25 +3,23 @@
 # ==
 module AtomicDesign
   module Component
+    module Atom
+      class Metadata < Component
+        default_layout class: 'text-decoration-none'
 
-      module Atom
-        class Metadata < Component
-          default_layout class: 'text-decoration-none'
+        # == property
+        property :color, primary: { class: 'text-primary' },
+                         secondary: { class: 'text-secondary' },
+                         success: { class: 'text-success' },
+                         danger: { class: 'text-danger' },
+                         warning: { class: 'text-warning' },
+                         info: { class: 'text-info' }
 
-          # == property
-          property :color, primary: { class: 'text-primary' },
-                           secondary: { class: 'text-secondary' },
-                           success: { class: 'text-success' },
-                           danger: { class: 'text-danger' },
-                           warning: { class: 'text-warning' },
-                           info: { class: 'text-info' }
-
-          # == Methods
-          def call
-            content_to :p, context, attributes
-          end
-
+        # == Methods
+        def call
+          content_to :p, context, attributes
         end
       end
+    end
   end
 end
