@@ -5,9 +5,8 @@ require_relative 'atomic_design/version'
 
 module AtomicDesign
   extend ActiveSupport::Autoload
-  # autoload :Engine, 'atomic_design/engine'
 
-  # Rails::Engineに登録しているので、Rails環境ではZeitwerkが宣言時に名前解決できている
+  # Rails::Engineに登録しているので、Rails環境ではZeitwerkによって宣言時に名前解決できている
   # rspecなどZeitwerkがない環境のために、eager_autoloadしている
   eager_autoload do
     autoload :Helpers
