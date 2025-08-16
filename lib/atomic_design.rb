@@ -3,7 +3,7 @@
 require 'view_component'
 require_relative 'atomic_design/version'
 
-module AtomicDesign
+module AtomicDesign # :nodoc:
   extend ActiveSupport::Autoload
 
   # Rails::Engineに登録しているので、Rails環境ではZeitwerkによって宣言時に名前解決できている

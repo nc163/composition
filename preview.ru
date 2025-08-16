@@ -15,8 +15,8 @@ require 'lookbook'
 require 'atomic_design/engine'
 
 # 簡単なRailsアプリケーション
-module AtomicDesignPreview
-  class Application < Rails::Application
+module AtomicDesign
+  class Application < Rails::Application # :nodoc:
     config.load_defaults 7.0
     config.root = __dir__
     config.eager_load = false
@@ -44,15 +44,14 @@ module AtomicDesignPreview
   end
 end
 
-AtomicDesignPreview::Application.initialize!
+AtomicDesign::Application.initialize!
 
-AtomicDesignPreview::Application.routes.draw do
+AtomicDesign::Application.routes.draw do
   mount Lookbook::Engine, at: '/'
 end
 
-# run AtomicDesignPreview::Application
 run(
-  app: AtomicDesignPreview::Application,
+  app: AtomicDesign::Application,
   Host: '0.0.0.0',
   Port: 8080
 )
