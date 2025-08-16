@@ -91,7 +91,7 @@ module AtomicDesign
       def form_with(options = {}, &block)
         options[:class] ||= 'form'
         options[:local] ||= true
-        options[:builder] ||= ::AtomicDesign::Helpers::FormHelper::FormBuilder
+        options[:builder] ||= ::AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder
         helpers.form_with(**options, &block)
       end
 
