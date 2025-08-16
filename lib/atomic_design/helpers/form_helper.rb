@@ -33,7 +33,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::TextField.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::TextField.new(method, **options)
           end
         end
 
@@ -42,7 +42,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::TextArea.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::TextArea.new(method, **options)
           end
         end
 
@@ -51,7 +51,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::CheckBoxField.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::CheckBoxField.new(method, **options)
           end
         end
 
@@ -60,7 +60,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::DateField.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::DateField.new(method, **options)
           end
         end
 
@@ -69,7 +69,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::TimeField.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::TimeField.new(method, **options)
           end
         end
 
@@ -78,7 +78,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::DatetimeField.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::DatetimeField.new(method, **options)
           end
         end
 
@@ -88,7 +88,7 @@ module AtomicDesign
             super(method, choices, { include_blank: '選択してください' }, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::Select.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::Select.new(method, **options)
           end
         end
 
@@ -98,7 +98,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Component::Atom::Form::Submit.new(method, **options)
+            @template.render AtomicDesign::Components::Atom::Form::Submit.new(method, **options)
           end
         end
 
@@ -108,7 +108,7 @@ module AtomicDesign
         def component(component_name, method = nil, **options, &block)
           component = component_name.to_s.camelize.safe_constantize
           raise "Forget to define #{component_name} ?" if component.nil?
-          unless component < AtomicDesign::Component::Base
+          unless component < AtomicDesign::Components::Base
             raise "#{component}(#{component_name}) must inherit from ApplicationComponent."
           end
 
@@ -120,7 +120,7 @@ module AtomicDesign
       # def atomic_design_form_with
       #   options = {}
       #   options[:form] = self
-      #   @template.render AtomicDesign::Component::Atom::Form.new(**options)
+      #   @template.render AtomicDesign::Components::Atom::Form.new(**options)
       # end
     end
   end

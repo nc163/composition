@@ -10,7 +10,7 @@ module AtomicDesign # :nodoc:
   # rspecなどZeitwerkがない環境のために、eager_autoloadしている
   eager_autoload do
     autoload :Helpers
-    autoload :Component
+    autoload :Components
   end
 
   # = AtomicDesign Configuration

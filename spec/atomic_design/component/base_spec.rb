@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'atomic_design/component/base'
+require 'atomic_design/components/base'
 
-describe AtomicDesign::Component::Base, type: :component do
-  let(:component_class) { AtomicDesign::Component::Base }
+describe AtomicDesign::Components::Base, type: :component do
+  let(:component_class) { AtomicDesign::Components::Base }
 
   describe 'initialization' do
     context '引数なしで初期化' do
@@ -305,10 +305,10 @@ describe AtomicDesign::Component::Base, type: :component do
     end
 
     describe '.lambda_slots_component_handler' do
-      let(:valid_component_class) { Class.new(AtomicDesign::Component::Base) }
+      let(:valid_component_class) { Class.new(AtomicDesign::Components::Base) }
       let(:invalid_component_class) { Class.new }
 
-      it 'AtomicDesign::Component::Baseを継承していないクラスでArgumentErrorが発生する' do
+      it 'AtomicDesign::Components::Baseを継承していないクラスでArgumentErrorが発生する' do
         expect do
           component_class.send(:lambda_slots_component_handler, invalid_component_class)
         end.to raise_error(ArgumentError)
@@ -339,11 +339,11 @@ describe AtomicDesign::Component::Base, type: :component do
     end
 
     it 'DefaultLayoutモジュールがincludeされている' do
-      expect(component_class.included_modules).to include(AtomicDesign::Component::DefaultLayout)
+      expect(component_class.included_modules).to include(AtomicDesign::Components::DefaultLayout)
     end
 
     it 'Propertyモジュールがincludeされている' do
-      expect(component_class.included_modules).to include(AtomicDesign::Component::Property)
+      expect(component_class.included_modules).to include(AtomicDesign::Components::Property)
     end
   end
 

@@ -12,14 +12,14 @@ RSpec.describe AtomicDesign::Helpers::ComponentHelper, type: :helper do
   it 'provides atomic_design builder on the view' do
     expect(view).to respond_to(:atomic_design)
     builder = view.atomic_design
-    expect(builder).to respond_to(:atom, :molecule, :organism, :template, :page)
+    expect(builder).to respond_to(:atoms, :molecules, :organisms, :templates, :pages)
 
-    expect(view.atomic_design.atom.button).to eq '<span class="btn"></span>'
+    expect(view.atomic_design.atoms.button).to eq '<span class="btn"></span>'
   end
 
   it 'raises an error when referencing a non-existent builder component' do
     expect do
-      view.atomic_design.atom.non_existent_component
+      view.atomic_design.atoms.non_existent_component
     end.to raise_error(/is not defined\./)
   end
 end

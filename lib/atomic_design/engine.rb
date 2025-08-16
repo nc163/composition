@@ -20,7 +20,7 @@ module AtomicDesign
     #
     initializer 'atomic_design.check_view_component', before: 'view_component.set_configs' do |app|
       if Gem.loaded_specs['view_component'].version < Gem::Version.new('4.0.0')
-        app.config.view_component.view_component_path = root.join('lib', 'atomic_design', 'component').to_s
+        app.config.view_component.view_component_path = root.join('lib', 'atomic_design', 'components').to_s
         app.config.view_component.capture_compatibility_patch_enabled = true
       end
     end

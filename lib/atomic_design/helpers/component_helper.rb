@@ -22,8 +22,8 @@ module AtomicDesign
             component = component_string.safe_constantize
 
             raise "#{component_string} is not defined." if component.nil?
-            unless component < AtomicDesign::Component::Base
-              raise "#{component.name} must inherit from AtomicDesign::Component::Base"
+            unless component < AtomicDesign::Components::Base
+              raise "#{component.name} must inherit from AtomicDesign::Components::Base"
             end
 
             component
@@ -108,24 +108,24 @@ module AtomicDesign
           end
         end
 
-        def atom
-          component_builder(@view_context, :atom)
+        def atoms
+          component_builder(@view_context, :atoms)
         end
 
-        def molecule
-          component_builder(@view_context, :molecule)
+        def molecules
+          component_builder(@view_context, :molecules)
         end
 
-        def organism
-          component_builder(@view_context, :organism)
+        def organisms
+          component_builder(@view_context, :organisms)
         end
 
-        def template
-          component_builder(@view_context, :template)
+        def templates
+          component_builder(@view_context, :templates)
         end
 
-        def page
-          component_builder(@view_context, :page)
+        def pages
+          component_builder(@view_context, :pages)
         end
 
         private
@@ -136,8 +136,8 @@ module AtomicDesign
       end
 
       # コンポーネントを生成する
-      # atomic_design.organism.modal(options)
-      # => render AtomicDesign::Component::Organism::Modal.new(options)
+      # atomic_design.organisms.modal(options)
+      # => render AtomicDesign::Components::Organisms::Modal.new(options)
       def atomic_design
         atomic_design_component_builder
       end
@@ -158,20 +158,20 @@ module AtomicDesign
       #
       # @example
       #   component 'atoms/alert', id: 'alert', class: 'alert'
-      #   => AtomicDesign::Component::Atom::Alert.new(id: 'alert', class: 'alert')
+      #   => AtomicDesign::Components::Atom::Alert.new(id: 'alert', class: 'alert')
       #
       # また、AtomicDesignの場合、**organisms**以外のコンポーネントをView呼び出すことは稀なので
       # **organisms**/以下のコンポーネントを呼び出す場合は省略できる
       #
       # @example
       #   component 'sidebar', id: 'sidebar', class: 'sidebar'
-      #   => AtomicDesign::Organism::Sidebar.new(id: 'sidebar', class: 'sidebar')
+      #   => AtomicDesign::Organisms::Sidebar.new(id: 'sidebar', class: 'sidebar')
       #
       def component(component_name, context_or_options = nil, **options, &block)
         component = "atomic_design/component/organism/#{component_name}".camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
-        unless component < AtomicDesign::Component::Base
+        unless component < AtomicDesign::Components::Base
           raise "#{component}(#{name}) must inherit from AtomicDesignComponent."
         end
 
@@ -205,7 +205,7 @@ module AtomicDesign
 
       #
       def resolve_component_full_name(name, default: nil)
-        "atomic_design/component/organism/#{name}"
+        "atomic_design/component/organisms/#{name}"
       end
     end
   end

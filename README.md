@@ -22,7 +22,7 @@ module ApplicationHelper
 ```
 view
 ```erb
-<%= atomic_design.organism.card_table %>
+<%= atomic_design.organisms.card_table %>
 ```
 
 

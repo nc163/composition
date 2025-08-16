@@ -19,8 +19,9 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/nc163'
 
   spec.files = Dir[
-    'lib/**/*.rb',
-    'lib/**/*.erb',
+    'lib/atomic_design/.rb',
+    'lib/atomic_design/**/*.rb',
+    'lib/atomic_design/**/*.erb',
     'README.md'
   ]
   # spec.bindir        = "exe"
