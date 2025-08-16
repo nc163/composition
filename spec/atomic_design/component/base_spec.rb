@@ -166,7 +166,7 @@ describe AtomicDesign::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: AtomicDesign::Helpers::FormBuilder
+        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder
       )
 
       component.form_with
@@ -177,7 +177,7 @@ describe AtomicDesign::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'custom-form',
         local: true,
-        builder: AtomicDesign::Helpers::FormBuilder,
+        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder,
         method: :post
       )
 
@@ -189,7 +189,7 @@ describe AtomicDesign::Component::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: AtomicDesign::Helpers::FormBuilder
+        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder
       ).and_yield
 
       component.form_with(&block)

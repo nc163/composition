@@ -6,7 +6,7 @@ module AtomicDesign
     # = AtomicDesign Form Helpers
     module FormHelper
       # see: https://api.rubyonrails.org/v8.0/classes/ActionView/Helpers/FormBuilder.html
-      class FormBuilder < ::ActionView::Helpers::FormBuilder
+      class AtomicDesignFormBuilder < ::ActionView::Helpers::FormBuilder
         # フィールドタイプとメソッドのマッピング
         FIELD_MAPPINGS = {
           string: :text_field,

@@ -6,7 +6,7 @@ module AtomicDesign
     module ComponentHelper # :nodoc:
       extend ActiveSupport::Concern
 
-      class AtomicDesignBuilder # :nodoc:
+      class AtomicDesignComponentBuilder # :nodoc:
         def initialize(view_context)
           @view_context = view_context
         end
@@ -139,7 +139,7 @@ module AtomicDesign
       # atomic_design.organism.modal(options)
       # => render AtomicDesign::Component::Organism::Modal.new(options)
       def atomic_design
-        atomic_design_builder
+        atomic_design_component_builder
       end
 
       # DSL for rendering AtomicDesignComponent based components.
@@ -180,8 +180,8 @@ module AtomicDesign
 
       private
 
-      def atomic_design_builder
-        @atomic_design_builder ||= AtomicDesignBuilder.new(self)
+      def atomic_design_component_builder
+        @atomic_design_component_builder ||= AtomicDesignComponentBuilder.new(self)
       end
 
       # def form_with_component(options={})
