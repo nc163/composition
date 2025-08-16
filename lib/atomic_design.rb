@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'view_component'
 require_relative 'atomic_design/version'
 
 module AtomicDesign

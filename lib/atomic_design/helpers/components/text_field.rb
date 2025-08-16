@@ -3,8 +3,7 @@
 module AtomicDesign
   module Helpers
     module Components # :nodoc:
-      class TextField < ::AtomicDesign::Component::Atom::Form::TextField # :nodoc:
-      end
+      class TextField < ::AtomicDesign::Component::Atom::Form::TextField; end # :nodoc:
     end
   end
 end

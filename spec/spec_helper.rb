@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'rails'
+require 'action_controller'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
 

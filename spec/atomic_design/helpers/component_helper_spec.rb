@@ -16,4 +16,10 @@ RSpec.describe AtomicDesign::Helpers::ComponentHelper, type: :helper do
 
     expect(view.atomic_design.atom.button).to eq '<span class="btn"></span>'
   end
+
+  it 'raises an error when referencing a non-existent builder component' do
+    expect do
+      view.atomic_design.atom.non_existent_component
+    end.to raise_error(/is not defined\./)
+  end
 end
