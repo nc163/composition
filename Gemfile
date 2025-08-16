@@ -16,7 +16,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'nokogiri', '~> 1.16'
   gem 'ostruct'
   gem 'rails', '~> 7.0'
   gem 'rubocop', require: false

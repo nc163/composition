@@ -31,7 +31,7 @@ module AtomicDesign
                     concat with_head('検索')
                     concat(with_body do
                       form.object.class.attribute_types.each do |name, model_type|
-                        concat form.field(model_type.type, name.to_sym)
+                        concat form.any_field(model_type.type, name.to_sym)
                       end
                     end)
                     concat(with_foot do

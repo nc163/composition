@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    atomic_design (0.1.1)
+    atomic_design (0.2.1)
       view_component (~> 3.22)
 
 GEM
@@ -348,7 +348,6 @@ DEPENDENCIES
   capybara (~> 3.39)
   guard-yard
   lookbook (~> 2.3)
-  nokogiri (~> 1.16)
   ostruct
   rails (~> 7.0)
   rspec-rails (~> 6.0)
