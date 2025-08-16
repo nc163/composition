@@ -9,8 +9,7 @@ module AtomicDesign
     isolate_namespace AtomicDesign
 
     config.eager_load_namespaces << AtomicDesign
-
-    config.autoload_paths += %W[#{root.join('lib')}]
+    config.paths.add 'lib', eager_load: true
 
     # :nocov:
     # initializer 'atomic_design.set_configs', before: :set_autoload_paths do |app|
@@ -25,18 +24,6 @@ module AtomicDesign
         app.config.view_component.capture_compatibility_patch_enabled = true
       end
     end
-
-    # # :nocov:
-    # # プレビューパスの設定
-    # initializer "atomic_design.configure_lookbook", after: "view_component.set_configs" do |app|
-    #   if defined?(Lookbook) && Rails.env.development?
-    #     # Lookbookのプレビューパスにコンポーネントのプレビューディレクトリを追加
-    #     preview_paths = Array(ViewComponent::Base.preview_paths)
-    #     component_preview_path = root.join("previews").to_s
-    #     preview_paths << component_preview_path unless preview_paths.include?(component_preview_path)
-    #     ViewComponent::Base.preview_paths = preview_paths
-    #   end
-    # end
 
     # :nocov:
     # アセットの設定

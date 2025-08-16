@@ -3,28 +3,25 @@
 #
 module AtomicDesign
   module Component
+    module Molecule
+      class Table::Trow::Th < ::AtomicDesign::Component::Base
+        # == Slots
+        # renders_one :button, AtomicDesign::Component::Atom::Button
 
-      module Molecule
-        class Table::Trow::Th < Component
-        
-          # == Slots
-          # renders_one :button, AtomicDesign::Atom::Button
-        
-          # attr_accessor :text
-        
-          # == Methods
-        
-          def call
-            content_tag :th, attributes do
-              if content?
-                content
-              else
-                context
-              end
+        # attr_accessor :text
+
+        # == Methods
+
+        def call
+          content_tag :th, attributes do
+            if content?
+              content
+            else
+              context
             end
           end
-        
         end
       end
+    end
   end
 end

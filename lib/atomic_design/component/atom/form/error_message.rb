@@ -3,22 +3,21 @@
 #
 module AtomicDesign
   module Component
+    module Atom
+      module Form
+        class ErrorMessage < ::AtomicDesign::Component::Base
+          # == Layout
+          default_layout class: ''
 
-      module Atom
-        module Form
-          class ErrorMessage < Component
-          
-            # == Layout
-            default_layout class: ''
-          
-            def call
-              content_tag :p, attributes do
-                concat form.object.errors.first
-              end if form.errors.any?
+          def call
+            return unless form.errors.any?
+
+            content_tag :p, attributes do
+              concat form.object.errors.first
             end
           end
-
         end
       end
+    end
   end
 end

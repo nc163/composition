@@ -4,7 +4,7 @@
 module AtomicDesign
   module Component
     module Atom
-      class Metadata < Component
+      class Metadata < ::AtomicDesign::Component::Base
         default_layout class: 'text-decoration-none'
 
         # == property

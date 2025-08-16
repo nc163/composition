@@ -2,36 +2,33 @@
 
 module AtomicDesign
   module Component
+    module Molecule
+      class Table < ::AtomicDesign::Component::Base
+        # == Layout
+        default_layout class: 'table'
 
-      module Molecule
-        class Table < Component
+        # == Slots
+        renders_one :thead,   Table::Thead
+        renders_one :tbody,   Table::Tbody
 
-          # == Layout
-          default_layout class: 'table'
+        # == Attributes
+        attr_accessor :headers, :caption
 
-          # == Slots
-          renders_one :thead,   Table::Thead
-          renders_one :tbody,   Table::Tbody
+        # == Methods
 
-          # == Attributes
-          attr_accessor :headers, :caption
-
-          # == Methods
-
-          def call
-            content_tag :table, attributes do
-              concat(content_tag(:caption, caption)) if !!caption
-              if content?
-                concat thead
-                concat tbody
-              else
-                concat with_thead(headers)
-                concat with_tbody(context)
-              end
+        def call
+          content_tag :table, attributes do
+            concat(content_tag(:caption, caption)) if !!caption
+            if content?
+              concat thead
+              concat tbody
+            else
+              concat with_thead(headers)
+              concat with_tbody(context)
             end
           end
-
         end
       end
+    end
   end
 end

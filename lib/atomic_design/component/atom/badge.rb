@@ -4,8 +4,7 @@
 module AtomicDesign
   module Component
     module Atom
-      class Badge < Component
-
+      class Badge < ::AtomicDesign::Component::Base
         # == Layout
         default_layout class: 'badge'
 

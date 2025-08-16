@@ -5,7 +5,7 @@ module AtomicDesign
     module Atom
       # Form components
       module Form
-        class CheckBoxField < Component
+        class CheckBoxField < ::AtomicDesign::Component::Base
           # == Layout
           default_layout class: 'form-group'
 

@@ -3,42 +3,39 @@
 #
 module AtomicDesign
   module Component
+    module Organism
+      module Card
+        module Form
+          class Action < ::AtomicDesign::Component::Base
+            # == Layout
+            default_layout class: 'card'
 
-      module Organism
-        module Card 
-          module Form
-            class Action < Component
-            
-              # == Layout
-              default_layout class: 'card'
-            
-              # == Slots
-              renders_one :card, lambda_slots_component_handler(AtomicDesign::Molecule::Card)
-              renders_many :buttons, AtomicDesign::Atom::Button
-            
-              # == Attributes
-              attr_accessor :actions
-            
-              # == Methods
-            
-              def call
-                with_card attributes do |card|
-                  if content?
-                    concat context
-                  else
-                    concat card.with_body {
-                      (actions || []).each do |context, options|
-                        options = options.merge(class: 'me-2')
-                        concat(with_button(context, options))
-                      end
-                    }
-                  end
+            # == Slots
+            renders_one :card, lambda_slots_component_handler(AtomicDesign::Component::Molecule::Card)
+            renders_many :buttons, AtomicDesign::Component::Atom::Button
+
+            # == Attributes
+            attr_accessor :actions
+
+            # == Methods
+
+            def call
+              with_card attributes do |card|
+                if content?
+                  concat context
+                else
+                  concat(card.with_body do
+                    (actions || []).each do |context, options|
+                      options = options.merge(class: 'me-2')
+                      concat(with_button(context, options))
+                    end
+                  end)
                 end
               end
-            
             end
           end
         end
       end
+    end
   end
 end

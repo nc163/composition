@@ -5,7 +5,7 @@ module AtomicDesign
   module Component
     module Atom
       module Form
-        class TextField < Component
+        class TextField < ::AtomicDesign::Component::Base
           # == Layout
           default_layout class: 'form-group'
 

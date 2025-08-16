@@ -3,18 +3,18 @@
 # #
 # module AtomicDesign
 #   module Component
-# 
+#
 #       module Molecule
-#         class Form < Component
-        
+#         class Form < ::AtomicDesign::Component::Base
+
 #           attr_accessor :model, :url, :method, :local
-        
+
 #           def call
 #             form_with model: model || nil, url: url || nil, method: method || nil, builder: ApplicationComponent::FormBuilder, **attributes do
 #               context || content
 #             end
 #           end
-        
+
 #         end
 #       end
 #     end

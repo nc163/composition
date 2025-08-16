@@ -4,8 +4,7 @@
 module AtomicDesign
   module Component
     module Atom
-      class Alert < Component
-
+      class Alert < ::AtomicDesign::Component::Base
         # == Layout
         default_layout class: 'alert', role: :alert
 

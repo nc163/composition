@@ -18,7 +18,7 @@ module AtomicDesign
           end
 
           def build(name)
-            component_string = "atomic_design/component/#{@component_type}/#{name.to_s.dasherize}".camelize
+            component_string = "atomic_design/component/#{@component_type}/#{name.to_s.underscore}".camelize
             component = component_string.safe_constantize
 
             raise "#{component_string} is not defined." if component.nil?
@@ -158,7 +158,7 @@ module AtomicDesign
       #
       # @example
       #   component 'atoms/alert', id: 'alert', class: 'alert'
-      #   => AtomicDesign::Atom::Alert.new(id: 'alert', class: 'alert')
+      #   => AtomicDesign::Component::Atom::Alert.new(id: 'alert', class: 'alert')
       #
       # また、AtomicDesignの場合、**organisms**以外のコンポーネントをView呼び出すことは稀なので
       # **organisms**/以下のコンポーネントを呼び出す場合は省略できる
@@ -168,8 +168,7 @@ module AtomicDesign
       #   => AtomicDesign::Organism::Sidebar.new(id: 'sidebar', class: 'sidebar')
       #
       def component(component_name, context_or_options = nil, **options, &block)
-        component_full_name = resolve_component_full_name(component_name, default: 'atomic_design/organisms/')
-        component = component_full_name.camelize.safe_constantize
+        component = "atomic_design/component/organism/#{component_name}".camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
         unless component < AtomicDesign::Component::Base
@@ -204,18 +203,9 @@ module AtomicDesign
       #   component_name
       # end
 
-      def component_name_space
-        @component_name_space ||= case AtomicDesign.configuration.component_design
-                                  when :atomic_design
-                                    "atomic_design/component/#{AtomicDesign.configuration.component_design}/organisms"
-                                  else
-                                    "atomic_design/component/#{AtomicDesign.configuration.component_design}"
-                                  end
-      end
-
       #
       def resolve_component_full_name(name, default: nil)
-        "#{component_name_space}/#{name}"
+        "atomic_design/component/organism/#{name}"
       end
     end
   end

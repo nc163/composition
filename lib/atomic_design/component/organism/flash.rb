@@ -3,32 +3,29 @@
 # ==
 module AtomicDesign
   module Component
+    module Organism
+      class Flash < ::AtomicDesign::Component::Base
+        # # == Attributes
+        attr_accessor :flash
 
-      module Organism
-        class Flash < Component
+        private
 
-          # # == Attributes
-          attr_accessor :flash
+        def flash?
+          # alert? || notice?
+        end
 
-          private
+        def alert?
+          # flash.key?(:alert)
+        end
 
-          def flash?
-            # alert? || notice?
-          end
-        
-          def alert?
-            # flash.key?(:alert)
-          end
-        
-          def notice?
-            # flash.key?(:notice)
-          end
-        
-          def message
-            @flash[:alert] || @flash[:notice]
-          end
+        def notice?
+          # flash.key?(:notice)
+        end
 
+        def message
+          @flash[:alert] || @flash[:notice]
         end
       end
+    end
   end
 end

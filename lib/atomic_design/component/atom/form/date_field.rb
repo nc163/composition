@@ -3,31 +3,28 @@
 #
 module AtomicDesign
   module Component
+    module Atom
+      module Form
+        class DateField < ::AtomicDesign::Component::Base
+          # == Layout
+          default_layout class: 'form-group'
 
-      module Atom
-        module Form
-          class DateField < Component
-          
-            # == Layout
-            default_layout class: 'form-group'
-          
-            # == Attributes
-            # attr_accessor :placeholder
-          
-            # == Slots
-            # Nop
-          
-            # == Methods
-          
-            def call
-              content_tag :div, attributes do
-                concat form.label(context, class: 'fw-bold')
-                concat form.date_field(context, class: 'form-control', use_default: true)
-              end
+          # == Attributes
+          # attr_accessor :placeholder
+
+          # == Slots
+          # Nop
+
+          # == Methods
+
+          def call
+            content_tag :div, attributes do
+              concat form.label(context, class: 'fw-bold')
+              concat form.date_field(context, class: 'form-control', use_default: true)
             end
-          
           end
         end
       end
+    end
   end
 end

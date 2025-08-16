@@ -5,7 +5,7 @@
 module AtomicDesign
   module Component
     module Atom
-      class Pagination < Component
+      class Pagination < ::AtomicDesign::Component::Base
         # == Layout
         default_layout class: '', aria: { label: 'Page navigation' }
 
