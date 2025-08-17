@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  module Components
-    module DefaultLayout
+  module Component
+    module DefaultLayout # :nodoc:
       def self.included(base)
         base.extend ClassMethods
       end

@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Components
-    module Property
+    module Property # :nodoc:
       PROPERTY_DEFAULT_KEYWORDS = :default
 
       def self.included(base)
