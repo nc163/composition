@@ -18,7 +18,7 @@ module AtomicDesign
           end
 
           def build(name)
-            component_string = "atomic_design/component/#{@component_type}/#{name.to_s.underscore}".camelize
+            component_string = "atomic_design/components/#{@component_type}/#{name.to_s.underscore}".camelize
             component = component_string.safe_constantize
 
             raise "#{component_string} is not defined." if component.nil?

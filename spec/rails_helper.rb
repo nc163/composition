@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'view_component'
 
 RSpec.configure do |config|
   # ViewComponentのテスト用設定

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'atomic_design/components/base'
 
 describe AtomicDesign::Components::Base, type: :component do
   let(:component_class) { AtomicDesign::Components::Base }

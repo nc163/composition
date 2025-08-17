@@ -5,6 +5,7 @@ require 'rails'
 require 'action_controller'
 require 'view_component/test_helpers'
 require 'capybara/rspec'
+require 'atomic_design'
 
 # Rails環境のセットアップ
 ENV['RAILS_ENV'] = 'test'

@@ -3,7 +3,8 @@
 module AtomicDesign
   module Components
     module Atoms # :nodoc:
-      #
+      # ボタンコンポーネント
+      # <span class='btn'></span>
       class Button < ::AtomicDesign::Components::Base
         default_layout class: 'btn'
 
