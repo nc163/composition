@@ -2,7 +2,6 @@
 
 require 'rails/engine'
 require 'atomic_design'
-require 'view_component'
 
 module AtomicDesign
   class Engine < Rails::Engine # :nodoc:

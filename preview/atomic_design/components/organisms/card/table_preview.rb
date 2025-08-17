@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+#
+module Preview
+  module AtomicDesign
+    module Components
+      module Organisms
+        module Card
+          class TablePreview < ViewComponent::Preview
+            def default
+              render Table.new WebPage.page(1).per(10)
+            end
+          end
+        end
+      end
+    end
+  end
+end
