@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'atomic_design/components/default_layout'
-require 'atomic_design/components/property'
-
 module AtomicDesign
   module Components
     # AtomicDesign コンポーネント基底クラス

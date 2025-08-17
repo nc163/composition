@@ -7,6 +7,8 @@ module AtomicDesign
 
     eager_autoload do
       autoload :Base
+      autoload :DefaultLayout
+      autoload :Property
 
       autoload :Atoms
       autoload :Molecules
