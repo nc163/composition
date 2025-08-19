@@ -8,7 +8,7 @@ module AtomicDesign
       class Button < ::AtomicDesign::Components::Base
         default_layout class: 'btn'
 
-        property :color, primary: { class: 'text-bg-primary' },
+        property :color, primary: { class: 'bg-primary' },
                          secondary: { class: 'text-bg-secondary' },
                          success: { class: 'btn-outline-success' },
                          danger: { class: 'text-bg-danger' },

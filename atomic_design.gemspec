@@ -19,11 +19,10 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = 'https://github.com/nc163'
 
   spec.files = Dir[
-    'lib/atomic_design/.rb',
-    'lib/atomic_design/**/*.rb',
-    'lib/atomic_design/**/*.erb',
-    'README.md'
-  ]
+    'README.md',
+    'lib/**/*.rb',
+    'lib/**/*.erb'
+  ].reject { |f| f.end_with?('_preview.rb') || f.end_with?('_preview.erb') }
   # spec.bindir        = "exe"
   # spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']

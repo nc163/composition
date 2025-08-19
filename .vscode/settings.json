@@ -1,0 +1,158 @@
+{
+    // == VSCode テーマカラー設定
+    //
+    "workbench.colorCustomizations": {
+      "titleBar.activeForeground": "#000000",
+      "titleBar.activeBackground": "#9D2F23",
+      "titleBar.border": "#9D2F23",
+    },
+
+    // == Editor
+    //
+
+    "editor.bracketPairColorization.enabled": true,
+    "editor.minimap.enabled": true,
+
+    "editor.fontWeight": "bold",
+    // "editor.fontFamily": "Ricty Diminished, Source Han Code JP, Menlo, Monaco, 'Courier New', monospace",
+    "editor.insertSpaces": true,
+    "workbench.fontAliasing": "auto",
+    "editor.cursorBlinking": "solid",
+
+    //= Drag and Dropでファイルを移動した時に確認ダイアログを表示する
+    "explorer.confirmDragAndDrop": true,
+    //= 自動保存OFF
+    "files.autoSave": "off",
+    //= パンくずリスト
+    "breadcrumbs.enabled": true,
+    //= ファイルの末尾の空白をトリミング
+    "files.trimTrailingWhitespace": true,
+    //= 最終行以降の新しい行をトリミング
+    "files.trimFinalNewlines": true,
+    //= ファイルの末尾に改行を追加
+    "files.insertFinalNewline": true,
+
+
+    //= エクスプローラーで非表示リスト
+    "files.exclude": {
+      "**/.DS_Store": true,
+      "**/.git": true,
+      "**/.bundle": true,
+    },
+
+    //= ファイル監視除外ファイル
+    "files.watcherExclude": {
+      "**/.DS_Store": true,
+      "**/.docker": true,
+      "**/.git": true,
+      "**/.gitlab": true,
+      "**/.vscode": true,
+      "**/.yardoc": true,
+
+      ".dockerignore": true,
+      ".env**": true,
+      ".gitattributes": true,
+      ".gitignore": true,
+      ".node-version": true,
+      ".rspec": true,
+      ".rubocop_todo.yml": true,
+      ".rubocop.yml": true,
+      ".ruby-version": true,
+      ".solargraph.yml": true,
+      "config.ru": true,
+      "Procfile.dev": true,
+      "Rakefile": true,
+
+      // ruby on rails
+      "**/vendor/bundle": true,
+      "**/db": true,
+      "**/doc": true,
+      "**/log": true,
+      "**/*.log": true,
+      "**/tmp": true,
+      "**/*.old": true,
+
+      // other
+      "**/*.rdoc": true,
+      "**/.ruby-lsp": true,
+    },
+
+    //= 検索除外ファイル
+    "search.exclude": {
+      "**/.DS_Store": true,
+      "**/.docker": true,
+      "**/.git": true,
+      "**/.gitlab": true,
+      "**/.vscode": true,
+      "**/.yardoc": true,
+
+      ".dockerignore": true,
+      ".env**": true,
+      ".gitattributes": true,
+      ".gitignore": true,
+      ".node-version": true,
+      ".rspec": true,
+      ".rubocop_todo.yml": true,
+      ".rubocop.yml": true,
+      ".ruby-version": true,
+      ".solargraph.yml": true,
+      "config.ru": true,
+      "Procfile.dev": true,
+      "Rakefile": true,
+
+      // ruby on rails
+      "**/vendor/bundle": true,
+      "**/db": true,
+      "**/doc": true,
+      "**/log": true,
+      "**/*.log": true,
+      "**/tmp": true,
+      "**/*.old": true,
+
+      // other
+      "**/*.rdoc": true,
+      "**/.ruby-lsp": true,
+    },
+
+    //= 言語の関連付け
+    "files.associations": {
+      ".*rake": "ruby"
+    },
+
+    //= 推奨する拡張機能を通知する
+    "extensions.ignoreRecommendations": true,
+
+    // == extensions
+    //
+
+    "git.branchProtection": [
+      // "main"
+    ],
+
+    //= git blame
+    "gitblame.commitUrl": "${tool.protocol}//${gitorigin.hostname}${gitorigin.port}${gitorigin.path}/-${tool.commitpath}${hash}",
+
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": false,
+      "yaml": false,
+    },
+
+    //= ruby-rubocop
+    "ruby.rubocop.onSave": false,
+    "ruby.rubocop.configFilePath": ".rubocop.yml",
+    "ruby.rubocop.suppressRubocopWarnings": true,
+    "[ruby]": {
+      "editor.defaultFormatter": "Shopify.ruby-lsp",
+      "editor.formatOnSave": false,
+      "editor.tabSize": 2, // Use 2 spaces for indentation
+      "editor.insertSpaces": true, // Use spaces and not tabs for indentation
+      "editor.semanticHighlighting.enabled": true, // Enable semantic highlighting
+      "editor.formatOnType": false, // Enable formatting while typing
+    },
+
+    "terminal.integrated.enableVisualBell": true, // Level of debug info to log. `warn` is least and `debug` is most.
+
+    // tailwind
+    // "css.lint.unknownAtRules": "ignore",
+}
