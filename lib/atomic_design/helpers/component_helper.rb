@@ -22,7 +22,7 @@ module AtomicDesign
             component = component_string.safe_constantize
 
             raise "#{component_string} is not defined." if component.nil?
-            unless component < AtomicDesign::Components::Base
+            unless component < ::AtomicDesign::Components::Base
               raise "#{component.name} must inherit from AtomicDesign::Components::Base"
             end
 
