@@ -54,10 +54,10 @@ module Preview # :nodoc:
         <html>
           <head>
             <meta charset="utf-8">
-            <link rel="stylesheet" href="/assets/stylesheets/bootstrap.min.css">
+            <link rel="stylesheet" href="/assets/stylesheets/bootstrap_5_3_0.min.css">
           </head>
           <body>
-            <script src="/assets/javascripts/bootstrap.min.js"></script>
+            <script src="/assets/javascripts/bootstrap_5_3_0.min.js"></script>
             <%= yield %>
           </body>
         </html>
