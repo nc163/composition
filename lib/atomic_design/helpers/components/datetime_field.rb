@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Helpers
-    module Components # :nodoc:
+    module Modules # :nodoc:
       class DatetimeField # :nodoc:
       end
     end

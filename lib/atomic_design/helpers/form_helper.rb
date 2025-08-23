@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  # = AtomicDesign Helpers
   module Helpers
     # = AtomicDesign Form Helpers
     module FormHelper
@@ -28,12 +27,17 @@ module AtomicDesign
           method(field_method).call(...)
         end
 
+        # def label(method, **options)
+        #   options[:form] = self
+        #   @template.render AtomicDesign::Modules::Atoms::Form::Label.new(method, **options)
+        # end
+
         def text_field(method, **options)
           if options.delete(:use_default)
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::TextField.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::TextField.new(method, **options)
           end
         end
 
@@ -42,7 +46,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::TextArea.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::TextArea.new(method, **options)
           end
         end
 
@@ -51,7 +55,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::CheckBoxField.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::CheckBoxField.new(method, **options)
           end
         end
 
@@ -60,7 +64,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::DateField.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::DateField.new(method, **options)
           end
         end
 
@@ -69,7 +73,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::TimeField.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::TimeField.new(method, **options)
           end
         end
 
@@ -78,7 +82,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::DatetimeField.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::DatetimeField.new(method, **options)
           end
         end
 
@@ -88,7 +92,7 @@ module AtomicDesign
             super(method, choices, { include_blank: '選択してください' }, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::Select.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::Select.new(method, **options)
           end
         end
 
@@ -98,7 +102,7 @@ module AtomicDesign
             super(method, **options)
           else
             options[:form] = self
-            @template.render AtomicDesign::Components::Atom::Form::Submit.new(method, **options)
+            @template.render AtomicDesign::Modules::Atoms::Form::Submit.new(method, **options)
           end
         end
 
@@ -108,7 +112,7 @@ module AtomicDesign
         def component(component_name, method = nil, **options, &block)
           component = component_name.to_s.camelize.safe_constantize
           raise "Forget to define #{component_name} ?" if component.nil?
-          unless component < AtomicDesign::Components::Base
+          unless component < AtomicDesign::Base
             raise "#{component}(#{component_name}) must inherit from ApplicationComponent."
           end
 
@@ -120,7 +124,7 @@ module AtomicDesign
       # def atomic_design_form_with
       #   options = {}
       #   options[:form] = self
-      #   @template.render AtomicDesign::Components::Atom::Form.new(**options)
+      #   @template.render AtomicDesign::Modules::Atoms::Form.new(**options)
       # end
     end
   end

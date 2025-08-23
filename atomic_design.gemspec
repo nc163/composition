@@ -22,17 +22,15 @@ Gem::Specification.new do |spec|
     'README.md',
     'lib/**/*.rb',
     'lib/**/*.erb'
-  ].reject { |f| f.end_with?('_preview.rb') || f.end_with?('_preview.erb') }
+  ].reject { |f| f.end_with?('_preview.rb') }
   # spec.bindir        = "exe"
   # spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
   # Dependencies
-  spec.add_dependency 'view_component', '~> 3.22'
-
-  spec.add_development_dependency 'lookbook', '~> 2.3'
-  spec.add_development_dependency 'rails', '~> 7.0'
-  spec.add_development_dependency 'rspec-rails', '~> 6.0'
+  spec.add_dependency 'actionview', '~> 7.0'
+  spec.add_dependency 'activesupport', '~> 7.0'
+  spec.add_dependency 'view_component', '~> 4.0'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  # = AtomicDesign Modules
+  # = AtomicDesign Helpers
   module Modules
     extend ActiveSupport::Autoload
 
     eager_autoload do
-      autoload :Property
-      autoload :DefaultLayout
+      autoload :Atoms
+      autoload :Moles
+      autoload :Orgas
+      autoload :Temps
+      autoload :Pages
     end
-
-    extend ActiveSupport::Concern
-    include Property
-    include DefaultLayout
   end
 end

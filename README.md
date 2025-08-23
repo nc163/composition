@@ -2,29 +2,39 @@
 
 AtomicDesignは、Railsアプリケーション用の再利用可能なUIコンポーネントライブラリです。
 
-## プレビュー(Lookbook)
+## Preview
 ```bash
 bundle exec rackup preview.ru -o 0.0.0.0
 ```
 ブラウザで開く http://0.0.0.0:9292
 
-## テスト
+## Test
 ```bash
 bundle exec rspec
 ```
 
+## Documentation
+```bash
+bundle exec yardoc
+```
+
 ## 使い方(rails)
-Gemfile
+1. Gemfile
 ```ruby
 gem "atomic_design", git: "https://gitlab.com/nc163/atomic_design.git", branch: "main"
 ```
-ApplicationHelper に追加
+
+2. ApplicationHelper に追加
 ```ruby
 module ApplicationHelper
   include AtomicDesign::Helpers
   ...
 ```
-Viewで生成
+
+3. Asset
+
+
+4. Viewで生成
 ```erb
 <%= atomic_design.organisms.card_table %>
 ```

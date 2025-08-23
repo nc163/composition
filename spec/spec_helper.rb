@@ -4,10 +4,10 @@ require 'bundler/setup'
 require 'rails'
 require 'action_controller'
 require 'view_component/test_helpers'
+require 'view_component/system_test_helpers'
 require 'capybara/rspec'
 require 'atomic_design'
 
-# Rails環境のセットアップ
 ENV['RAILS_ENV'] = 'test'
 
 # Dummy Railsアプリケーションの設定
@@ -23,12 +23,9 @@ end
 
 Rails.application.initialize!
 
-# ViewComponentのテストヘルパーを読み込み
-require 'view_component/test_helpers'
-require 'capybara/rspec'
-
 RSpec.configure do |config|
   config.include ViewComponent::TestHelpers, type: :component
+  config.include ViewComponent::SystemTestHelpers, type: :component
   config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:each, type: :component) do
@@ -36,6 +33,3 @@ RSpec.configure do |config|
     @vc_test_controller = nil
   end
 end
-
-# ライブラリを読み込み
-require_relative '../lib/atomic_design'

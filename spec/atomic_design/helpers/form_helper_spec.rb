@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-RSpec.describe AtomicDesign::Helpers::FormHelper, type: :helper do
+describe AtomicDesign::Helpers::FormHelper, type: :helper do
   let(:view) do
     ActionView::Base.new(ActionView::LookupContext.new([]), {}, ActionController::Base.new)
   end

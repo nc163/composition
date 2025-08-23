@@ -1,2 +1,5 @@
 .DS_Store
 vendor/bundle
+tmp
+doc
+.yardoc

@@ -2,8 +2,8 @@
 
 module AtomicDesign
   module Helpers
-    module Components # :nodoc:
-      class Submit < ::AtomicDesign::Components::Atom::Form::Submit # :nodoc:
+    module Modules # :nodoc:
+      class Submit < ::AtomicDesign::Modules::Atoms::Form::Submit # :nodoc:
       end
     end
   end

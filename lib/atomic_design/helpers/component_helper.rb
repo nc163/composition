@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  # = AtomicDesign Helpers
   module Helpers
     module ComponentHelper # :nodoc:
       extend ActiveSupport::Concern
@@ -12,19 +11,19 @@ module AtomicDesign
         end
 
         class ComponentBuilder # :nodoc:
-          def initialize(view_context, component_type)
+          MODULE_PATH = 'atomic_design/modules'
+
+          def initialize(view_context, module_name)
             @view_context = view_context
-            @component_type = component_type
+            @module_name = "#{MODULE_PATH}/#{module_name}"
           end
 
           def build(name)
-            component_string = "atomic_design/components/#{@component_type}/#{name.to_s.underscore}".camelize
+            component_string = "#{@module_name}/#{name.to_s.underscore}".camelize
             component = component_string.safe_constantize
 
             raise "#{component_string} is not defined." if component.nil?
-            unless component < ::AtomicDesign::Components::Base
-              raise "#{component.name} must inherit from AtomicDesign::Components::Base"
-            end
+            raise "#{component.name} must inherit from AtomicDesign::Base" unless component < ::AtomicDesign::Base
 
             component
           end
@@ -103,41 +102,73 @@ module AtomicDesign
 
           def method_missing(called, *args, **options, &block)
             component = build(called)
-
             @view_context.render component.new(*args, **options), &block
           end
         end
 
-        def atoms
+        def atom
           component_builder(@view_context, :atoms)
         end
 
-        def molecules
+        def mole
           component_builder(@view_context, :molecules)
         end
 
-        def organisms
+        def orga
           component_builder(@view_context, :organisms)
         end
 
-        def templates
+        def temp
           component_builder(@view_context, :templates)
         end
 
-        def pages
+        def page
           component_builder(@view_context, :pages)
         end
 
         private
 
-        def component_builder(view_context, component_type)
-          @component_builder ||= ComponentBuilder.new(view_context, component_type)
+        def component_builder(view_context, module_name)
+          @component_builder ||= ComponentBuilder.new(view_context, module_name)
         end
       end
 
-      # コンポーネントを生成する
-      # atomic_design.organisms.modal(options)
-      # => render AtomicDesign::Components::Organisms::Modal.new(options)
+      # コンポーネントを返す
+      # ActionView::Helpers::TagHelper.tag のような書き方をするためのヘルパー
+      #
+      # === Building
+      #
+      # 定義済みのコンポーネントを呼び出すためのコンポーネントプロクシを以下のように使う
+      #
+      #   atomic_design.<component_space>.<component_name>(context, options)
+      #
+      # component_space には atoms, molecules, organisms, templates, pages を指定できる。
+      #
+      # ==== Passing
+      #
+      # コンポーネントのコンテキストを指定することができる。
+      #
+      #   atomic_design.atoms.button 'ボタン'
+      #   # => <button class='btn'>ボタン</button>
+      #
+      #   link_to atomic_design.atoms.button atomic_design.atoms.badge('リンクテキスト'), root_path
+      #   # => <a href="/"><mark class='badge'>リンクテキスト</mark></a>
+      #
+      # ブロック式
+      #
+      #   link_to root_path do
+      #     atomic_design.atoms.button atomic_design.atoms.badge('リンクテキスト')
+      #   end
+      #   # => <a href="/"><mark class='badge'>リンクテキスト</mark></a>
+      #
+      # === Options
+      #
+      # コンポーネントに渡すオプションを指定することができる。
+      # 詳細はActionView::Helpers::TagHelper
+      #
+      #   atomic_design.atoms.button 'ボタン', id: 'btn-1'
+      #   # => <button id='btn-1' class='btn'>ボタン</button>
+      #
       def atomic_design
         atomic_design_component_builder
       end
@@ -158,22 +189,20 @@ module AtomicDesign
       #
       # @example
       #   component 'atoms/alert', id: 'alert', class: 'alert'
-      #   => AtomicDesign::Components::Atom::Alert.new(id: 'alert', class: 'alert')
+      #   => AtomicDesign::Modules::Atoms::Alert.new(id: 'alert', class: 'alert')
       #
       # また、AtomicDesignの場合、**organisms**以外のコンポーネントをView呼び出すことは稀なので
       # **organisms**/以下のコンポーネントを呼び出す場合は省略できる
       #
       # @example
       #   component 'sidebar', id: 'sidebar', class: 'sidebar'
-      #   => AtomicDesign::Organisms::Sidebar.new(id: 'sidebar', class: 'sidebar')
+      #   => AtomicDesign::Orgas::Sidebar.new(id: 'sidebar', class: 'sidebar')
       #
       def component(component_name, context_or_options = nil, **options, &block)
         component = "atomic_design/component/organism/#{component_name}".camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
-        unless component < AtomicDesign::Components::Base
-          raise "#{component}(#{name}) must inherit from AtomicDesignComponent."
-        end
+        raise "#{component}(#{name}) must inherit from AtomicDesignComponent." unless component < AtomicDesign::Base
 
         render component.new(context_or_options, **options), &block
       end
@@ -182,30 +211,6 @@ module AtomicDesign
 
       def atomic_design_component_builder
         @atomic_design_component_builder ||= AtomicDesignComponentBuilder.new(self)
-      end
-
-      # def form_with_component(options={})
-      #   options[:class] ||= 'form'
-      #   options[:local] ||= true
-      #   options[:builder] ||= Design::Helpers::AtomicDesign::FormBuilder
-      #   form_with(**options) { |f| yield f if block_given? }
-      # end
-
-      # def component_class_resolve(name, default: 'atomic_design/organisms/')
-      #   component_name = ''
-      #   if name.start_with?('bulma/', 'atomic_design/')
-      #     component_name = name
-      #   elsif name.start_with?('atoms/', 'molecules/', 'organisms/', 'templates/', 'pages/')
-      #     component_name = "atomic_design/#{name}"
-      #   else # デフォルト atomic_design/organisms/ 以下とする
-      #     component_name = "#{default}#{name}"
-      #   end
-      #   component_name
-      # end
-
-      #
-      def resolve_component_full_name(name, default: nil)
-        "atomic_design/component/organisms/#{name}"
       end
     end
   end
