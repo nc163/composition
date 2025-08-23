@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    atomic_design (0.2.1)
+    atomic_design (0.3.0)
       actionview (~> 7.0)
       activesupport (~> 7.0)
       view_component (~> 4.0)
