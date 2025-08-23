@@ -4,8 +4,7 @@ module AtomicDesign
   module Modules 
     module Helpers
       module PropHelper # :nodoc:
-        
-        class Prop < ::Hashie::Dash
+        class Prop < ::Hashie::Dash # :nodoc:
           include Hashie::Extensions::IgnoreUndeclared
           include ::Hashie::Extensions::DeepMerge
           # values: Array of allowed values for the property
