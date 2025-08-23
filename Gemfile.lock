@@ -1,17 +1,10 @@
-GIT
-  remote: https://github.com/nc163/ruby-prop_store.git
-  revision: d7c0981e2534441e8431a43ee497001e7a705a18
-  branch: main
-  specs:
-    prop_store (0.5.0)
-      hashie (~> 5.0)
-
 PATH
   remote: .
   specs:
-    atomic_design (0.3.1)
+    atomic_design (0.3.2)
       actionview (~> 7.0)
       activesupport (~> 7.0)
+      hashie (~> 5.0)
       view_component (~> 4.0)
 
 GEM
@@ -142,6 +135,9 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-yard (2.2.1)
+      guard (>= 1.1.0)
+      yard (>= 0.7.0)
     hashie (5.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
@@ -357,9 +353,10 @@ DEPENDENCIES
   capybara (~> 3.39)
   dotenv
   guard-rspec
+  guard-yard
   lookbook (~> 2.3)
-  prop_store!
   rails (~> 7.0)
+  rspec
   rspec-rails (~> 6.0)
   rubocop
   rubocop-performance

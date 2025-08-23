@@ -4,7 +4,6 @@ module AtomicDesign
   module Modules
     # AtomicDesign コンポーネント基底クラス
     class Base < ::ViewComponent::Base
-      include ::PropStore::Helpers
       include Helpers
 
       attr_accessor :context, :form

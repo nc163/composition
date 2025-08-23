@@ -5,10 +5,9 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in component.gemspec
 gemspec
 
-gem 'prop_store', github: 'nc163/ruby-prop_store', branch: 'main'
-
 group :development do
   gem 'dotenv'
+  gem 'guard-yard'
   gem 'lookbook', '~> 2.3'
   gem 'yard'
 end
@@ -24,4 +23,5 @@ end
 
 group :test do
   gem 'capybara', '~> 3.39'
+  gem 'rspec'
 end

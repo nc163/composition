@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'prop_store'
+require 'hashie'
 require 'view_component'
 require_relative 'atomic_design/version'
 

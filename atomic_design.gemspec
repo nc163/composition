@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   # Dependencies
   spec.add_dependency 'actionview', '~> 7.0'
   spec.add_dependency 'activesupport', '~> 7.0'
+  spec.add_dependency 'hashie', '~> 5.0'
   spec.add_dependency 'view_component', '~> 4.0'
 
   # For more information and examples about making a new gem, checkout our

@@ -33,4 +33,6 @@ RSpec.configure do |config|
     # 各テスト前にビューコンテキストをリセット
     @vc_test_controller = nil
   end
+
+  Dir[File.join(File.dirname(__FILE__), 'fixtures', '**', '*.rb')].sort.each { |f| require f }
 end
