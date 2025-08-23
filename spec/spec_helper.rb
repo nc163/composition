@@ -10,6 +10,7 @@ require 'atomic_design'
 
 ENV['RAILS_ENV'] = 'test'
 
+# TODO: view_component のヘルパー機能で代替できる
 # Dummy Railsアプリケーションの設定
 class DummyApp < Rails::Application
   config.root = __dir__
