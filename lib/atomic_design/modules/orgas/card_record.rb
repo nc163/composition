@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class CardRecord < ::AtomicDesign::Base
+      class CardRecord < ::AtomicDesign::Modules::Base
         # == Slots
         renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
         renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)

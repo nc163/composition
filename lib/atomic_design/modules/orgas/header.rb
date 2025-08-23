@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class Header < ::AtomicDesign::Base
+      class Header < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout id: 'global-header', class: '', style: 'position: sticky; top: 100vh; top: 100dvh;'
 

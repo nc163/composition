@@ -5,7 +5,7 @@
 #   module Modules
 #
 #       module Moles # :nodoc:
-#         class Form < ::AtomicDesign::Base
+#         class Form < ::AtomicDesign::Modules::Base
 
 #           attr_accessor :model, :url, :method, :local
 

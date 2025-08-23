@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class Modules < AtomicDesign::Base; end
+      class Modules < AtomicDesign::Modules::Base; end
     end
   end
 end

@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe AtomicDesign::Base, type: :component do
-  let(:component_class) { AtomicDesign::Base }
+describe AtomicDesign::Modules::Base, type: :component do
+  let(:component_class) { AtomicDesign::Modules::Base }
 
   describe 'initialization' do
     context '引数なしで初期化' do
@@ -165,7 +165,7 @@ describe AtomicDesign::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder
+        builder: AtomicDesign::Helpers::FormHelper::FormBuilder
       )
 
       component.form_with
@@ -176,7 +176,7 @@ describe AtomicDesign::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'custom-form',
         local: true,
-        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder,
+        builder: AtomicDesign::Helpers::FormHelper::FormBuilder,
         method: :post
       )
 
@@ -188,7 +188,7 @@ describe AtomicDesign::Base, type: :component do
       expect(helpers_mock).to receive(:form_with).with(
         class: 'form',
         local: true,
-        builder: AtomicDesign::Helpers::FormHelper::AtomicDesignFormBuilder
+        builder: AtomicDesign::Helpers::FormHelper::FormBuilder
       ).and_yield
 
       component.form_with(&block)
@@ -304,7 +304,7 @@ describe AtomicDesign::Base, type: :component do
     end
 
     describe '.lambda_slots_component_handler' do
-      let(:valid_component_class) { Class.new(AtomicDesign::Base) }
+      let(:valid_component_class) { Class.new(AtomicDesign::Modules::Base) }
       let(:invalid_component_class) { Class.new }
 
       it 'AtomicDesign::Modules::Baseを継承していないクラスでArgumentErrorが発生する' do

@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class Alert < ::AtomicDesign::Base # :nodoc:
+      class Alert < ::AtomicDesign::Modules::Base # :nodoc:
         prop :level, map: ALERT_LEVELS, default: :danger
 
         def self.levels

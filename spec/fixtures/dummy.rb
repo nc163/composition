@@ -1,4 +1,4 @@
-class Dummy < ::AtomicDesign::Base
+class Dummy < ::AtomicDesign::Modules::Base
   layout class: 'dummy-class'
   property :logged_in?
   property :icon?

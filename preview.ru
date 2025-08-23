@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 
+require 'dotenv/load'
 require 'webrick'
 require 'rails'
 require 'active_support'

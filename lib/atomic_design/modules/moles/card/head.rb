@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Card::Head < ::AtomicDesign::Base
+      class Card::Head < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout class: 'card-header fw-bold'
 

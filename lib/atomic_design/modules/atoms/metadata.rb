@@ -5,7 +5,7 @@ module AtomicDesign
   module Modules
     module Atoms # :nodoc:
       # == Metadata
-      class Metadata < ::AtomicDesign::Base
+      class Metadata < ::AtomicDesign::Modules::Base
         attributes class: 'text-decoration-none'
 
         # == property

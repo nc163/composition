@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Metadata::Field < ::AtomicDesign::Base
+      class Metadata::Field < ::AtomicDesign::Modules::Base
         # == property
         property :color, primary: { class: 'text-primary' },
                          secondary: { class: 'text-secondary' },

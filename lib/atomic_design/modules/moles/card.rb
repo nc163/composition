@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Moles # :nodoc:
       # ==
-      class Card < ::AtomicDesign::Base
+      class Card < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout class: 'card'
 

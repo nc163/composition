@@ -5,7 +5,7 @@ module AtomicDesign
     # = AtomicDesign Form Helpers
     module FormHelper
       # see: https://api.rubyonrails.org/v8.0/classes/ActionView/Helpers/FormBuilder.html
-      class AtomicDesignFormBuilder < ::ActionView::Helpers::FormBuilder
+      class FormBuilder < ::ActionView::Helpers::FormBuilder
         # フィールドタイプとメソッドのマッピング
         FIELD_MAPPINGS = {
           string: :text_field,
@@ -112,7 +112,7 @@ module AtomicDesign
         def component(component_name, method = nil, **options, &block)
           component = component_name.to_s.camelize.safe_constantize
           raise "Forget to define #{component_name} ?" if component.nil?
-          unless component < AtomicDesign::Base
+          unless component < AtomicDesign::Modules::Base
             raise "#{component}(#{component_name}) must inherit from ApplicationComponent."
           end
 

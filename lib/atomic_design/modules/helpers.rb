@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class Modules < AtomicDesign::Modules::Base; end
+    module Helpers # :nodoc:
+      extend ActiveSupport::Autoload
+
     end
   end
 end

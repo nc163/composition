@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class Footer < ::AtomicDesign::Base
+      class Footer < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout id: 'global-footer', class: '', style: 'position: sticky; top: 100vh; top: 100dvh;'
 

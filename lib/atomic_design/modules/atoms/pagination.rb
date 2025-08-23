@@ -5,7 +5,7 @@
 module AtomicDesign
   module Modules
     module Atoms # :nodoc:
-      class Pagination < ::AtomicDesign::Base
+      class Pagination < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout class: '', aria: { label: 'Pages navigation' }
 

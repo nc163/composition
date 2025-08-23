@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class Dialogs::Alert < ::AtomicDesign::Base
+      class Dialogs::Alert < ::AtomicDesign::Modules::Base
         # == Constants
         # Nop
 

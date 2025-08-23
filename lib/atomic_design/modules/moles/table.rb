@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Table < ::AtomicDesign::Base
+      class Table < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout class: 'table'
 

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class List::Item < ::AtomicDesign::Base
+      class List::Item < ::AtomicDesign::Modules::Base
         # == Layout
         default_layout class: 'list-group-item'
 

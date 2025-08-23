@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Table::Tfoot < ::AtomicDesign::Base
+      class Table::Tfoot < ::AtomicDesign::Modules::Base
         # == Slots
         renders_one :trow, Table::Trow
 

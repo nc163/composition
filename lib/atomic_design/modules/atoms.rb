@@ -9,10 +9,11 @@ module AtomicDesign
         autoload :Alert
         autoload :Badge
         autoload :Button
-        # autoload :Icon
         autoload :List
         # autoload :Metadata
         # autoload :Pagination
+
+        autoload :Icons
       end
 
       ALERT_LEVELS = {

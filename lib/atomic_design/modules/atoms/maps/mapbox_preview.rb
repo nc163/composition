@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+module AtomicDesign
+  module Modules
+    module Atoms
+      module Maps
+        class MapboxPreview < ::ViewComponent::Preview # :nodoc:
+
+          # @!group default
+
+          # @param lat
+          # @param lon
+          # @param zoom
+          def default(lat: 35.681236, lon: 139.767125, zoom: 10)
+            render Mapbox.new lat: lat, lon: lon, zoom: zoom, access_token: ENV['MAPBOX_ACCESS_TOKEN']
+          end
+        end
+      end
+    end
+  end
+end

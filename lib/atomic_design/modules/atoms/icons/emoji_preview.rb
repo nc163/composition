@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
     module Atoms
-      module Icon
-        class FontAwesome6Preview < ::ViewComponent::Preview
+      module Icons
+        class EmojiPreview < ::ViewComponent::Preview # :nodoc:
           # @!group default
 
           # @param icon select :icons
           def default(icon: :question)
-            render FontAwesome6.new(nil, icon: icon)
+            render Emoji.new(nil, icon: icon)
           end
 
           private
 
           def icons
-            { choices: FontAwesome6.icons }
+            { choices: Emoji.icons }
           end
         end
       end

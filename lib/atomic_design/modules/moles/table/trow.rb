@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Table::Trow < ::AtomicDesign::Base
+      class Table::Trow < ::AtomicDesign::Modules::Base
         # == Slots
         renders_many :tds, Table::Trow::Td
         renders_many :ths, Table::Trow::Th

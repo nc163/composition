@@ -6,7 +6,7 @@ module AtomicDesign
     module Orgas # :nodoc:
       module Card
         module Form
-          class Search < ::AtomicDesign::Base
+          class Search < ::AtomicDesign::Modules::Base
             # == Layout
             default_layout class: 'card'
 

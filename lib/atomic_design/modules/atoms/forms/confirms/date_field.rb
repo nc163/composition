@@ -4,9 +4,9 @@
 module AtomicDesign
   module Modules
     module Atoms # :nodoc:
-      module Form
-        module Confirm
-          class DateField < ::AtomicDesign::Base
+      module Forms
+        module Confirms
+          class DateField < ::AtomicDesign::Modules::Base
             # == Layout
             default_layout class: 'form-group'
 

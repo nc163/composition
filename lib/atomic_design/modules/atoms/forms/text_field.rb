@@ -4,8 +4,8 @@
 module AtomicDesign
   module Modules
     module Atoms # :nodoc:
-      module Form
-        class TimeField < ::AtomicDesign::Base
+      module Forms
+        class TextField < ::AtomicDesign::Modules::Base
           # == Layout
           default_layout class: 'form-group'
 
@@ -20,7 +20,7 @@ module AtomicDesign
           def call
             content_tag :div, attributes do
               concat form.label(context, class: 'fw-bold')
-              concat form.time_field(context, class: 'form-control', use_default: true)
+              concat form.text_field(context, class: 'form-control', use_default: true)
             end
           end
         end

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Text::Metadata < ::AtomicDesign::Base
+      class Text::Metadata < ::AtomicDesign::Modules::Base
         # == Properties
         # property :type, text: { class: 'text-primary' }
         # property :type, link: { class: 'text-primary' }

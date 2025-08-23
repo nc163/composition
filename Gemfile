@@ -8,6 +8,7 @@ gemspec
 gem 'prop_store', github: 'nc163/ruby-prop_store', branch: 'main'
 
 group :development do
+  gem 'dotenv'
   gem 'lookbook', '~> 2.3'
   gem 'yard'
 end

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      class Flash < ::AtomicDesign::Base
+      class Flash < ::AtomicDesign::Modules::Base
         # # == Attributes
         attr_accessor :flash
 

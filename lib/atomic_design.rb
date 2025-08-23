@@ -10,7 +10,6 @@ module AtomicDesign # :nodoc:
   # Rails::Engineに登録しているので、Rails環境ではZeitwerkによって宣言時に名前解決できている
   # rspecなどZeitwerkがない環境のために、eager_autoloadしている
   eager_autoload do
-    autoload :Base
     autoload :Modules
     autoload :Helpers
   end

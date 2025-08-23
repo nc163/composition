@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Atoms # :nodoc:
-      class Text::Plane < ::AtomicDesign::Base
+      class Text::Plane < ::AtomicDesign::Modules::Base
         # == Layout
         property :color, primary: { class: 'text-bg-primary' },
                          secondary: { class: 'text-bg-secondary' },

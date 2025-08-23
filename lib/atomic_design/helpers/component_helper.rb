@@ -5,7 +5,7 @@ module AtomicDesign
     module ComponentHelper # :nodoc:
       extend ActiveSupport::Concern
 
-      class AtomicDesignComponentBuilder # :nodoc:
+      class ModuleProxy # :nodoc:
         def initialize(view_context)
           @view_context = view_context
         end
@@ -18,82 +18,23 @@ module AtomicDesign
             @module_name = "#{MODULE_PATH}/#{module_name}"
           end
 
-          def build(name)
-            component_string = "#{@module_name}/#{name.to_s.underscore}".camelize
-            component = component_string.safe_constantize
-
-            raise "#{component_string} is not defined." if component.nil?
-            raise "#{component.name} must inherit from AtomicDesign::Base" unless component < ::AtomicDesign::Base
-
-            component
-          end
-
-          def tag_options(options, escape = true)
-            return if options.blank?
-
-            output = +''
-            sep    = ' '
-            options.each_pair do |key, value|
-              type = TAG_TYPES[key]
-              if type == :data && value.is_a?(Hash)
-                value.each_pair do |k, v|
-                  next if v.nil?
-
-                  output << sep
-                  output << prefix_tag_option(key, k, v, escape)
-                end
-              elsif type == :aria && value.is_a?(Hash)
-                value.each_pair do |k, v|
-                  next if v.nil?
-
-                  case v
-                  when Array, Hash
-                    tokens = TagHelper.build_tag_values(v)
-                    next if tokens.none?
-
-                    v = safe_join(tokens, ' ')
-                  else
-                    v = v.to_s
-                  end
-
-                  output << sep
-                  output << prefix_tag_option(key, k, v, escape)
-                end
-              elsif type == :boolean
-                if value
-                  output << sep
-                  output << boolean_tag_option(key)
-                end
-              elsif !value.nil?
-                output << sep
-                output << tag_option(key, value, escape)
-              end
-            end
-            output unless output.empty?
-          end
-
-          def boolean_tag_option(key)
-            %(#{key}="#{key}")
-          end
-
-          def tag_option(key, value, escape)
-            case value
-            when Array, Hash
-              value = TagHelper.build_tag_values(value) if key.to_s == 'class'
-              value = escape ? safe_join(value, ' ') : value.join(' ')
-            else
-              value = escape ? ERB::Util.unwrapped_html_escape(value) : value.to_s
-            end
-            value = value.gsub('"', '&quot;') if value.include?('"')
-            %(#{key}="#{value}")
-          end
-
           private
 
-          def prefix_tag_option(prefix, key, value, escape)
-            key = "#{prefix}-#{key.to_s.dasherize}"
-            value = value.to_json unless value.is_a?(String) || value.is_a?(Symbol) || value.is_a?(BigDecimal)
-            tag_option(key, value, escape)
+          def build(name)
+            target_string = "#{@module_name}/#{name.to_s.underscore}".camelize
+            target = target_string.safe_constantize
+
+            raise "#{target_string} is not defined." if target.nil?
+            
+            if target&.class
+              raise "#{target.name} must inherit from AtomicDesign::Modules::Base" unless target < ::AtomicDesign::Modules::Base
+              return target
+            end
+            if target&.module?
+              raise 'テスト中'
+            end
+
+            target
           end
 
           def respond_to_missing?(*args)
@@ -106,30 +47,30 @@ module AtomicDesign
           end
         end
 
-        def atom
-          component_builder(@view_context, :atoms)
+        def atoms
+          @atom_builder ||= builder(@view_context, :atoms)
         end
 
-        def mole
-          component_builder(@view_context, :molecules)
+        def moles
+          @mole_builder ||= builder(@view_context, :molecules)
         end
 
-        def orga
-          component_builder(@view_context, :organisms)
+        def orgas
+          @orga_builder ||= builder(@view_context, :organisms)
         end
 
-        def temp
-          component_builder(@view_context, :templates)
+        def temps
+          @temp_builder ||= builder(@view_context, :templates)
         end
 
-        def page
-          component_builder(@view_context, :pages)
+        def pages
+          @page_builder ||= builder(@view_context, :pages)
         end
 
         private
 
-        def component_builder(view_context, module_name)
-          @component_builder ||= ComponentBuilder.new(view_context, module_name)
+        def builder(view_context, module_name)
+          ComponentBuilder.new(view_context, module_name)
         end
       end
 
@@ -140,9 +81,9 @@ module AtomicDesign
       #
       # 定義済みのコンポーネントを呼び出すためのコンポーネントプロクシを以下のように使う
       #
-      #   atomic_design.<component_space>.<component_name>(context, options)
+      #   atomic_design.<module>.<component_name>(context, options)
       #
-      # component_space には atoms, molecules, organisms, templates, pages を指定できる。
+      # module には atoms, moles, orgas, temps, pages
       #
       # ==== Passing
       #
@@ -170,7 +111,7 @@ module AtomicDesign
       #   # => <button id='btn-1' class='btn'>ボタン</button>
       #
       def atomic_design
-        atomic_design_component_builder
+        module_proxy
       end
 
       # DSL for rendering AtomicDesignComponent based components.
@@ -199,18 +140,18 @@ module AtomicDesign
       #   => AtomicDesign::Orgas::Sidebar.new(id: 'sidebar', class: 'sidebar')
       #
       def component(component_name, context_or_options = nil, **options, &block)
-        component = "atomic_design/component/organism/#{component_name}".camelize.safe_constantize
+        component = "atomic_design/component/orgas/#{component_name}".camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
-        raise "#{component}(#{name}) must inherit from AtomicDesignComponent." unless component < AtomicDesign::Base
+        raise "#{component}(#{name}) must inherit from AtomicDesignComponent." unless component < AtomicDesign::Modules::Base
 
         render component.new(context_or_options, **options), &block
       end
 
       private
 
-      def atomic_design_component_builder
-        @atomic_design_component_builder ||= AtomicDesignComponentBuilder.new(self)
+      def module_proxy
+        @module_proxy ||= ModuleProxy.new(self)
       end
     end
   end

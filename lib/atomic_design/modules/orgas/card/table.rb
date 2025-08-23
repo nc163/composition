@@ -5,7 +5,7 @@ module AtomicDesign
   module Modules
     module Orgas # :nodoc:
       module Card
-        class Table < ::AtomicDesign::Base
+        class Table < ::AtomicDesign::Modules::Base
           # == Slots
           renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
           renders_one :table, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Table)

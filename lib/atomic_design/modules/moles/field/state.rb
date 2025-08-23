@@ -5,7 +5,7 @@ module AtomicDesign
   module Modules
     module Moles # :nodoc:
       module Field
-        class State < ::AtomicDesign::Base
+        class State < ::AtomicDesign::Modules::Base
           # == Layout
           default_layout class: 'form-group'
 
