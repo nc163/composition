@@ -6,15 +6,10 @@ module AtomicDesign
       extend ActiveSupport::Concern
 
       class ModuleProxy # :nodoc:
-        def initialize(view_context)
-          @view_context = view_context
-        end
-
         class ModuleBuilder # :nodoc:
           MODULE_PATH = 'atomic_design/modules'
 
-          def initialize(view_context, module_name)
-            @view_context = view_context
+          def initialize(module_name)
             @module_name = "#{MODULE_PATH}/#{module_name}"
           end
 
@@ -44,34 +39,34 @@ module AtomicDesign
 
           def method_missing(called, *args, **options, &block)
             component = build(called)
-            @view_context.render component.new(*args, **options), &block
+            render component.new(*args, **options), &block
           end
         end
 
         def atoms
-          @atom_builder ||= builder(@view_context, :atoms)
+          @atom_builder ||= builder(:atoms)
         end
 
         def moles
-          @mole_builder ||= builder(@view_context, :molecules)
+          @mole_builder ||= builder(:molecules)
         end
 
         def orgas
-          @orga_builder ||= builder(@view_context, :organisms)
+          @orga_builder ||= builder(:organisms)
         end
 
         def temps
-          @temp_builder ||= builder(@view_context, :templates)
+          @temp_builder ||= builder(:templates)
         end
 
         def pages
-          @page_builder ||= builder(@view_context, :pages)
+          @page_builder ||= builder(:pages)
         end
 
         private
 
-        def builder(view_context, module_name)
-          ModuleBuilder.new(view_context, module_name)
+        def builder(module_name)
+          ModuleBuilder.new(module_name)
         end
       end
 
@@ -154,7 +149,7 @@ module AtomicDesign
       private
 
       def module_proxy
-        @module_proxy ||= ModuleProxy.new(self)
+        @module_proxy ||= ModuleProxy.new
       end
     end
   end
