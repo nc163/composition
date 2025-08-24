@@ -2,8 +2,8 @@
 
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
-      module Icons
+    module Atoms
+      module Icons # :nodoc:
         extend ActiveSupport::Autoload
 
         eager_autoload do
@@ -12,7 +12,7 @@ module AtomicDesign
         end
 
         EMOJI_COLOR = {
-          red: { style: 'color: transparent; text-shadow: 0 0 0 #e9c538' },
+          red: { style: 'color: transparent; text-shadow: 0 0 0 #e9c538' }
         }.freeze
 
         FONT_AWESOME_6_ICONS = {
