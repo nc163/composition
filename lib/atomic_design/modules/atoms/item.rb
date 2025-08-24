@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       class Item < ::AtomicDesign::Modules::Base # :nodoc:
-        attributes class: 'list-group-item'
+        attrs class: 'list-group-item'
       end
     end
   end

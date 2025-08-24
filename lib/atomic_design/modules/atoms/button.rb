@@ -6,7 +6,7 @@ module AtomicDesign
       # ボタンコンポーネント
       # `<span class='btn'>{{content}}</span>`
       class Button < ::AtomicDesign::Modules::Base
-        attributes class: 'btn'
+        attrs class: 'btn'
 
         prop :color, map: BUTTON_COLORS, default: :primary
 

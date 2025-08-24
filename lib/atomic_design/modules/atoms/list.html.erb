@@ -1,4 +1,4 @@
-<%= content_tag (order? ? :ol : :ul), attributes do %>
+<%= content_tag (order? ? :ol : :ul), options do %>
   <% if content? %>
     <% items.each do |item| %>
       <%= concat item %>

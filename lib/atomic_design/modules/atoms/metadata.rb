@@ -6,7 +6,7 @@ module AtomicDesign
     module Atoms # :nodoc:
       # == Metadata
       class Metadata < ::AtomicDesign::Modules::Base
-        attributes class: 'text-decoration-none'
+        attrs class: 'text-decoration-none'
 
         # == property
         property :color, primary: { class: 'text-primary' },
@@ -18,7 +18,7 @@ module AtomicDesign
 
         # == Methods
         def call
-          content_to :p, context, attributes
+          content_to :p, context, options
         end
       end
     end

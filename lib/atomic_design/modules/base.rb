@@ -36,7 +36,7 @@ module AtomicDesign
 
       class << self
         # HTML属性の初期値
-        def attributes(**options)
+        def attrs(**options)
           @attributes ||= {}
           @attributes.merge!(options)
         end
@@ -66,7 +66,7 @@ module AtomicDesign
         # html attributes
         html_attrs = [] || {}
         html_attrs << others if others.any?
-        html_attrs << self.class.attributes if self.class.attributes.any?
+        html_attrs << self.class.attrs if self.class.attrs.any?
         prop_options.map { |p| send(p) || {} }.each do |h|
           html_attrs << h
         end

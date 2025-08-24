@@ -7,7 +7,7 @@ module AtomicDesign
         renders_one :thead,   Table::Thead
         renders_one :tbody,   Table::Tbody
 
-        attributes class: 'table'
+        attrs class: 'table'
 
         # == Attributes
         # attr_accessor :headers, :caption

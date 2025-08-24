@@ -7,10 +7,10 @@ module AtomicDesign
         renders_many :items, List::Item
 
         # == Layout
-        attributes class: 'list-group list-group-flush'
+        attrs class: 'list-group list-group-flush'
 
         def call
-          content_tag :ol, attributes do
+          content_tag :ol, options do
             if content?
               items.each do |item|
                 concat item

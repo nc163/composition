@@ -9,7 +9,7 @@ module AtomicDesign
         renders_one :foot, Foot
 
         # == Layout
-        attributes class: 'card'
+        attrs class: 'card'
 
         def call
           content_tag :aside, options do

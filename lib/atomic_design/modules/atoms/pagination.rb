@@ -7,12 +7,12 @@ module AtomicDesign
     module Atoms # :nodoc:
       class Pagination < ::AtomicDesign::Modules::Base
         # == Layout
-        default_layout class: '', aria: { label: 'Pages navigation' }
+        attrs class: '', aria: { label: 'Pages navigation' }
 
         # == Methods
 
         def call
-          content_tag :nav, attributes do
+          content_tag :nav, options do
             if context.total_pages >= 1
               concat(content_tag(:ul, class: 'pagination') do
                 concat(content_tag(:li, class: 'page-item') do

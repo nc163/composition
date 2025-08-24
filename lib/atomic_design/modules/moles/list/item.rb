@@ -5,14 +5,14 @@ module AtomicDesign
     module Moles
       class List::Item < ::AtomicDesign::Modules::Base # :nodoc:
         # == Layout
-        default_layout class: 'list-group-item'
+        attrs class: 'list-group-item'
 
         # url_options, is passed to url_for
         attr_accessor :url_options
 
         # == Methods
         def call
-          content_tag :li, attributes do
+          content_tag :li, options do
             if_wrap_with_link do
               if content?
                 content

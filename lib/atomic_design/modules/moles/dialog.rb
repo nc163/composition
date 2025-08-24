@@ -7,7 +7,7 @@ module AtomicDesign
         # == Methods
 
         def call
-          content_tag :dialog, attributes do
+          content_tag :dialog, options do
             context || content
           end
         end

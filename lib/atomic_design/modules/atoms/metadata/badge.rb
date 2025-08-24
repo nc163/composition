@@ -7,7 +7,7 @@ module AtomicDesign
       module Metadata
         class Badge < Atoms::Modules # :nodoc:
           # == Layout
-          default_layout class: 'badge'
+          attrs class: 'badge'
 
           property :color, primary: { class: 'text-bg-primary' },
                            secondary: { class: 'text-bg-secondary' },
@@ -19,7 +19,7 @@ module AtomicDesign
           # == Methods
 
           def call
-            content_tag :mark, attributes do
+            content_tag :mark, options do
               context
             end
           end

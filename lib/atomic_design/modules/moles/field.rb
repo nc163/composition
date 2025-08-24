@@ -14,11 +14,11 @@ module AtomicDesign
 
       def call
         if content?
-          content_tag :div, attributes do
+          content_tag :div, options do
             concat content
           end
         else
-          content_tag :div, attributes do
+          content_tag :div, options do
             concat(content_tag(:label, context.class.human_attribute_name(field), class: 'fw-bold'))
             concat(content_tag(:p) do
               "#{context.send(field)}"

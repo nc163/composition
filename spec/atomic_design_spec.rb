@@ -2,5 +2,5 @@
 
 require 'spec_helper'
 
-describe AtomicDesign::Helpers do # :nodoc:
+describe AtomicDesign do # :nodoc:
 end

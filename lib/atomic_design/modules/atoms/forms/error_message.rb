@@ -6,12 +6,12 @@ module AtomicDesign
       module Forms
         class ErrorMessage < ::AtomicDesign::Modules::Base # :nodoc:
           # == Layout
-          default_layout class: ''
+          attrs class: ''
 
           def call
             return unless form.errors.any?
 
-            content_tag :p, attributes do
+            content_tag :p, options do
               concat form.object.errors.first
             end
           end

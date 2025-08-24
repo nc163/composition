@@ -6,16 +6,16 @@ module AtomicDesign
       class List < ::AtomicDesign::Modules::Base # :nodoc:
         renders_many :items, Item
 
-        attributes class: 'list-group list-group-flush'
+        attrs class: 'list-group list-group-flush'
         prop :order?, default: false
 
         class Item < ::AtomicDesign::Modules::Base # :nodoc:
           # == Layout
-          attributes class: 'list-group-item'
+          attrs class: 'list-group-item'
 
           # == Methods
           def call
-            content_tag :li, attributes do
+            content_tag :li, options do
               context
             end
           end
