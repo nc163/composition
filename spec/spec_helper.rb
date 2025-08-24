@@ -23,6 +23,7 @@ class DummyApp < Rails::Application
 end
 
 Rails.application.initialize!
+ActionController::Base.include AtomicDesign::Helpers
 
 RSpec.configure do |config|
   config.include ViewComponent::TestHelpers, type: :component

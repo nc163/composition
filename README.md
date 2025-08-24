@@ -33,6 +33,9 @@ module ApplicationHelper
   include AtomicDesign::Helpers
   ...
 ```
+```erb
+  <%= render atomic_design.atoms.button 'ボタン' %>
+```
 
 3. Asset
 

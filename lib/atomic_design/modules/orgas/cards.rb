@@ -2,8 +2,8 @@
 
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
-      module Cards
+    module Orgas
+      module Cards # :nodoc:
         extend ActiveSupport::Autoload
 
         eager_autoload do

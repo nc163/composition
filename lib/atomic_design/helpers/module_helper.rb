@@ -6,40 +6,46 @@ module AtomicDesign
       extend ActiveSupport::Concern
 
       class ModuleProxy # :nodoc:
-        class ModuleBuilder # :nodoc:
-          MODULE_PATH = 'atomic_design/modules'
+        MODULES_PATH = 'atomic_design/modules'
 
-          def initialize(module_name)
-            @module_name = "#{MODULE_PATH}/#{module_name}"
+        class ModuleBuilder # :nodoc:
+          def initialize(namespace_snake_case)
+            @namespace = namespace_snake_case
+          end
+
+          attr_reader :namespace
+
+          def arbit(names_snake_case, *args, **kwargs, &block)
+            klass_or_module_string = "#{namespace}/#{names_snake_case}"
+            klass_or_module = klass_or_module_string.camelize.safe_constantize
+
+            return build!(klass_or_module, *args, **kwargs, &block) if klass_or_module.is_a?(Class)
+            return recall!(klass_or_module_string, *args, **kwargs, &block) if klass_or_module.is_a?(Module)
+
+            nil
           end
 
           private
 
-          def build(name)
-            target_string = "#{@module_name}/#{name.to_s.underscore}".camelize
-            target = target_string.safe_constantize
+          def build!(cls, *args, **kwargs, &block)
+            return cls.new(*args, **kwargs, &block) if cls < ::AtomicDesign::Modules::Base
 
-            raise "#{target_string} is not defined." if target.nil?
+            raise "#{cls.name} must inherit from ::AtomicDesign::Modules::Base"
+          end
 
-            if target&.class
-              unless target < ::AtomicDesign::Modules::Base
-                raise "#{target.name} must inherit from AtomicDesign::Modules::Base"
-              end
-
-              return target
-            end
-            raise 'テスト中' if target&.module?
-
-            target
+          def recall!(mod, *args, **kwargs, &block)
+            self.class.new(mod, *args, **kwargs, &block)
           end
 
           def respond_to_missing?(*args)
             true
           end
 
-          def method_missing(called, *args, **options, &block)
-            component = build(called)
-            render component.new(*args, **options), &block
+          def method_missing(called, *args, **kwargs, &block)
+            res = arbit(called, *args, **kwargs, &block)
+            return res unless res.nil?
+
+            super(called, *args, **kwargs)
           end
         end
 
@@ -66,7 +72,7 @@ module AtomicDesign
         private
 
         def builder(module_name)
-          ModuleBuilder.new(module_name)
+          ModuleBuilder.new("#{MODULES_PATH}/#{module_name}")
         end
       end
 
