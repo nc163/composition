@@ -8,10 +8,12 @@ module AtomicDesign
 
       eager_autoload do
         autoload :PropHelper
+        autoload :ModuleRefHelper
       end
 
       extend ActiveSupport::Concern
       include PropHelper
+      include ModuleRefHelper
     end
   end
 end
