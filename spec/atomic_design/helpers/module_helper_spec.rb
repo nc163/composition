@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe AtomicDesign::Helpers::ComponentHelper, type: :helper do # :nodoc:
+describe AtomicDesign::Helpers::ModuleHelper, type: :helper do # :nodoc:
   let(:view) do
     ActionView::Base.new(ActionView::LookupContext.new([]), {}, nil)
   end
@@ -15,10 +15,9 @@ describe AtomicDesign::Helpers::ComponentHelper, type: :helper do # :nodoc:
     expect(view).to respond_to(:atomic_design)
     expect(view.atomic_design).to respond_to(:atoms, :moles, :orgas, :temps, :pages)
 
-    expect(view.atomic_design.atoms.button).to match(/<button.*?\/button>/m)
+    expect(view.atomic_design.atoms.button).to match(%r{<button.*?/button>}m)
     # expect(view.atomic_design.atoms.icons.fa6).to match(/<i.*?\/i>/m)
   end
-
 
   it 'raises an error when referencing a non-existent builder component' do
     expect do

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class Table::Trow::Td < ::AtomicDesign::Modules::Base
+    module Moles
+      class Table::Trow::Td < ::AtomicDesign::Modules::Base # :nodoc:
         # == Slots
         renders_one :button, Atoms::Button
 
@@ -13,7 +12,7 @@ module AtomicDesign
         # == Methods
 
         def call
-          content_tag :td, attributes do
+          content_tag :td, options do
             if content?
               content
             elsif url_options.present?

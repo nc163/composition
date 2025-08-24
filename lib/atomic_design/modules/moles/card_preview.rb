@@ -14,7 +14,7 @@ module AtomicDesign
           render Card.new do |card|
             card.with_head(title)
             card.with_body do |slot|
-              body
+              content_tag :span, body, class: 'text-secondary'
             end
             card.with_foot do |slot|
               foot

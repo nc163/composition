@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
+    module Atoms
       module Forms
-        class ErrorMessage < ::AtomicDesign::Modules::Base
+        class ErrorMessage < ::AtomicDesign::Modules::Base # :nodoc:
           # == Layout
           default_layout class: ''
 

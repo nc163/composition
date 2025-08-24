@@ -6,15 +6,10 @@ module AtomicDesign
     module Moles # :nodoc:
       class Card::Body < ::AtomicDesign::Modules::Base
         # == Layout
-        default_layout class: 'card-body'
-
-        # == Attributes
-        # Nop
-
-        # == Methods
+        attributes class: 'card-body'
 
         def call
-          content_tag :div, attributes do
+          content_tag :div, options do
             concat(content || context)
           end
         end

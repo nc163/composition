@@ -5,8 +5,7 @@ require 'spec_helper'
 describe AtomicDesign::Modules::Atoms do
   it 'autoloads' do
     expect(defined?(AtomicDesign::Modules::Atoms::Alert)).to eq('constant')
-    expect(defined?(AtomicDesign::Modules::Atoms::Badge)).to eq('constant')
-    expect(defined?(AtomicDesign::Modules::Atoms::Button)).to eq('constant')
+    expect(defined?(AtomicDesign::Modules::Atoms::Icons)).to eq('constant')
     expect(defined?(AtomicDesign::Modules::Atoms::List)).to eq('constant')
   end
 end

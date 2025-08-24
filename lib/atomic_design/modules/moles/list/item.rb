@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class List::Item < ::AtomicDesign::Modules::Base
+    module Moles
+      class List::Item < ::AtomicDesign::Modules::Base # :nodoc:
         # == Layout
         default_layout class: 'list-group-item'
 

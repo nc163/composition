@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Helpers
-    module Modules # :nodoc:
+    module Components # :nodoc:
       class Select # :nodoc:
       end
     end

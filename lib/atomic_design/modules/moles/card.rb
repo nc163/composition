@@ -2,32 +2,17 @@
 
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      # ==
-      class Card < ::AtomicDesign::Modules::Base
+    module Moles
+      class Card < ::AtomicDesign::Modules::Base # :nodoc:
+        renders_one :head, Head
+        renders_one :body, Body
+        renders_one :foot, Foot
+
         # == Layout
-        default_layout class: 'card'
-
-        # == Slots
-        # renders_one :head, Card::Head
-        # renders_one :body, Card::Body
-        # renders_one :foot, Card::Foot
-        # renders_one :head, -> (context = nil, options = {}, &block) do
-        #   Card::Head.new(context, options, &block)
-        # end
-        # renders_one :body, -> (context = nil, options = {}, &block) do
-        #   Card::Body.new(context, options, &block)
-        # end
-        renders_one :head, lambda_slots_component_handler(Card::Head)
-        renders_one :body, lambda_slots_component_handler(Card::Body)
-        renders_one :foot, lambda_slots_component_handler(Card::Foot)
-
-        attr_accessor :url_option
-
-        # == Methods
+        attributes class: 'card'
 
         def call
-          content_tag :aside, attributes do
+          content_tag :aside, options do
             if content?
               concat(head) if head?
               concat(body) if body?

@@ -16,7 +16,6 @@ module AtomicDesign
 
           autoload :Confirms
         end
-
       end
     end
   end

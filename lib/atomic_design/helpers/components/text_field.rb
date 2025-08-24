@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Helpers
-    module Modules # :nodoc:
+    module Components # :nodoc:
       class TextField < ::AtomicDesign::Modules::Atoms::Form::TextField; end # :nodoc:
     end
   end

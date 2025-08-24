@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    class Moles::Field < Moles::Modules
+    class Moles::Field < Moles::Modules # :nodoc:
       # == Slots
       renders_one :mapbox, Atoms::Map::Mapbox
 

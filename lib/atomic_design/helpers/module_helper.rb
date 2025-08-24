@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Helpers
-    module ComponentHelper # :nodoc:
+    module ModuleHelper # :nodoc:
       extend ActiveSupport::Concern
 
       class ModuleProxy # :nodoc:
@@ -10,7 +10,7 @@ module AtomicDesign
           @view_context = view_context
         end
 
-        class ComponentBuilder # :nodoc:
+        class ModuleBuilder # :nodoc:
           MODULE_PATH = 'atomic_design/modules'
 
           def initialize(view_context, module_name)
@@ -25,14 +25,15 @@ module AtomicDesign
             target = target_string.safe_constantize
 
             raise "#{target_string} is not defined." if target.nil?
-            
+
             if target&.class
-              raise "#{target.name} must inherit from AtomicDesign::Modules::Base" unless target < ::AtomicDesign::Modules::Base
+              unless target < ::AtomicDesign::Modules::Base
+                raise "#{target.name} must inherit from AtomicDesign::Modules::Base"
+              end
+
               return target
             end
-            if target&.module?
-              raise 'テスト中'
-            end
+            raise 'テスト中' if target&.module?
 
             target
           end
@@ -70,7 +71,7 @@ module AtomicDesign
         private
 
         def builder(view_context, module_name)
-          ComponentBuilder.new(view_context, module_name)
+          ModuleBuilder.new(view_context, module_name)
         end
       end
 
@@ -143,7 +144,9 @@ module AtomicDesign
         component = "atomic_design/component/orgas/#{component_name}".camelize.safe_constantize
 
         raise "#{component_name} is not defined." if component.nil?
-        raise "#{component}(#{name}) must inherit from AtomicDesignComponent." unless component < AtomicDesign::Modules::Base
+        unless component < AtomicDesign::Modules::Base
+          raise "#{component}(#{name}) must inherit from AtomicDesignComponent."
+        end
 
         render component.new(context_or_options, **options), &block
       end

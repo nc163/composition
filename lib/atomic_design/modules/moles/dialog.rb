@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# ==
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class Dialog < ::AtomicDesign::Modules::Base
+    module Moles
+      class Dialog < ::AtomicDesign::Modules::Base # :nodoc:
         # == Methods
 
         def call

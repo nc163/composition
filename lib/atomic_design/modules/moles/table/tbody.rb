@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class Table::Tbody < ::AtomicDesign::Modules::Base
+    module Moles
+      class Table::Tbody < ::AtomicDesign::Modules::Base # :nodoc:
         # == Slots
         renders_many :trows, Table::Trow
 
@@ -12,7 +11,7 @@ module AtomicDesign
         # attr_accessor :rows
 
         def call
-          content_tag :tbody, attributes do
+          content_tag :tbody, options do
             if content?
               trows.each do |trow|
                 concat trow

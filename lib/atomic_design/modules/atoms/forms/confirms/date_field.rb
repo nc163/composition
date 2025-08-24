@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
+    module Atoms
       module Forms
         module Confirms
-          class DateField < ::AtomicDesign::Modules::Base
+          class DateField < ::AtomicDesign::Modules::Base # :nodoc:
             # == Layout
             default_layout class: 'form-group'
 

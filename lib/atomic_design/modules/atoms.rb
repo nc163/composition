@@ -2,7 +2,8 @@
 
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
+    # AtomicDesignに基づいた最小単位のコンポーネントの名前空間
+    module Atoms
       extend ActiveSupport::Autoload
 
       eager_autoload do

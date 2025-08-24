@@ -2,9 +2,9 @@
 
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
+    module Atoms
       module Forms
-        class CheckBoxField < ::AtomicDesign::Modules::Base
+        class CheckBoxField < ::AtomicDesign::Modules::Base # :nodoc:
           # == Layout
           default_layout class: 'form-group'
 

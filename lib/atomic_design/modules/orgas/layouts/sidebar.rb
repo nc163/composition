@@ -3,43 +3,39 @@
 #
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
+    module Orgas
       module Layouts
-        class Sidebar < Orgas::Modules
-          # == Layout
-          default_layout class: 'sidebar'
+        class Sidebar < ::AtomicDesign::Modules::Base # :nodoc:
+          renders_one :card, lambda_slots_component_handler(Moles::Card)
+          renders_one :list, lambda_slots_component_handler(Moles::List)
+          renders_many :fields, lambda_slots_component_handler(Moles::Field)
+          renders_many :badges, lambda_slots_component_handler(Atoms::Badge)
 
-          # == Slots
-          renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
-          renders_one :list, lambda_slots_component_handler(AtomicDesign::Modules::Moles::List)
-          renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)
-          renders_many :badges, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Badge)
+          attributes class: 'sidebar'
 
-          # == Methods
-
-          def call
-            # with_card attributes do |card|
-            content_tag :aside, attributes do
-              if content?
-                # items.each_with_index do |item, index|
-                #   concat item
-                # end
-              else
-                concat(with_list do |list|
-                  context.each do |_context, _options, _badge|
-                    concat(list.with_item(nil, **_options) do |item|
-                      concat(_context)
-
-                      if _badge
-                        badge_context, badge_options = _badge
-                        concat(with_badge(badge_context, **badge_options))
-                      end
-                    end)
-                  end
-                end)
-              end
-            end
-          end
+          # def call
+          #   # with_card attributes do |card|
+          #   content_tag :aside, attributes do
+          #     if content?
+          #       # items.each_with_index do |item, index|
+          #       #   concat item
+          #       # end
+          #     else
+          #       concat(with_list do |list|
+          #         context.each do |_context, _options, _badge|
+          #           concat(list.with_item(nil, **_options) do |item|
+          #             concat(_context)
+          #
+          #             if _badge
+          #               badge_context, badge_options = _badge
+          #               concat(with_badge(badge_context, **badge_options))
+          #             end
+          #           end)
+          #         end
+          #       end)
+          #     end
+          #   end
+          # end
         end
       end
     end

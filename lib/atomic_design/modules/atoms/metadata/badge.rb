@@ -3,9 +3,9 @@
 # ==
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
+    module Atoms
       module Metadata
-        class Badge < Atoms::Modules
+        class Badge < Atoms::Modules # :nodoc:
           # == Layout
           default_layout class: 'badge'
 

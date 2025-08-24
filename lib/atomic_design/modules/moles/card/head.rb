@@ -6,15 +6,10 @@ module AtomicDesign
     module Moles # :nodoc:
       class Card::Head < ::AtomicDesign::Modules::Base
         # == Layout
-        default_layout class: 'card-header fw-bold'
-
-        # == Attributes
-        #
-
-        # == Methods
+        attributes class: 'card-header fw-bold'
 
         def call
-          content_tag :header, attributes do
+          content_tag :header, options do
             if content?
               content
             else

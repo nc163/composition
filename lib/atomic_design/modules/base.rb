@@ -35,7 +35,7 @@ module AtomicDesign
       end
 
       class << self
-        # 初期値を設定する
+        # HTML属性の初期値
         def attributes(**options)
           @attributes ||= {}
           @attributes.merge!(options)

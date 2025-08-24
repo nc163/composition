@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  # = AtomicDesign Helpers
+  # 再利用可能なコンポーネント名前空間
   module Modules
     extend ActiveSupport::Autoload
 

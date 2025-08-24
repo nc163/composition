@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  module Modules 
+  module Modules
     module Helpers
       module PropHelper # :nodoc:
         class Prop < ::Hashie::Dash # :nodoc:
@@ -175,7 +175,7 @@ module AtomicDesign
         end
 
         # 一度propのメソッドを参照、ない場合は再度method_missingを呼び出す
-        def method_missing(called, *args, **options)
+        def method_missing(called, *args, **options) # rubocop:disable Style/MissingRespondToMissing
           if self.class.props&.include?(called)
             dynamic_call(called)
           else

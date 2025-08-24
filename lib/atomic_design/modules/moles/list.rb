@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
-      class List < Modules
+    module Moles
+      class List < Modules # :nodoc:
         # == Layout
-        default_layout class: 'list-group list-group-flush'
+        attributes class: 'list-group list-group-flush'
 
         # == Slots
         renders_many :items, List::Item
