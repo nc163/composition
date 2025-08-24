@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms # :nodoc:
       # ボタンコンポーネント
-      # <span class='btn'>{{content}}</span>
+      # `<span class='btn'>{{content}}</span>`
       class Button < ::AtomicDesign::Modules::Base
         attributes class: 'btn'
 

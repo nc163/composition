@@ -15,7 +15,10 @@ bundle exec rspec
 
 ## Documentation
 ```bash
-bundle exec yardoc
+bundle exec yard doc --no-private
+```
+```bash
+bundle exec yard server --reload --no-private
 ```
 
 ## 使い方(rails)
