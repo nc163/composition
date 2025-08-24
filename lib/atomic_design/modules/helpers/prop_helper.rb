@@ -4,6 +4,16 @@ module AtomicDesign
   module Modules
     module Helpers
       module PropHelper # :nodoc:
+        extend ActiveSupport::Concern
+
+        included do
+          extend ClassMethods
+          unless instance_variable_defined?(:@prop_helper_included)
+            instance_variable_set(:@prop_helper_included, true)
+            PropHelper.prop_helper_initializer(self)
+          end
+        end
+
         class Prop < ::Hashie::Dash # :nodoc:
           include Hashie::Extensions::IgnoreUndeclared
           include ::Hashie::Extensions::DeepMerge
@@ -17,29 +27,17 @@ module AtomicDesign
           end
         end
 
-        def self.included(base)
-          base.extend ClassMethods
+        # initializerの設定を共通化
+        def self.prop_helper_initializer(klass)
+          prop_helper_initializer = Module.new do
+            define_method(:initialize) do |*args, **kwargs, &block|
+              set_prop(**kwargs)
 
-          # initialize
-          setup_prop_helper_initializer(base)
-        end
-
-        class << self
-          private
-
-          # initializerの設定を共通化
-          def setup_prop_helper_initializer(klass)
-            initializer = Module.new do
-              define_method(:initialize) do |*args, **kwargs, &block|
-                set_prop(**kwargs)
-
-                # 親クラスのinitializeを呼び出し
-                super(*args, **kwargs, &block)
-              end
+              super(*args, **kwargs, &block)
             end
-
-            klass.prepend(initializer)
           end
+
+          klass.prepend(prop_helper_initializer)
         end
 
         module ClassMethods # :nodoc:
@@ -68,7 +66,7 @@ module AtomicDesign
             klass.instance_variable_set(:@prop_store, store)
 
             # 3) initializerを子にも適用
-            PropHelper.send(:setup_prop_helper_initializer, klass)
+            PropHelper.send(:prop_helper_initializer, klass)
           end
 
           def prop_options

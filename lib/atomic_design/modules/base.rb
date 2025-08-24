@@ -6,7 +6,7 @@ module AtomicDesign
     class Base < ::ViewComponent::Base
       include Helpers
 
-      attr_accessor :context, :form
+      attr_accessor :form
 
       # View Context
       #
@@ -20,18 +20,16 @@ module AtomicDesign
       #     table.head do
       #     ...
       #
-      # params [*] context_or_form_method_or_options
-      # params [Hash] options
-      def initialize(context_or_form_method_or_options = nil, **options)
-        # super
+      # params [*] args
+      # params [Hash] kwargs
+      def initialize(*args, **kwargs, &block)
+        # if block_given?
+        #   kwargs = args || {}
+        #   args = []
+        # end
 
-        if block_given?
-          options = context_or_form_method_or_options || {}
-          context_or_form_method_or_options = nil
-        end
-
-        @context = context_or_form_method_or_options
-        @options = options
+        @args = args
+        @kwargs = kwargs
       end
 
       class << self
@@ -40,10 +38,6 @@ module AtomicDesign
           @attributes ||= {}
           @attributes.merge!(options)
         end
-      end
-
-      def context?
-        !!@context
       end
 
       # #
@@ -56,15 +50,22 @@ module AtomicDesign
 
       protected
 
+      # コンテキストが存在するか
+      def context?
+        !!@args
+      end
+
+      # コンテキストを取得する
+      def contexts
+        @args
+      end
+
       # HTML属性のハッシュ
       def options
-        return {} unless (@options ||= {}).any?
+        prop_options = @kwargs.keys && self.class.props
+        others = @kwargs.delete_if { |k, _| prop_options.include?(k) }
 
-        prop_options = @options.keys && self.class.props
-        others = @options.delete_if { |k, _| prop_options.include?(k) }
-
-        # html attributes
-        html_attrs = [] || {}
+        html_attrs = [{}]
         html_attrs << others if others.any?
         html_attrs << self.class.attrs if self.class.attrs.any?
         prop_options.map { |p| send(p) || {} }.each do |h|
@@ -80,6 +81,8 @@ module AtomicDesign
         raise ArgumentError, 'Key must be a Symbol' unless key.is_a?(Symbol)
 
         case key
+        when :id
+          [old_value, new_value].compact.join(' ')
         when :class
           [old_value, new_value].compact.join(' ')
         when :style

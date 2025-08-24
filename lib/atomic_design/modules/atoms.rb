@@ -17,6 +17,8 @@ module AtomicDesign
         autoload :Icons
       end
 
+      AVATAR_SIZES = {}.freeze
+
       ALERT_LEVELS = {
         info: { class: 'alert-info' },
         success: { class: 'alert-success' },

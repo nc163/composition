@@ -11,4 +11,8 @@ describe AtomicDesign::Modules::Helpers::PropHelper do # :nodoc:
     end.not_to raise_error
   end
 
+  it 'initialize' do
+    dummy = DummyProp.new(title: 'タイトル')
+    expect(dummy.title).to eq 'タイトル'
+  end
 end
