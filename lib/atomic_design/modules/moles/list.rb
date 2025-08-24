@@ -4,13 +4,10 @@ module AtomicDesign
   module Modules
     module Moles
       class List < Modules # :nodoc:
-        # == Layout
-        attributes class: 'list-group list-group-flush'
-
-        # == Slots
         renders_many :items, List::Item
 
-        # == Methods
+        # == Layout
+        attributes class: 'list-group list-group-flush'
 
         def call
           content_tag :ol, attributes do

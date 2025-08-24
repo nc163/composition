@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas # :nodoc:
-      module Card
+      module Cards
         module Form
           class Action < ::AtomicDesign::Modules::Base
             # == Layout

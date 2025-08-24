@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-# render Orgas::Card::Record.new @user, only: [:name, :email], except: nil
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
-      module Card
+    module Orgas
+      module Cards
+        # render Orgas::Card::Record.new @user, only: [:name, :email], except: nil
         class Record < ::AtomicDesign::Modules::Base
-          # == Slots
           renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
           renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)
           renders_many :tables, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Table)
