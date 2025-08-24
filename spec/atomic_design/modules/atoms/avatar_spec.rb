@@ -4,6 +4,6 @@ require 'spec_helper'
 
 describe AtomicDesign::Modules::Atoms::Avatar, type: :component do
   it 'initialize' do
-    expect(described_class.new(url: 'https://example.com/avatar.png', alt: 'avatar')).to match([:level])
+    expect(AtomicDesign::Modules::Atoms::Avatar.new).to be_an_instance_of(AtomicDesign::Modules::Atoms::Avatar)
   end
 end

@@ -23,10 +23,7 @@ module AtomicDesign
       # params [*] args
       # params [Hash] kwargs
       def initialize(*args, **kwargs, &block)
-        # if block_given?
-        #   kwargs = args || {}
-        #   args = []
-        # end
+        args.unshift nil if block_given?
 
         @args = args
         @kwargs = kwargs
@@ -52,12 +49,17 @@ module AtomicDesign
 
       # コンテキストが存在するか
       def context?
-        !!@args
+        !context.nil?
       end
 
       # コンテキストを取得する
-      def contexts
-        @args
+      def context
+        @args&.first
+      end
+
+      # 引数を取得する
+      def args
+        @args || []
       end
 
       # HTML属性のハッシュ
