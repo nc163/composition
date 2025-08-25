@@ -6,7 +6,7 @@ module AtomicDesign
       class Avatar < Base # :nodoc:
         attrs class: 'rounded-circle', alt: 'avatar'
 
-        # prop :size, map: AVATAR_SIZES, default: :medium
+        # prop :size, mapping: AVATAR_SIZES, default: :medium
 
         def self.sizes
           AVATAR_SIZES.keys

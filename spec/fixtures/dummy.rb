@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# テスト用コンポーネント
 class Dummy < ::AtomicDesign::Modules::Base
   COLORS = {
     primary: { class: 'bg-primary' },
@@ -10,8 +11,13 @@ class Dummy < ::AtomicDesign::Modules::Base
     info: { class: 'bg-info' }
   }.freeze
 
-  attrs class: 'list-group list-group-flush'
+  default class: 'list-group list-group-flush'
 
-  prop :order?, default: false
-  prop :color, map: COLORS, default: :primary
+  state :order?,                                    require: false, default: false
+  state :color,  to: :attribute, mapping: COLORS,                   default: :primary
+
+  # set_props do |s|
+  #   s.prop :order?,                                    require: false, default: false
+  #   s.prop :color,  to: :attribute, mapping: COLORS,                   default: :primary
+  # end
 end

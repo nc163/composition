@@ -15,7 +15,7 @@ module AtomicDesign
         def context1(title: '何らかのテキスト', lat: 35.681236, lon: 139.767125, zoom: 10)
           context = {
             title: { text: title, class: 'fw-bold' },
-            map: { lat: lat, lon: lon, zoom: zoom, access_token: ACCESS_TOKEN }
+            mapping: { lat: lat, lon: lon, zoom: zoom, access_token: ACCESS_TOKEN }
           }
           render Field.new context
         end

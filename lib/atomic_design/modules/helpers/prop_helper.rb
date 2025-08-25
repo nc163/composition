@@ -20,7 +20,7 @@ module AtomicDesign
           # values: Array of allowed values for the property
           include ::Hashie::Extensions::Dash::PredefinedValues
 
-          ALLOW_OPTION_KEYS = %i[values default map required].freeze
+          ALLOW_OPTION_KEYS = %i[values default mapping required].freeze
 
           class << self
             # Class methods go here
@@ -79,6 +79,8 @@ module AtomicDesign
 
           # class Component
           #   include PropStore::Helpers::PropHelper
+          #   prop :name, {{}} required: true, default: any
+          #
           #   prop :title, required: true
           #   prop :description
           #   prop :color, values: %i[red green blue]
@@ -86,6 +88,8 @@ module AtomicDesign
           def prop(name, **options)
             raise ArgumentError, "Invalid name: #{name}" unless allow_name?(name)
             raise ArgumentError, "Invalid options: #{options.inspect}" unless allow_options?(**options)
+
+            #
 
             prop_arg = { name.to_sym => options }
 
@@ -113,10 +117,15 @@ module AtomicDesign
           end
 
           def to_hashie_options(**options)
-            # from :map to :values
-            if options.keys.include?(:map) && options[:map].is_a?(Hash) # rubocop:disable Style/IfUnlessModifier
-              options[:values] = options[:map].keys
+            # from :mapping to :values
+            if options.keys.include?(:mapping) && options[:mapping].is_a?(Hash)
+              options[:values] = options[:mapping].keys
             end
+            # # from :type to :values
+            # if options.keys.include?(:type)
+            #   options[:values] ||= []
+            #   options[:values] << options[:type]
+            # end
 
             options
           end

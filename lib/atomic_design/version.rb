@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Version # :nodoc:
-    VERSION = '0.4.4'
+    VERSION = '0.4.5'
 
     def self.gem_version
       Gem::Version.new(VERSION)

@@ -6,7 +6,7 @@ module AtomicDesign
       class Badge < Base # :nodoc:
         attrs class: 'badge'
 
-        prop :color, map: BADGE_COLORS, default: :primary
+        prop :color, mapping: BADGE_COLORS, default: :primary
 
         def self.colors
           BADGE_COLORS.keys

@@ -8,7 +8,7 @@ module AtomicDesign
       class Button < Base # :nodoc:
         attrs class: 'btn'
 
-        prop :color, map: BUTTON_COLORS, default: :primary
+        prop :color, mapping: BUTTON_COLORS, default: :primary
 
         def self.colors
           BUTTON_COLORS.keys

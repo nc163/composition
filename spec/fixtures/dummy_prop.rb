@@ -13,7 +13,7 @@ class DummyProp
   prop :title, required: true
   prop :description
   prop :color, values: COLORS
-  prop :bgcolor, map: BGCOLOR_MAP
+  prop :bgcolor, mapping: BGCOLOR_MAP
   prop :age, values: (0..150)
   prop :size, default: 'medium'
   prop :dummy, default: 'no call'
