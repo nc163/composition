@@ -42,7 +42,7 @@ module Preview
       Rails.root.join('lib'),
       Rails.root.join('preview')
     ]
-    config.lookbook.project_name = 'Atomic Design'
+    config.lookbook.project_name = "Atomic Design #{AtomicDesign::Version.gem_version}"
     config.lookbook.preview_layout = 'default'
     config.lookbook.preview_display_options = {
       theme: %w[light dark],
