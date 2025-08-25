@@ -33,18 +33,14 @@ module ApplicationHelper
   include AtomicDesign::Helpers
   ...
 ```
-```erb
-  <%= render atomic_design.atoms.button 'ボタン' %>
-```
 
 3. Asset
-
+いつか書く
 
 4. Viewで生成
 ```erb
-<%= atomic_design.organisms.card_table %>
+  <%= render atomic_design.atoms.button 'ボタン' %>
 ```
-
 
 ## TODO
 jsを使い回すようになったら、manifest.js に 追加するジェネレーターを作らないとかも。。
