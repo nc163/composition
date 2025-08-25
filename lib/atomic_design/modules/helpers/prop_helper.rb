@@ -3,7 +3,8 @@
 module AtomicDesign
   module Modules
     module Helpers
-      module PropHelper # :nodoc:
+      # もう使ってない
+      module PropHelper
         extend ActiveSupport::Concern
 
         included do
@@ -79,12 +80,12 @@ module AtomicDesign
 
           # class Component
           #   include PropStore::Helpers::PropHelper
-          #   prop :name, {{}} required: true, default: any
+          #   state :name, {{}} required: true, default: any
           #
-          #   prop :title, required: true
-          #   prop :description
-          #   prop :color, values: %i[red green blue]
-          #   prop :size, default: 'medium'
+          #   state :title, required: true
+          #   state :description
+          #   state :color, values: %i[red green blue]
+          #   state :size, default: 'medium'
           def prop(name, **options)
             raise ArgumentError, "Invalid name: #{name}" unless allow_name?(name)
             raise ArgumentError, "Invalid options: #{options.inspect}" unless allow_options?(**options)

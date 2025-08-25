@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class ErrorMessage < Base # :nodoc:
           # == Layout
-          attrs class: ''
+          defaults class: ''
 
           def call
             return unless form.errors.any?

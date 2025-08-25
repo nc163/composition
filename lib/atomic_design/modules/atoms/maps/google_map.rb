@@ -5,12 +5,12 @@ module AtomicDesign
     module Atoms
       module Maps
         class GoogleMap < Base # :nodoc:
-          attrs style: 'width: 100%; height: 400px;'
+          defaults style: 'width: 100%; height: 400px;'
 
-          prop :access_token, required: true
-          prop :lat, required: true
-          prop :lon, required: true
-          prop :zoom, values: (1..15), default: 10
+          state :access_token, required: true
+          state :lat, required: true
+          state :lon, required: true
+          state :zoom, values: (1..15), default: 10
         end
       end
     end

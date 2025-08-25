@@ -23,12 +23,12 @@ describe AtomicDesign::Modules::Helpers::PropHelper::Prop do # :nodoc:
     end
   end
   context 'ClassMethods' do
-    it 'prop?' do
-      expect(DummyProp.prop?(:title)).to be true
+    it 'state?' do
+      expect(DummyProp.state?(:title)).to be true
     end
 
-    it 'props' do
-      expect(DummyProp.props).to include(:title, :description, :color, :bgcolor, :size, :age)
+    it 'states' do
+      expect(DummyProp.status).to include(:title, :description, :color, :bgcolor, :size, :age)
     end
   end
 
@@ -39,8 +39,8 @@ describe AtomicDesign::Modules::Helpers::PropHelper::Prop do # :nodoc:
     end
 
     it 'props' do
-      expect(DummyPropChild1.props).to match_array(%i[title description color bgcolor age size dummy child1])
-      expect(DummyPropChild2.props).to match_array(%i[title description color bgcolor age size dummy child2])
+      expect(DummyPropChild1.status).to match_array(%i[title description color bgcolor age size dummy child1])
+      expect(DummyPropChild2.status).to match_array(%i[title description color bgcolor age size dummy child2])
     end
   end
 end

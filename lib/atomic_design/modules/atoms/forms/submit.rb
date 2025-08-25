@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class Submit < Base # :nodoc:
           # == Layout
-          attrs class: 'btn'
+          defaults class: 'btn'
 
           # attrs :color, primary: { class: 'btn-primary' },
           #               secondary: { class: 'btn-secondary' },
@@ -15,9 +15,9 @@ module AtomicDesign
           #               warning: { class: 'btn-warning' },
           #               info: { class: 'btn-info' }
 
-          def call
-            concat form.submit(context, use_default: true, **attributes)
-          end
+          # def call
+          #   concat form.submit(context, use_default: true, options)
+          # end
         end
       end
     end

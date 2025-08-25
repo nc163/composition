@@ -6,7 +6,7 @@ module AtomicDesign
       module Cards
         class Action < Base # :nodoc:
           # == Layout
-          attrs class: 'card'
+          defaults class: 'card'
 
           # == Slots
           renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)

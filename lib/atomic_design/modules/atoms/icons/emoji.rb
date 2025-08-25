@@ -5,8 +5,8 @@ module AtomicDesign
     module Atoms
       module Icons
         class Emoji < Base # :nodoc:
-          prop :icon, mapping: EMOJI_COLOR, required: true
-          prop :emoji, required: true
+          state :icon, mapping: EMOJI_COLOR, required: true
+          state :emoji, required: true
         end
       end
     end

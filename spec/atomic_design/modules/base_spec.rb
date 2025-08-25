@@ -20,15 +20,26 @@ describe AtomicDesign::Modules::Base, type: :component do # :nodoc:
   context 'dummy' do
     it 'initialize' do
       context = 'コンテキスト'
-      options = { order?: true, color: :danger }
+      options = {
+        id: 'dummy-1',
+        class: 'dummy',
+        order?: true,
+        title: 'タイトル',
+        src: '/assets/images/60x60.png',
+        color: :danger,
+        age: 20
+      }
       expect { Dummy.new context, **options }.not_to raise_error
-
       dummy = Dummy.new context, **options
 
       expect(dummy.send(:context)).to eq(context)
       expect(dummy.send(:order?)).to eq(options[:order?])
       expect(dummy.send(:color)).to eq(Dummy::COLORS[options[:color]])
-      expect(dummy.send(:options)).to eq(class: "list-group list-group-flush #{Dummy::COLORS[options[:color]][:class]}")
+      expect(dummy.send(:options)).to eq(
+        id: 'dummy-1',
+        class: "dummy list-group list-group-flush btn-sm #{Dummy::COLORS[options[:color]][:class]}",
+        src: '/assets/images/60x60.png' #         ^^^^^^-- 初期値
+      )
     end
   end
 end

@@ -1,6 +1,5 @@
-class DummyPropChild1 < DummyProp
-  prop :child1, default: 'i am child'
+# frozen_string_literal: true
 
-  def initialize(name = nil, **kwargs)
-  end
+class DummyPropChild1 < DummyProp
+  state :child1, default: 'i am child'
 end

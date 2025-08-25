@@ -5,9 +5,9 @@ module AtomicDesign
     module Atoms
       module Icons
         class FontAwesome6 < Base # :nodoc:
-          attrs 'aria-hidden': true
+          defaults 'aria-hidden': true
 
-          prop :icon, mapping: FONT_AWESOME_6_ICONS, required: true
+          state :icon, mapping: FONT_AWESOME_6_ICONS, required: true
 
           def self.icons
             FONT_AWESOME_6_ICONS.keys

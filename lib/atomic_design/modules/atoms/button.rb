@@ -6,9 +6,9 @@ module AtomicDesign
       # ボタンコンポーネント
       # `<span class='btn'>{{content}}</span>`
       class Button < Base # :nodoc:
-        attrs class: 'btn'
+        defaults class: 'btn'
 
-        prop :color, mapping: BUTTON_COLORS, default: :primary
+        state :color, mapping: BUTTON_COLORS, default: :primary
 
         def self.colors
           BUTTON_COLORS.keys

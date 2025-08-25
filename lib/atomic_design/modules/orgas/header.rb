@@ -5,7 +5,7 @@ module AtomicDesign
     module Orgas
       class Header < Base # :nodoc:
         # == Layout
-        attrs id: 'global-header', class: '', style: 'position: sticky; top: 100vh; top: 100dvh;'
+        defaults id: 'global-header', class: '', style: 'position: sticky; top: 100vh; top: 100dvh;'
 
         # == Slots
         # Nop

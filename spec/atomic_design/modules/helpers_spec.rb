@@ -21,6 +21,8 @@ describe AtomicDesign::Modules::Helpers do # :nodoc:
         'Dummy'
       end
     end
-    expect(dummy_class.included_modules).to include(AtomicDesign::Modules::Helpers::PropHelper)
+    expect(dummy_class.included_modules).to include(AtomicDesign::Modules::Helpers)
+    expect(dummy_class.included_modules).to include(AtomicDesign::Modules::Helpers::StateHelper)
+    expect(dummy_class.included_modules).to include(AtomicDesign::Modules::Helpers::DefaultHelper)
   end
 end

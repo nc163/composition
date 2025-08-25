@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# テスト用コンポーネント
 class Dummy < ::AtomicDesign::Modules::Base
   COLORS = {
     primary: { class: 'bg-primary' },
@@ -11,13 +10,21 @@ class Dummy < ::AtomicDesign::Modules::Base
     info: { class: 'bg-info' }
   }.freeze
 
-  default class: 'list-group list-group-flush'
+  SIZE = {
+    big: { class: 'btn-lg' },
+    small: { class: 'btn-sm' }
+  }.freeze
 
-  state :order?,                                    require: false, default: false
-  state :color,  to: :attribute, mapping: COLORS,                   default: :primary
+  defaults class: 'list-group list-group-flush'
 
-  # set_props do |s|
-  #   s.prop :order?,                                    require: false, default: false
-  #   s.prop :color,  to: :attribute, mapping: COLORS,                   default: :primary
-  # end
+  #     key     |                        options
+  #     name    |     role         |  func            | required      |   default
+  state :size,        role: :html,    mapping: SIZE,                      default: :small
+  state :color,       role: :html,    mapping: COLORS,  required: true
+  state :src,         role: :html,                      required: true
+
+  state :order?,      role: :value,                                       default: false
+  state :title,       role: :value,                     required: true
+  state :description, role: :value,                                       default: 'no description'
+  state :age,         role: :value,   values: (0..150), required: true
 end

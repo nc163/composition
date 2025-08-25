@@ -1,2 +1,7 @@
 Layout/ExtraSpacing:
   Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false

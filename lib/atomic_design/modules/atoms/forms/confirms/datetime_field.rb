@@ -7,7 +7,7 @@ module AtomicDesign
         module Confirms
           class DatetimeField < Base # :nodoc:
             # == Layout
-            attrs class: 'form-group'
+            defaults class: 'form-group'
 
             # == Attributes
             # attr_accessor :placeholder

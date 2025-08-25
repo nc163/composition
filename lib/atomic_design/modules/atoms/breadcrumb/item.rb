@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       class Breadcrumb::Item < Base # :nodoc:
         # == Layout
-        attrs class: 'list-group-item'
+        defaults class: 'list-group-item'
 
         # == Methods
         def call

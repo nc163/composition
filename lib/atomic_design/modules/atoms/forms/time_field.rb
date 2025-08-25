@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class TimeField < Base # :nodoc:
           # == Layout
-          attrs class: 'form-group'
+          defaults class: 'form-group'
 
           # == Attributes
           # attr_accessor :placeholder

@@ -7,12 +7,14 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
-        autoload :PropHelper
+        autoload :StateHelper
+        autoload :DefaultHelper
         autoload :ModuleRefHelper
       end
 
       extend ActiveSupport::Concern
-      include PropHelper
+      include StateHelper
+      include DefaultHelper
       include ModuleRefHelper
     end
   end

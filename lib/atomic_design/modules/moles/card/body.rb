@@ -5,7 +5,7 @@ module AtomicDesign
     module Moles
       class Card::Body < Base # :nodoc:
         # == Layout
-        attrs class: 'card-body'
+        defaults class: 'card-body'
 
         def call
           content_tag :div, options do

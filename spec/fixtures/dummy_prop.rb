@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DummyProp
-  include AtomicDesign::Modules::Helpers::PropHelper
+  include AtomicDesign::Modules::Helpers
 
   COLORS = %i[red green blue].freeze
   BGCOLOR_MAP = {
@@ -10,13 +12,13 @@ class DummyProp
     info: 'bg-info'
   }.freeze
 
-  prop :title, required: true
-  prop :description
-  prop :color, values: COLORS
-  prop :bgcolor, mapping: BGCOLOR_MAP
-  prop :age, values: (0..150)
-  prop :size, default: 'medium'
-  prop :dummy, default: 'no call'
+  state :title,                                                 required: true
+  state :description
+  state :color,       values: COLORS
+  state :bgcolor,     mapping: BGCOLOR_MAP
+  state :age,         values: (0..150)
+  state :size,                              default: 'medium'
+  state :dummy,                             default: 'no call'
 
   def initialize(name = nil, **kwargs)
   end

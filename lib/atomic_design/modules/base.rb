@@ -30,12 +30,6 @@ module AtomicDesign
       end
 
       class << self
-        # HTML属性の初期値
-        def attrs(**options)
-          @attributes ||= {}
-          @attributes.merge!(options)
-        end
-
         def nesting
           namespace = name.underscore
           @nesting ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new(namespace)
@@ -82,16 +76,11 @@ module AtomicDesign
 
       # HTML属性のハッシュ
       def options
-        prop_options = @kwargs.keys && self.class.props
-        others = @kwargs.delete_if { |k, _| prop_options.include?(k) }
-
         html_attrs = [{}]
-        html_attrs << others if others.any?
-        html_attrs << self.class.attrs if self.class.attrs.any?
-        prop_options.map { |p| send(p) || {} }.each do |h|
-          html_attrs << h
-        end
-        html_attrs.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
+        html_attrs << @kwargs.slice(*(@kwargs.keys - self.class.status))
+        html_attrs << self.class.defaults if self.class.defaults.any?
+        html_attrs << state_html_values
+        html_attrs.flatten.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
       end
 
       private

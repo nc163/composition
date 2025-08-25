@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       class Pagination < Base # :nodoc:
         # == Layout
-        attrs class: '', aria: { label: 'Pages navigation' }
+        defaults class: '', aria: { label: 'Pages navigation' }
 
         # == Methods
 

@@ -6,12 +6,12 @@ module AtomicDesign
       class List < Base # :nodoc:
         renders_many :items, 'Item'
 
-        attrs class: 'list-group list-group-flush'
-        prop :order?, default: false
+        defaults class: 'list-group list-group-flush'
+        state :order?, default: false
 
         class Item < Base # :nodoc:
           # == Layout
-          attrs class: 'list-group-item'
+          defaults class: 'list-group-item'
         end
       end
     end

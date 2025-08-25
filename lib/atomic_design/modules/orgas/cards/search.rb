@@ -6,7 +6,7 @@ module AtomicDesign
       module Cards
         class Search < Base # :nodoc:
           # == Layout
-          attrs class: 'card'
+          defaults class: 'card'
 
           # == Slots
           renders_one :head,  AtomicDesign::Modules::Moles::Card::Head
