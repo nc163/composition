@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Forms
         module Confirms
-          class TextArea < ::AtomicDesign::Modules::Base # :nodoc:
+          class TextArea < Base # :nodoc:
             # == Layout
             attrs class: 'form-group'
 

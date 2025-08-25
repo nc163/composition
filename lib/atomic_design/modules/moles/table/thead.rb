@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Table::Thead < ::AtomicDesign::Modules::Base # :nodoc:
+      class Table::Thead < Base # :nodoc:
         # == Slots
         renders_one :trow, Table::Trow
 

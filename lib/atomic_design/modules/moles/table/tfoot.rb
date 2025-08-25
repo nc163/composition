@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Table::Tfoot < ::AtomicDesign::Modules::Base # :nodoc:
+      class Table::Tfoot < Base # :nodoc:
         # == Slots
         renders_one :trow, Table::Trow
 

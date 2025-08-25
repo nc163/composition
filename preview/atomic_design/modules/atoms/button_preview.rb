@@ -9,33 +9,33 @@ module AtomicDesign
         # @param context
         # @param color select :colors
         def default(context: 'Example', color: :primary)
-          render atomic_design.atoms.button.new(context, color: color)
+          render atomic_design.atoms.button(context, color: color)
         end
 
         # @!group colors
 
         def primary
-          render atomic_design.atoms.button.new('primary', color: :primary)
+          render atomic_design.atoms.button('primary', color: :primary)
         end
 
         def secondary
-          render atomic_design.atoms.button.new('secondary', color: :secondary)
+          render atomic_design.atoms.button('secondary', color: :secondary)
         end
 
         def success
-          render atomic_design.atoms.button.new('success', color: :success)
+          render atomic_design.atoms.button('success', color: :success)
         end
 
         def danger
-          render atomic_design.atoms.button.new('danger', color: :danger)
+          render atomic_design.atoms.button('danger', color: :danger)
         end
 
         def warning
-          render atomic_design.atoms.button.new('warning', color: :warning)
+          render atomic_design.atoms.button('warning', color: :warning)
         end
 
         def info
-          render atomic_design.atoms.button.new('info', color: :info)
+          render atomic_design.atoms.button('info', color: :info)
         end
 
         private

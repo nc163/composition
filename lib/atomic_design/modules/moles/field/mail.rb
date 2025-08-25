@@ -5,7 +5,7 @@ module AtomicDesign
   module Modules
     module Moles # :nodoc:
       module Field
-        class Mail < ::AtomicDesign::Modules::Base
+        class Mail < Base # :nodoc:
           # == Layout
           attrs class: 'form-group'
 

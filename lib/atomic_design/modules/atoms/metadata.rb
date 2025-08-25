@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-# ==
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
-      # == Metadata
-      class Metadata < ::AtomicDesign::Modules::Base
+    module Atoms
+      class Metadata < Base # :nodoc:
         attrs class: 'text-decoration-none'
 
         # == property

@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class TextField < ::AtomicDesign::Modules::Base # :nodoc:
+        class TextField < Base # :nodoc:
           # == Layout
           attrs class: 'form-group'
 

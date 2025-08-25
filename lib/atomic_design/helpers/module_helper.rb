@@ -49,24 +49,29 @@ module AtomicDesign
           end
         end
 
+        # Returns the atoms modules
         def atoms
-          @atom_builder ||= builder(:atoms)
+          @atoms ||= builder(:atoms)
         end
 
+        # Returns the molecules modules
         def moles
-          @mole_builder ||= builder(:molecules)
+          @moles ||= builder(:moles)
         end
 
+        # Returns the organisms modules
         def orgas
-          @orga_builder ||= builder(:organisms)
+          @orgas ||= builder(:orgas)
         end
 
+        # Returns the templates modules
         def temps
-          @temp_builder ||= builder(:templates)
+          @temps ||= builder(:temps)
         end
 
+        # Returns the pages modules
         def pages
-          @page_builder ||= builder(:pages)
+          @pages ||= builder(:pages)
         end
 
         private

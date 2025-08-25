@@ -27,13 +27,16 @@ module Preview
     # form で必要な CSRF トークンを生成に必要,もしくは `form_with( authenticity_token: false)`
     config.secret_key_base = 'demo_secret_key_base_'
     config.logger = Logger.new($stdout)
-    config.log_level = :info
+    config.log_level = :warn
 
     # view_component
     config.view_component.previews.controller = 'PreviewsController'
 
     # lookbook
-    config.autoload_paths += Dir[Rails.root.join('lib')]
+    config.autoload_paths += Dir[
+      Rails.root.join('lib'),
+      Rails.root.join('preview')
+    ]
     config.lookbook.project_name = 'Atomic Design'
     config.lookbook.preview_layout = 'default'
     config.lookbook.preview_display_options = {
@@ -47,8 +50,8 @@ module Preview
     # preview
     config.lookbook.preview_inspector.sidebar_panels = %i[previews pages]
     config.lookbook.preview_collection_label = 'Previews'
-    config.lookbook.preview_paths = [File.expand_path('lib/', __dir__)]
-    config.lookbook.page_collection_label = 'Docs'
+    config.lookbook.preview_paths = [File.expand_path('preview/', __dir__)]
+    config.lookbook.page_collection_label = 'Documents'
     config.lookbook.page_paths = [File.expand_path('docs/', __dir__)]
     config.lookbook.page_route = 'docs'
 

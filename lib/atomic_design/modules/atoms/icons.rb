@@ -7,6 +7,7 @@ module AtomicDesign
         extend ActiveSupport::Autoload
 
         eager_autoload do
+          # Class
           autoload :FontAwesome6
           autoload :Emoji
         end

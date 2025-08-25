@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Forms
         module Confirms
-          class TimeField < ::AtomicDesign::Modules::Base # :nodoc:
+          class TimeField < Base # :nodoc:
             # == Layout
             attrs class: 'form-group'
 

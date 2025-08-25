@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
-      class Header < ::AtomicDesign::Modules::Base
+    module Orgas
+      class Header < Base # :nodoc:
         # == Layout
         default_layout id: 'global-header', class: '', style: 'position: sticky; top: 100vh; top: 100dvh;'
 

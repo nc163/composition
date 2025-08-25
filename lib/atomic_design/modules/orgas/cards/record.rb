@@ -5,7 +5,7 @@ module AtomicDesign
     module Orgas
       module Cards
         # render Orgas::Card::Record.new @user, only: [:name, :email], except: nil
-        class Record < ::AtomicDesign::Modules::Base
+        class Record < Base # :nodoc:
           renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
           renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)
           renders_many :tables, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Table)

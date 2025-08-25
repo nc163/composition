@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Dialog < ::AtomicDesign::Modules::Base # :nodoc:
+      class Dialog < Base # :nodoc:
         # == Methods
 
         def call

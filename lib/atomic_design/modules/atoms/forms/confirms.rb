@@ -8,6 +8,7 @@ module AtomicDesign
           extend ActiveSupport::Autoload
 
           eager_autoload do
+            # Class
             autoload :TextField
             autoload :TextArea
             autoload :DatetimeField
@@ -15,7 +16,6 @@ module AtomicDesign
             autoload :TimeField
             autoload :CheckBoxField
           end
-
         end
       end
     end

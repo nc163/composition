@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
     module Orgas
       module Layouts
-        class Sidebar < ::AtomicDesign::Modules::Base # :nodoc:
+        class Sidebar < Base # :nodoc:
           renders_one :card, lambda_slots_component_handler(Moles::Card)
           renders_one :list, lambda_slots_component_handler(Moles::List)
           renders_many :fields, lambda_slots_component_handler(Moles::Field)

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Card::Foot < ::AtomicDesign::Modules::Base
+      class Card::Foot < Base # :nodoc:
         # == Layout
         attrs class: 'card-footer'
 

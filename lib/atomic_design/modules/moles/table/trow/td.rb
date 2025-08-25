@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Table::Trow::Td < ::AtomicDesign::Modules::Base # :nodoc:
+      class Table::Trow::Td < Base # :nodoc:
         # == Slots
         renders_one :button, Atoms::Button
 

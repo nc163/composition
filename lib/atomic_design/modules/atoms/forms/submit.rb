@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class Submit < ::AtomicDesign::Modules::Base # :nodoc:
+        class Submit < Base # :nodoc:
           # == Layout
           attrs class: 'btn'
 

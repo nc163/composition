@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
     module Orgas
-      class CardRecordPreview < Preview
+      class CardRecordPreview < Preview # :nodoc:
         def default
           render Record.new(User.first, context)
         end

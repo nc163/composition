@@ -9,7 +9,7 @@ module AtomicDesign
         # @param context
         # @param level select :levels
         def default(context: 'Example', level: :info)
-          render Alert.new(context, level: level)
+          render atomic_design.atoms.alert(context, level: level)
         end
 
         # def primary

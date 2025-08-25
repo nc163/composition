@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Forms
         module Confirms
-          class TextField < ::AtomicDesign::Modules::Base # :nodoc:
+          class TextField < Base # :nodoc:
             # == Layout
             attrs class: 'form-group'
 

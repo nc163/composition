@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Card < ::AtomicDesign::Modules::Base # :nodoc:
+      class Card < Base # :nodoc:
         renders_one :head, Head
         renders_one :body, Body
         renders_one :foot, Foot

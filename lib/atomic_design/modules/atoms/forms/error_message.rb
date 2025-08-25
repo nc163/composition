@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class ErrorMessage < ::AtomicDesign::Modules::Base # :nodoc:
+        class ErrorMessage < Base # :nodoc:
           # == Layout
           attrs class: ''
 

@@ -91,7 +91,8 @@ module AtomicDesign
           [old_value, new_value].compact.join('; ')
         when :data
           old_value.to_h.merge(new_value.to_h)
-        else raise "Invalid key: #{key}"
+        else
+          [old_value, new_value].compact.join(' ')
         end
       end
     end

@@ -3,13 +3,13 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class List < ::AtomicDesign::Modules::Base # :nodoc:
+      class List < Base # :nodoc:
         renders_many :items, Item
 
         attrs class: 'list-group list-group-flush'
         prop :order?, default: false
 
-        class Item < ::AtomicDesign::Modules::Base # :nodoc:
+        class Item < Base # :nodoc:
           # == Layout
           attrs class: 'list-group-item'
 

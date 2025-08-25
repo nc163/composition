@@ -8,7 +8,7 @@ module AtomicDesign
 
         # @param context
         def default(context = 'Example', url = '', alt: '')
-          render atomic_design.atoms.avatar.new(context, url, alt: alt)
+          render atomic_design.atoms.avatar(context, url, alt: alt)
         end
       end
     end

@@ -4,18 +4,18 @@ module AtomicDesign
   module Modules
     module Atoms
       module Icons
-        class EmojiPreview < Preview # :nodoc:
+        class FontAwesome6Preview < Preview # :nodoc:
           # @!group default
 
           # @param icon select :icons
           def default(icon: :question)
-            render Emoji.new(nil, icon: icon)
+            render atomic_design.atoms.icons.font_awesome_6(nil, icon: icon)
           end
 
           private
 
           def icons
-            { choices: Emoji.icons }
+            { choices: FontAwesome6.icons }
           end
         end
       end

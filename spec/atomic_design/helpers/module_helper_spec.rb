@@ -16,10 +16,8 @@ describe AtomicDesign::Helpers::ModuleHelper, type: :helper do # :nodoc:
     expect(view.atomic_design).to respond_to(:atoms, :moles, :orgas, :temps, :pages)
 
     expect(view.atomic_design.atoms.button).to be_an_instance_of(AtomicDesign::Modules::Atoms::Button)
-    expect { view.atomic_design.atoms.button_preview }.to raise_error(/must inherit/)
     expect(view.atomic_design.atoms.icons).to be_an_instance_of(AtomicDesign::Helpers::ModuleHelper::ModuleProxy::ModuleBuilder)
     expect(view.atomic_design.atoms.icons.font_awesome_6(nil, icon: :question)).to be_an_instance_of(AtomicDesign::Modules::Atoms::Icons::FontAwesome6)
-    expect { view.atomic_design.atoms.icons.font_awesome_6_preview }.to raise_error(/must inherit/)
   end
 
   it 'raises an error when referencing a non-existent builder component' do

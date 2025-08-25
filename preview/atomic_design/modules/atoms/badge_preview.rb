@@ -15,27 +15,27 @@ module AtomicDesign
         # @!group colors
 
         def primary
-          render atomic_design.atoms.badge.new('primary', color: :primary)
+          render atomic_design.atoms.badge('primary', color: :primary)
         end
 
         def secondary
-          render atomic_design.atoms.badge.new('secondary', color: :secondary)
+          render atomic_design.atoms.badge('secondary', color: :secondary)
         end
 
         def success
-          render atomic_design.atoms.badge.new('success', color: :success)
+          render atomic_design.atoms.badge('success', color: :success)
         end
 
         def danger
-          render atomic_design.atoms.badge.new('danger', color: :danger)
+          render atomic_design.atoms.badge('danger', color: :danger)
         end
 
         def warning
-          render atomic_design.atoms.badge.new('warning', color: :warning)
+          render atomic_design.atoms.badge('warning', color: :warning)
         end
 
         def info
-          render atomic_design.atoms.badge.new('info', color: :info)
+          render atomic_design.atoms.badge('info', color: :info)
         end
 
         private

@@ -11,7 +11,8 @@ module AtomicDesign
           # @param lon
           # @param zoom
           def default(lat: 35.681236, lon: 139.767125, zoom: 10)
-            render Mapbox.new lat: lat, lon: lon, zoom: zoom, access_token: ENV['MAPBOX_ACCESS_TOKEN']
+            render atomic_design.atoms.maps.mapbox(lat: lat, lon: lon, zoom: zoom,
+                                                   access_token: ENV['MAPBOX_ACCESS_TOKEN'])
           end
         end
       end

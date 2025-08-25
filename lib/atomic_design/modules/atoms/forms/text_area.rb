@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class TextArea < ::AtomicDesign::Modules::Base # :nodoc:
+        class TextArea < Base # :nodoc:
           # == Layout
           attrs class: 'form-group'
 

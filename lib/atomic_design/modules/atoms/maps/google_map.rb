@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Maps
-        class GoogleMap < ::AtomicDesign::Modules::Base # :nodoc:
+        class GoogleMap < Base # :nodoc:
           attributes style: 'width: 100%; height: 400px;'
 
           prop :access_token, required: true

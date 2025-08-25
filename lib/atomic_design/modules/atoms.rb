@@ -15,9 +15,12 @@ module AtomicDesign
         # autoload :Pagination
 
         autoload :Icons
+        autoload :Maps
       end
 
-      AVATAR_SIZES = {}.freeze
+      AVATAR_SIZES = {
+        #
+      }.freeze
 
       ALERT_LEVELS = {
         info: { class: 'alert-info' },

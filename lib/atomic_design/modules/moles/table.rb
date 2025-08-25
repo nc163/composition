@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class Table < ::AtomicDesign::Modules::Base # :nodoc:
+      class Table < Base # :nodoc:
         renders_one :thead,   Table::Thead
         renders_one :tbody,   Table::Tbody
 

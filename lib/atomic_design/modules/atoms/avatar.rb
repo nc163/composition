@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class Avatar < ::AtomicDesign::Modules::Base # :nodoc:
+      class Avatar < Base # :nodoc:
         attrs class: 'rounded-circle ', alt: 'avatar'
 
         # prop :size, map: AVATAR_SIZES, default: :medium

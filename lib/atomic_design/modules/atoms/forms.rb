@@ -7,13 +7,14 @@ module AtomicDesign
         extend ActiveSupport::Autoload
 
         eager_autoload do
+          # Class
           autoload :TextField
           autoload :TextArea
           autoload :DatetimeField
           autoload :DateField
           autoload :TimeField
           autoload :CheckBoxField
-
+          # Module
           autoload :Confirms
         end
       end

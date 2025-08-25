@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles # :nodoc:
-      class Card::Body < ::AtomicDesign::Modules::Base
+      class Card::Body < Base # :nodoc:
         # == Layout
         attrs class: 'card-body'
 

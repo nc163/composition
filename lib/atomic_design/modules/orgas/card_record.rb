@@ -3,8 +3,8 @@
 # render Orgas::Card::Record.new @user, only: [:name, :email], except: nil
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
-      class CardRecord < ::AtomicDesign::Modules::Base
+    module Orgas
+      class CardRecord < Base # :nodoc:
         # == Slots
         renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
         renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)

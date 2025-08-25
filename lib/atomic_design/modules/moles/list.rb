@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class List < Modules # :nodoc:
+      class List < Base # :nodoc:
         renders_many :items, List::Item
 
         # == Layout

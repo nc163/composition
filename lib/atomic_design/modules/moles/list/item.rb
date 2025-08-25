@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class List::Item < ::AtomicDesign::Modules::Base # :nodoc:
+      class List::Item < Base # :nodoc:
         # == Layout
         attrs class: 'list-group-item'
 

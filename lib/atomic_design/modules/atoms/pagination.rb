@@ -4,8 +4,8 @@
 # https://github.com/kaminari/kaminari/blob/master/kaminari-core/lib/kaminari/models/page_scope_methods.rb
 module AtomicDesign
   module Modules
-    module Atoms # :nodoc:
-      class Pagination < ::AtomicDesign::Modules::Base
+    module Atoms
+      class Pagination < Base # :nodoc:
         # == Layout
         attrs class: '', aria: { label: 'Pages navigation' }
 

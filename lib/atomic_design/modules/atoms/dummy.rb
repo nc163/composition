@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class Dummy < ::AtomicDesign::Modules::Base # :nodoc:
+      class Dummy < Base # :nodoc:
         attrs id: 'dummy-1', class: 'dummy'
       end
     end

@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Forms
         module Confirms
-          class DatetimeField < ::AtomicDesign::Modules::Base # :nodoc:
+          class DatetimeField < Base # :nodoc:
             # == Layout
             attrs class: 'form-group'
 

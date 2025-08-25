@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# ==
 module AtomicDesign
   module Modules
-    module Orgas # :nodoc:
-      class Flash < ::AtomicDesign::Modules::Base
+    module Orgas
+      class Flash < Base # :nodoc:
         # # == Attributes
         attr_accessor :flash
 

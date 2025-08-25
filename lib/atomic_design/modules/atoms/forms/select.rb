@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class Select < ::AtomicDesign::Modules::Base # :nodoc:
+        class Select < Base # :nodoc:
           # == Layout
           attrs class: 'form-group'
 

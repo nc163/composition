@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Forms
-        class DatetimeField < ::AtomicDesign::Modules::Base # :nodoc:
+        class DatetimeField < Base # :nodoc:
           # == Layout
           attrs class: 'form-group'
 
