@@ -7,13 +7,14 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
+        # Class
         autoload :Alert
         autoload :Badge
         autoload :Button
         autoload :List
         # autoload :Metadata
         # autoload :Pagination
-
+        # Module
         autoload :Icons
         autoload :Maps
       end
