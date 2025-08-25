@@ -29,13 +29,12 @@ module Preview
     config.logger = Logger.new($stdout)
     config.log_level = :info
 
+    # view_component
+    config.view_component.previews.controller = 'PreviewsController'
+
     # lookbook
-    # view_component 3系では必要 rb と erb の紐付け. 4系では不要
-    # config.view_component.preview_paths = [File.expand_path('lib', __dir__)]
     config.autoload_paths += Dir[Rails.root.join('lib')]
-    config.lookbook.preview_paths = [File.expand_path('lib', __dir__)]
     config.lookbook.project_name = 'Atomic Design'
-    config.lookbook.preview_collection_label = 'Components'
     config.lookbook.preview_layout = 'default'
     config.lookbook.preview_display_options = {
       theme: %w[light dark],
@@ -45,6 +44,17 @@ module Preview
     config.lookbook.ui_favicon = false
     config.lookbook.reload_on_change = true
     config.lookbook.live_updates = false
+    # preview
+    config.lookbook.preview_inspector.sidebar_panels = %i[previews pages]
+    config.lookbook.preview_collection_label = 'Previews'
+    config.lookbook.preview_paths = [File.expand_path('lib/', __dir__)]
+    config.lookbook.page_collection_label = 'Docs'
+    config.lookbook.page_paths = [File.expand_path('docs/', __dir__)]
+    config.lookbook.page_route = 'docs'
+
+    # preview_inspector
+    config.lookbook.preview_inspector.drawer_panels = %i[source params]
+    # sections
     # config.lookbook.preview_embeds.enabled = true
     config.lookbook.preview_params_options = {
       enabled: true,
@@ -65,7 +75,7 @@ module Preview
       end
 
       ActiveSupport.on_load(:action_view) do
-        include AtomicDesign::Helpers
+        # include AtomicDesign::Helpers
       end
     end
 
@@ -98,6 +108,11 @@ module Preview
 end
 
 Preview::Application.initialize!
+
+class PreviewsController < ActionController::Base
+  include ViewComponent::PreviewActions
+  include AtomicDesign::Helpers
+end
 
 Preview::Application.routes.draw do
   mount Lookbook::Engine, at: '/'

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class ListPreview < ::ViewComponent::Preview # :nodoc:
+      class ListPreview < Preview # :nodoc:
         # @!group default
 
         def context

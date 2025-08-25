@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas
-      class CardTablePreview < ::ViewComponent::Preview # :nodoc:
+      class CardTablePreview < Preview # :nodoc:
         def default
           render Table.new WebPage.page(1).per(10)
         end

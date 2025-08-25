@@ -173,11 +173,11 @@ module AtomicDesign
         end
 
         # 一度propのメソッドを参照、ない場合は再度method_missingを呼び出す
-        def method_missing(called, *args, **options) # rubocop:disable Style/MissingRespondToMissing
+        def method_missing(called, *args, **kwargs, &block) # rubocop:disable Style/MissingRespondToMissing
           if self.class.props&.include?(called)
             dynamic_call(called)
           else
-            super(called, *args, **options)
+            super(called, *args, **kwargs, &block)
           end
         end
       end

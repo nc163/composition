@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class CardPreview < ::ViewComponent::Preview # :nodoc:
+      class CardPreview < Preview # :nodoc:
         # @!group default
 
         # @param title

@@ -4,8 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Maps
-        class MapboxPreview < ::ViewComponent::Preview # :nodoc:
-
+        class MapboxPreview < Preview # :nodoc:
           # @!group default
 
           # @param lat

@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class FieldPreview < ::ViewComponent::Preview # :nodoc:
+      class FieldPreview < Preview # :nodoc:
         ACCESS_TOKEN = 'pk.eyJ1IjoibmMxNjMiLCJhIjoiY20zczYyY2hlMDVmeTJpbjNnaXFsMDI1ciJ9.qC3AbFcFbaxTGNZK-38H9A'
 
         # @!group context

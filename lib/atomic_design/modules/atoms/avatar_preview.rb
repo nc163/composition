@@ -3,12 +3,12 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class AvatarPreview < ::ViewComponent::Preview # :nodoc:
+      class AvatarPreview < Preview # :nodoc:
         # @!group default
 
         # @param context
         def default(context = 'Example', url = '', alt: '')
-          render Avatar.new(context, url, alt: alt)
+          render atomic_design.atoms.avatar.new(context, url, alt: alt)
         end
       end
     end

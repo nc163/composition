@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class AlertPreview < ::ViewComponent::Preview # :nodoc:
+      class AlertPreview < Preview # :nodoc:
         # @!group default
 
         # @param context

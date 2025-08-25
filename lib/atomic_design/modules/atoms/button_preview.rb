@@ -3,39 +3,39 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class ButtonPreview < ::ViewComponent::Preview # :nodoc:
+      class ButtonPreview < Preview # :nodoc:
         # @!group default
 
         # @param context
         # @param color select :colors
         def default(context: 'Example', color: :primary)
-          render Button.new(context, color: color)
+          render atomic_design.atoms.button.new(context, color: color)
         end
 
         # @!group colors
 
         def primary
-          render Button.new('primary', color: :primary)
+          render atomic_design.atoms.button.new('primary', color: :primary)
         end
 
         def secondary
-          render Button.new('secondary', color: :secondary)
+          render atomic_design.atoms.button.new('secondary', color: :secondary)
         end
 
         def success
-          render Button.new('success', color: :success)
+          render atomic_design.atoms.button.new('success', color: :success)
         end
 
         def danger
-          render Button.new('danger', color: :danger)
+          render atomic_design.atoms.button.new('danger', color: :danger)
         end
 
         def warning
-          render Button.new('warning', color: :warning)
+          render atomic_design.atoms.button.new('warning', color: :warning)
         end
 
         def info
-          render Button.new('info', color: :info)
+          render atomic_design.atoms.button.new('info', color: :info)
         end
 
         private

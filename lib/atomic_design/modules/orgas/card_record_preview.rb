@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas
-      class CardRecordPreview < ::ViewComponent::Preview
+      class CardRecordPreview < Preview
         def default
           render Record.new(User.first, context)
         end

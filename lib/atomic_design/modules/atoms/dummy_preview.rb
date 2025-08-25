@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class DummyPreview < ::ViewComponent::Preview # :nodoc:
+      class DummyPreview < Preview # :nodoc:
         # @!group default
 
         # @param context

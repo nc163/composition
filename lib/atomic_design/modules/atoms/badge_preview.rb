@@ -3,37 +3,39 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class BadgePreview < ::ViewComponent::Preview # :nodoc:
+      class BadgePreview < Preview # :nodoc:
         # @!group default
 
         # @param context
         # @param color select :colors
         def default(context: 'Example', color: :primary)
-          render Badge.new(context, color: color)
+          render atomic_design.atoms.badge(context, color: color)
         end
 
+        # @!group colors
+
         def primary
-          render Badge.new('primary', color: :primary)
+          render atomic_design.atoms.badge.new('primary', color: :primary)
         end
 
         def secondary
-          render Badge.new('secondary', color: :secondary)
+          render atomic_design.atoms.badge.new('secondary', color: :secondary)
         end
 
         def success
-          render Badge.new('success', color: :success)
+          render atomic_design.atoms.badge.new('success', color: :success)
         end
 
         def danger
-          render Badge.new('danger', color: :danger)
+          render atomic_design.atoms.badge.new('danger', color: :danger)
         end
 
         def warning
-          render Badge.new('warning', color: :warning)
+          render atomic_design.atoms.badge.new('warning', color: :warning)
         end
 
         def info
-          render Badge.new('info', color: :info)
+          render atomic_design.atoms.badge.new('info', color: :info)
         end
 
         private

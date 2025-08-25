@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class TablePreview < ::ViewComponent::Preview # :nodoc:
+      class TablePreview < Preview # :nodoc:
         # @!group default
 
         # @param caption

@@ -4,7 +4,7 @@
 module AtomicDesign
   module Modules
     module Orgas
-      class SidebarPreview < ::ViewComponent::Preview # :nodoc:
+      class SidebarPreview < Preview # :nodoc:
         # @!group default
 
         def content

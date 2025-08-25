@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
     'README.md',
     'lib/**/*.rb',
     'lib/**/*.erb'
-  ].reject { |f| f.end_with?('_preview.rb') }
+  ].reject { |f| f.end_with?('preview.rb') }
   # spec.bindir        = "exe"
   # spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
