@@ -9,6 +9,9 @@ module AtomicDesign
         eager_autoload do
           autoload :Record
           autoload :Table
+          autoload :Confirm
+          autoload :Search
+          autoload :Action
         end
       end
     end

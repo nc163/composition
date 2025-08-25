@@ -16,4 +16,19 @@ describe AtomicDesign::Modules::Base, type: :component do # :nodoc:
     expect(described_class.new(context, **options).send(:context)).to eq(context)
     expect(described_class.new(context, **options).send(:options)).to eq({ id: 'test', class: 'test-class' })
   end
+
+  context 'dummy' do
+    it 'initialize' do
+      context = 'コンテキスト'
+      options = { order?: true, color: :danger }
+      expect { Dummy.new context, **options }.not_to raise_error
+
+      dummy = Dummy.new context, **options
+
+      expect(dummy.send(:context)).to eq(context)
+      expect(dummy.send(:order?)).to eq(options[:order?])
+      expect(dummy.send(:color)).to eq(Dummy::COLORS[options[:color]])
+      expect(dummy.send(:options)).to eq(class: "list-group list-group-flush #{Dummy::COLORS[options[:color]][:class]}")
+    end
+  end
 end

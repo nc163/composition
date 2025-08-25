@@ -6,8 +6,9 @@ module AtomicDesign
       class ListPreview < Preview # :nodoc:
         # @!group default
 
-        def context
-          render List.new LIST
+        # @param order select :order
+        def context(order: true)
+          render atomic_design.atoms.list LIST, order?: order
         end
 
         def block
@@ -21,6 +22,10 @@ module AtomicDesign
         end
 
         private
+
+        def order
+          [true, false]
+        end
 
         LIST = [
           ['item1', {}],
