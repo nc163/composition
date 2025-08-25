@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Maps
         class Mapbox < Base # :nodoc:
-          attributes style: 'width: 100%; height: 400px;'
+          attrs style: 'width: 100%; height: 400px;'
 
           prop :access_token, required: true
           prop :lat, required: true

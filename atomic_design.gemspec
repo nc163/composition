@@ -20,9 +20,12 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir[
     'README.md',
+    'lib/**/*.js',
+    'lib/**/*.css',
+    'lib/**/*.map',
     'lib/**/*.rb',
     'lib/**/*.erb'
-  ].reject { |f| f.end_with?('preview.rb') }
+  ]
   # spec.bindir        = "exe"
   # spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
@@ -31,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'actionview', '~> 7.0'
   spec.add_dependency 'activesupport', '~> 7.0'
   spec.add_dependency 'hashie', '~> 5.0'
+  # spec.add_dependency 'kaminari', '~> 1.2', '>= 1.2.2'
   spec.add_dependency 'view_component', '~> 4.0'
 
   # For more information and examples about making a new gem, checkout our

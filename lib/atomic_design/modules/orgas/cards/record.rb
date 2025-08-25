@@ -4,61 +4,42 @@ module AtomicDesign
   module Modules
     module Orgas
       module Cards
-        # render Orgas::Card::Record.new @user, only: [:name, :email], except: nil
         class Record < Base # :nodoc:
-          renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
-          renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)
-          renders_many :tables, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Table)
-          renders_many :buttons, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Button)
+          # == Layout
+          attrs class: 'card'
 
-          attr_accessor :only, :except, :refarences, :actions
+          # == Slots
+          renders_one :head,  AtomicDesign::Modules::Moles::Card::Head
+          renders_one :body,  AtomicDesign::Modules::Moles::Card::Body
+          renders_one :foot,  AtomicDesign::Modules::Moles::Card::Foot
+          renders_many :buttons, AtomicDesign::Modules::Atoms::Button
+
+          # == Attributes
+          #
 
           # == Methods
 
           def call
-            with_card attributes do |card|
-              raise ArgumentError, 'Content is not allowed in this component' if content?
-
-              concat(card.with_head do
-                "#{context.model_name.human} 詳細"
-              end)
-              concat(card.with_body do |body|
-                record_attributes(only: only, except: except).each do |attribute|
-                  concat(with_field(context, field: attribute))
+            form_with model: context, url: url_for(action: :create), method: :post do |form|
+              content_tag :aside, attributes do
+                if content?
+                  concat head
+                  concat body
+                  concat foot
+                else
+                  concat with_head('新規作成')
+                  concat(with_body do
+                    form.object.class.attribute_types.each do |name, model_type|
+                      concat form.any_field(model_type.type, name.to_sym)
+                    end
+                  end)
+                  concat(with_foot do
+                    concat form.submit('確認', color: :primary)
+                  end)
                 end
-                # refarences&.each do |refarence|
-                #   refarences_table(refarence).each do |attribute|
-                #     concat(with_table(context, field: attribute))
-                #   end
-                # end
-              end)
-              concat(card.with_foot do |foot|
-                (actions || []).each do |context, options|
-                  options = options.merge(class: 'me-2')
-                  concat(with_button(context, options))
-                end
-              end)
+              end
             end
           end
-
-          private
-
-          def record_attributes(only: nil, except: nil)
-            @table_attributes ||= only || context.attribute_names.map(&:to_sym)
-            @table_attributes -= except if except.present?
-            @table_attributes
-          end
-
-          def refarences_table(refarence: nil)
-            refarence
-          end
-
-          # def context_for_field(resource, field_name)
-          #   {
-          #     title: { body: resource.class.human_attribute_name(field_name) },
-          #     body: { body: resource.format_attribute(field_name) }
-          #   }
-          # end
         end
       end
     end

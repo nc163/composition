@@ -14,7 +14,7 @@ module AtomicDesign
             autoload :DatetimeField
             autoload :DateField
             autoload :TimeField
-            autoload :CheckBoxField
+            autoload :CheckBox
           end
         end
       end

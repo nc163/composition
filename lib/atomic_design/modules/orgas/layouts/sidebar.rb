@@ -6,11 +6,11 @@ module AtomicDesign
       module Layouts
         class Sidebar < Base # :nodoc:
           renders_one :card, lambda_slots_component_handler(Moles::Card)
-          renders_one :list, lambda_slots_component_handler(Moles::List)
+          renders_one :list, lambda_slots_component_handler(Atoms::List)
           renders_many :fields, lambda_slots_component_handler(Moles::Field)
           renders_many :badges, lambda_slots_component_handler(Atoms::Badge)
 
-          attributes class: 'sidebar'
+          attrs class: 'sidebar'
 
           # def call
           #   # with_card attributes do |card|

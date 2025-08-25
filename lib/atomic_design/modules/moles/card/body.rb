@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-#
 module AtomicDesign
   module Modules
-    module Moles # :nodoc:
+    module Moles
       class Card::Body < Base # :nodoc:
         # == Layout
         attrs class: 'card-body'

@@ -5,7 +5,7 @@ module AtomicDesign
     module Moles
       class Field < Base # :nodoc:
         # == Slots
-        renders_one :mapbox, Atoms::Map::Mapbox
+        renders_one :mapbox, Atoms::Maps::Mapbox
 
         # url_for のオプション
         attr_accessor :url_option

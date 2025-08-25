@@ -5,7 +5,7 @@ module AtomicDesign
     module Atoms
       module Forms
         module Confirms
-          class CheckBoxField < Base # :nodoc:
+          class CheckBox < Base # :nodoc:
             # == Layout
             attrs class: 'form-group'
 

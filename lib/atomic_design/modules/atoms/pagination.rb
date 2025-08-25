@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# Kaminari専用
-# https://github.com/kaminari/kaminari/blob/master/kaminari-core/lib/kaminari/models/page_scope_methods.rb
 module AtomicDesign
   module Modules
     module Atoms

@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Helpers # :nodoc:
-    module Modules # :nodoc:
+    module Components # :nodoc:
       extend ActiveSupport::Autoload
 
       eager_autoload do

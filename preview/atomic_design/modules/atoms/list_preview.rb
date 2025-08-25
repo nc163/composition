@@ -2,7 +2,7 @@
 
 module AtomicDesign
   module Modules
-    module Moles
+    module Atoms
       class ListPreview < Preview # :nodoc:
         # @!group default
 

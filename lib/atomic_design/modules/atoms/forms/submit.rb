@@ -8,12 +8,12 @@ module AtomicDesign
           # == Layout
           attrs class: 'btn'
 
-          property :color, primary: { class: 'btn-primary' },
-                           secondary: { class: 'btn-secondary' },
-                           success: { class: 'btn-success' },
-                           danger: { class: 'btn-danger' },
-                           warning: { class: 'btn-warning' },
-                           info: { class: 'btn-info' }
+          # attrs :color, primary: { class: 'btn-primary' },
+          #               secondary: { class: 'btn-secondary' },
+          #               success: { class: 'btn-success' },
+          #               danger: { class: 'btn-danger' },
+          #               warning: { class: 'btn-warning' },
+          #               info: { class: 'btn-info' }
 
           def call
             concat form.submit(context, use_default: true, **attributes)

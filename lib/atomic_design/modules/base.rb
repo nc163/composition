@@ -35,6 +35,20 @@ module AtomicDesign
           @attributes ||= {}
           @attributes.merge!(options)
         end
+
+        def nesting
+          namespace = name.underscore
+          @nesting ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new(namespace)
+        end
+
+        # 後方互換性
+        def lambda_slots_component_handler(component_class)
+          raise ArgumentError unless component_class < AtomicDesign::Modules::Base
+
+          proc do |context_or_form_method_or_options = nil, options = {}, &block|
+            component_class.new(context_or_form_method_or_options, options, &block)
+          end
+        end
       end
 
       # #
@@ -44,6 +58,10 @@ module AtomicDesign
       #   options[:builder] ||= ::AtomicDesign::Helpers::FormHelper::FormBuilder
       #   helpers.form_with(**options, &block)
       # end
+
+      def nesting
+        self.class.nesting
+      end
 
       protected
 

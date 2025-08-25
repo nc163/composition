@@ -6,7 +6,7 @@ module AtomicDesign
       module Cards
         class Table < Base # :nodoc:
           renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
-          renders_one :table, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Table)
+          renders_one :table, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Table)
           renders_one :pagination, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Pagination)
 
           # == Attributes

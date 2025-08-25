@@ -8,6 +8,7 @@ module AtomicDesign
 
       eager_autoload do
         # Class
+        autoload :Avatar
         autoload :Alert
         autoload :Badge
         autoload :Button

@@ -6,9 +6,8 @@ module AtomicDesign
       class AvatarPreview < Preview # :nodoc:
         # @!group default
 
-        # @param context
-        def default(context = 'Example', url = '', alt: '')
-          render atomic_design.atoms.avatar(context, url, alt: alt)
+        def default(url = '/assets/images/60x60.png')
+          render atomic_design.atoms.avatar(url)
         end
       end
     end

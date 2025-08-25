@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       class List < Base # :nodoc:
-        renders_many :items, Item
+        renders_many :items, 'Item'
 
         attrs class: 'list-group list-group-flush'
         prop :order?, default: false
@@ -12,13 +12,6 @@ module AtomicDesign
         class Item < Base # :nodoc:
           # == Layout
           attrs class: 'list-group-item'
-
-          # == Methods
-          def call
-            content_tag :li, options do
-              context
-            end
-          end
         end
       end
     end

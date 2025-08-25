@@ -21,10 +21,15 @@ module Preview
     config.load_defaults 7.0
     config.root = __dir__
     # プレビューでは eager_load は不要だけど、Rails対応に必要
-    config.eager_load = false
-    # `/assets` で始まるURLを `lib/assets` から配信する
-    config.middleware.use Rack::Static, urls: ['/assets'], root: File.expand_path('lib/atomic_design', __dir__)
-    # form で必要な CSRF トークンを生成に必要,もしくは `form_with( authenticity_token: false)`
+    config.eager_load = true
+    # アセットの配信
+    config.middleware.use Rack::Static, urls: ['/assets/javascripts'],
+                                        root: File.expand_path('lib/atomic_design', __dir__)
+    config.middleware.use Rack::Static, urls: ['/assets/stylesheets'],
+                                        root: File.expand_path('lib/atomic_design', __dir__)
+    config.middleware.use Rack::Static, urls: ['/assets/images'],
+                                        root: File.expand_path('preview/atomic_design', __dir__)
+    # form で必要な CSRF トークンを生成に必要,もしくは `form_with(authenticity_token: false)`
     config.secret_key_base = 'demo_secret_key_base_'
     config.logger = Logger.new($stdout)
     config.log_level = :warn
@@ -66,7 +71,7 @@ module Preview
         width: '100%'
       }
     }
-    ##
+
     config.cache_classes = false
     config.consider_all_requests_local = true
     config.action_controller.perform_caching = false

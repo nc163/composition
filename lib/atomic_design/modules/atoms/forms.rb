@@ -13,7 +13,7 @@ module AtomicDesign
           autoload :DatetimeField
           autoload :DateField
           autoload :TimeField
-          autoload :CheckBoxField
+          autoload :CheckBox
           # Module
           autoload :Confirms
         end
