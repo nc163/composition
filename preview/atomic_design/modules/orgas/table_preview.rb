@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Orgas
-      class TablePreview < Preview # :nodoc:
+      class TablePreview < ::AtomicDesign::Modules::Preview # :nodoc:
         def default
           render Table.new WebPage.page(1).per(10)
         end

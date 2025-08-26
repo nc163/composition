@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Icons
-        class EmojiPreview < Preview # :nodoc:
+        class EmojiPreview < ::AtomicDesign::Modules::Preview # :nodoc:
           # @!group default
 
           # @param icon select :icons

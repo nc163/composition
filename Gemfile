@@ -13,12 +13,15 @@ group :development do
 end
 
 group :development, :test do
+  # gem 'actioncable'
   gem 'guard-rspec', require: false
+  gem 'listen'
+  gem 'puma'
+  gem 'rack', '~> 2.2'
   gem 'rails', '~> 7.0'
   gem 'rspec-rails', '~> 6.0'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
-  gem 'webrick', '~> 1.8'
 end
 
 group :test do

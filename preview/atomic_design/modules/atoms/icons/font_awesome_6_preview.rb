@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Icons
-        class FontAwesome6Preview < Preview # :nodoc:
+        class FontAwesome6Preview < ::AtomicDesign::Modules::Preview # :nodoc:
           # @!group default
 
           # @param icon select :icons

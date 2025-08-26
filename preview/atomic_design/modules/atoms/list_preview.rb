@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class ListPreview < Preview # :nodoc:
+      class ListPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param order select :order

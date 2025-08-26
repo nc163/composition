@@ -3,7 +3,7 @@
 require 'bundler/setup'
 
 require 'dotenv/load'
-require 'webrick'
+require 'puma'
 require 'rails'
 require 'active_support'
 require 'active_support/core_ext'
@@ -13,35 +13,41 @@ require 'action_view/testing/resolvers'
 
 require 'lookbook'
 require 'atomic_design/engine'
+require_relative 'preview/atomic_design/modules/preview'
+
+ENV['RACK_ENV'] = 'deployment'
+ENV['RAILS_ENV'] = 'development'
 
 # Lookbook
-module Preview
+module PreviewApp
   # プレビュー用のRailsアプリケーション
   class Application < Rails::Application
+    # rails
     config.load_defaults 7.0
     config.root = __dir__
+    config.enable_reloading = true
+    config.file_watcher = ActiveSupport::EventedFileUpdateChecker
     # プレビューでは eager_load は不要だけど、Rails対応に必要
-    config.eager_load = true
-    # アセットの配信
+    config.eager_load = false
+    config.autoload_paths += Dir[
+      Rails.root.join('lib'),
+      Rails.root.join('preview')
+    ]
+    config.autoload_once_paths -= Dir[Rails.root.join('preview')]
+    # form で必要な CSRF トークンを生成に必要,もしくは `form_with(authenticity_token: false)`
+    config.secret_key_base = 'demo_secret_key_base_'
+    config.logger = Logger.new($stdout)
+    config.log_level = :warn
+
+    # rack
     config.middleware.use Rack::Static, urls: ['/assets/javascripts'],
                                         root: File.expand_path('lib/atomic_design', __dir__)
     config.middleware.use Rack::Static, urls: ['/assets/stylesheets'],
                                         root: File.expand_path('lib/atomic_design', __dir__)
     config.middleware.use Rack::Static, urls: ['/assets/images'],
                                         root: File.expand_path('preview/atomic_design', __dir__)
-    # form で必要な CSRF トークンを生成に必要,もしくは `form_with(authenticity_token: false)`
-    config.secret_key_base = 'demo_secret_key_base_'
-    config.logger = Logger.new($stdout)
-    config.log_level = :warn
-
-    # view_component
-    config.view_component.previews.controller = 'PreviewsController'
 
     # lookbook
-    config.autoload_paths += Dir[
-      Rails.root.join('lib'),
-      Rails.root.join('preview')
-    ]
     config.lookbook.project_name = "Atomic Design #{AtomicDesign::Version.gem_version}"
     config.lookbook.preview_layout = 'default'
     config.lookbook.preview_display_options = {
@@ -53,6 +59,7 @@ module Preview
     config.lookbook.reload_on_change = true
     config.lookbook.live_updates = false
     # preview
+    config.lookbook.preview_inspector.enabled = true
     config.lookbook.preview_inspector.sidebar_panels = %i[previews pages]
     config.lookbook.preview_collection_label = 'Previews'
     config.lookbook.preview_paths = [File.expand_path('preview/', __dir__)]
@@ -63,7 +70,6 @@ module Preview
     # preview_inspector
     config.lookbook.preview_inspector.drawer_panels = %i[source params]
     # sections
-    # config.lookbook.preview_embeds.enabled = true
     config.lookbook.preview_params_options = {
       enabled: true,
       viewport: {
@@ -72,18 +78,9 @@ module Preview
       }
     }
 
-    config.cache_classes = false
-    config.consider_all_requests_local = true
-    config.action_controller.perform_caching = false
-    config.cache_store = :null_store
-
     initializer 'preview.setup_helpers', before: :load_config_initializers do |app|
       ActiveSupport.on_load(:action_controller_base) do
         include AtomicDesign::Helpers
-      end
-
-      ActiveSupport.on_load(:action_view) do
-        # include AtomicDesign::Helpers
       end
     end
 
@@ -105,25 +102,27 @@ module Preview
           </body>
         </html>
       ERB
-      resolver = ActionView::FixtureResolver.new(
-        'layouts/default.html.erb' => layout_erb
-      )
-      ActiveSupport.on_load(:action_controller) do
-        prepend_view_path resolver
+
+      config.to_prepare do
+        resolver = ActionView::FixtureResolver.new(
+          'layouts/default.html.erb' => layout_erb
+        )
+        ActionController::Base.prepend_view_path(resolver) unless ActionController::Base.view_paths.include?(resolver)
+        PreviewApp::Application.routes_reloader.execute_if_updated
+        PreviewApp::Application.routes.draw do
+          root to: redirect('/preview')
+          mount ::Lookbook::Engine, at: 'preview'
+        end
       end
     end
   end
 end
 
-Preview::Application.initialize!
+PreviewApp::Application.initialize!
 
-class PreviewsController < ActionController::Base
-  include ViewComponent::PreviewActions
-  include AtomicDesign::Helpers
+PreviewApp::Application.routes.draw do
+  root to: redirect('/preview')
+  mount ::Lookbook::Engine, at: 'preview'
 end
 
-Preview::Application.routes.draw do
-  mount Lookbook::Engine, at: '/'
-end
-
-run(Preview::Application)
+run(PreviewApp::Application)

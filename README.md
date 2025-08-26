@@ -4,7 +4,8 @@ AtomicDesignは、Railsアプリケーション用の再利用可能なUIコン�
 
 ## Preview
 ```bash
-bundle exec rackup preview.ru -o 0.0.0.0
+# bundle exec rackup preview.ru -o 0.0.0.0
+bundle exec rackup preview.ru -o 0.0.0.0 -s Puma
 ```
 ブラウザで開く http://0.0.0.0:9292
 

@@ -6,7 +6,7 @@ module AtomicDesign
       class Badge < Base # :nodoc:
         defaults class: 'badge'
 
-        state :color, mapping: BADGE_COLORS, default: :primary
+        state :color, role: :html, mapping: BADGE_COLORS, default: :primary
 
         def self.colors
           BADGE_COLORS.keys

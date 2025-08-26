@@ -3,13 +3,12 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class AlertPreview < Preview # :nodoc:
+      class AlertPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param context
-        # @param level select :levels
-        def default(context: 'Example', level: :info)
-          render atomic_design.atoms.alert(context, level: level)
+        def default(context: 'Example')
+          render atomic_design.atoms.alert(context)
         end
 
         # def primary

@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class PaginationPreview < Preview # :nodoc:
+      class PaginationPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param page

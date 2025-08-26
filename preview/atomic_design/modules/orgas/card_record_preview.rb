@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Orgas
-      class CardRecordPreview < Preview # :nodoc:
+      class CardRecordPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         def default
           render Record.new(User.first, context)
         end

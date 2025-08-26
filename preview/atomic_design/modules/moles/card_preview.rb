@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Moles
-      class CardPreview < Preview # :nodoc:
+      class CardPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param title

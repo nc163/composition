@@ -3,12 +3,12 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class BadgePreview < Preview # :nodoc:
+      class BadgePreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param context
         # @param color select :colors
-        def default(context: 'Example', color: :primary)
+        def default(context: 'Examaaaple', color: :primary)
           render atomic_design.atoms.badge(context, color: color)
         end
 

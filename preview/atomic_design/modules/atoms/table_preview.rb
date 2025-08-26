@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class TablePreview < Preview # :nodoc:
+      class TablePreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param caption

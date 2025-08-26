@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class ButtonPreview < Preview # :nodoc:
+      class ButtonPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         # @param context

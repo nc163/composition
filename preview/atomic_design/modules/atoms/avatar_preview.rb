@@ -3,7 +3,7 @@
 module AtomicDesign
   module Modules
     module Atoms
-      class AvatarPreview < Preview # :nodoc:
+      class AvatarPreview < ::AtomicDesign::Modules::Preview # :nodoc:
         # @!group default
 
         def default(url = '/assets/images/60x60.png')

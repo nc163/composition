@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       module Maps
-        class MapboxPreview < Preview # :nodoc:
+        class MapboxPreview < ::AtomicDesign::Modules::Preview # :nodoc:
           # @!group default
 
           # @param lat
