@@ -5,38 +5,28 @@ module AtomicDesign
     module Atoms
       module Maps
         class Mapbox < Base # :nodoc:
-          defaults style: 'width: 100%; height: 400px;'
-
           state :access_token, required: true
-          state :lat, required: true
-          state :lon, required: true
-          state :zoom, values: (1..15), default: 10
+          state :lat
+          state :lon
+          state :zoom, values: (1..15)
 
-          def before_render
-            @options[:id] = "mapbox-#{object_id}" unless options[:id]
-          end
-
-          def call_as_context
+          def call
             content_tag :div, '', options do
-              concat javascript_tag(render_mapbox_script)
-            end
-          end
-
-          private
-
-          def render_mapbox_script
-            <<-JAVASCRIPT
-                document.addEventListener('DOMContentLoaded', function() {
-                  mapboxgl.accessToken = "'#{access_token}'";
-                  var map = new mapboxgl.Map({
-                    container: '#{options[:id]}',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [#{lon}, #{lat}],
-                    zoom: #{zoom},
-                    dragPan: false
+              javascript_tag do
+                <<~JAVASCRIPT
+                  document.addEventListener('DOMContentLoaded', function() {
+                    mapboxgl.accessToken = "'#{access_token}'";
+                    var map = new mapboxgl.Map({
+                      container: '#{options[:id]}',
+                      style: 'mapbox://styles/mapbox/streets-v11',
+                      center: [#{lon}, #{lat}],
+                      zoom: #{zoom},
+                      dragPan: false
+                    });
                   });
-                });
-            JAVASCRIPT
+                JAVASCRIPT
+              end
+            end
           end
         end
       end

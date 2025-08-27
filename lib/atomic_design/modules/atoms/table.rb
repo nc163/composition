@@ -9,10 +9,8 @@ module AtomicDesign
 
         defaults class: 'table'
 
-        # == Attributes
-        # attr_accessor :headers, :caption
-
-        # == Methods
+        state :headers
+        state :caption
 
         def call
           content_tag :table, options do
@@ -21,7 +19,9 @@ module AtomicDesign
               concat(thead) if thead?
               concat(tbody) if tbody?
             else
-              concat with_thead(headers)
+              if state(:headers)
+                concat with_thead(state(:headers))
+              end
               concat with_tbody(context)
             end
           end

@@ -10,7 +10,6 @@ module AtomicDesign
         state :order?, default: false
 
         class Item < Base # :nodoc:
-          # == Layout
           defaults class: 'list-group-item'
         end
       end

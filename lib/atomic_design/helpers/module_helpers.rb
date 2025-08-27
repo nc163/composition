@@ -2,8 +2,23 @@
 
 module AtomicDesign
   module Helpers
-    module ModuleHelper # :nodoc:
+    module ModuleHelpers # :nodoc:
+      extend ActiveSupport::Autoload
+
+      eager_autoload do
+        autoload :AtomsHelpers
+        autoload :MolesHelpers
+        autoload :OrgasHelpers
+        autoload :TempsHelpers
+        autoload :PagesHelpers
+      end
+
       extend ActiveSupport::Concern
+      include AtomsHelpers
+      include MolesHelpers
+      include OrgasHelpers
+      include TempsHelpers
+      include PagesHelpers
 
       class ModuleBuilder # :nodoc:
         def initialize(namespace_snake_case)
@@ -144,15 +159,11 @@ module AtomicDesign
       #   component 'sidebar', id: 'sidebar', class: 'sidebar'
       #   => AtomicDesign::Orgas::Sidebar.new(id: 'sidebar', class: 'sidebar')
       #
-      def component(component_name, context_or_options = nil, **options, &block)
+      def component(component_name, *context_or_options, **options, &block)
         component = "atomic_design/component/orgas/#{component_name}".camelize.safe_constantize
-
         raise "#{component_name} is not defined." if component.nil?
-        unless component < AtomicDesign::Modules::Base
-          raise "#{component}(#{name}) must inherit from AtomicDesignComponent."
-        end
 
-        render component.new(context_or_options, **options), &block
+        render component.new(*context_or_options, **options), &block
       end
 
       private

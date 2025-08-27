@@ -4,43 +4,26 @@ module AtomicDesign
   module Modules
     module Atoms
       class TablePreview < ::AtomicDesign::Modules::Preview # :nodoc:
-        # @!group default
-
-        # @param caption
-        def context(caption: 'caption')
-          render Table.new TABLE, caption: caption, headers: HEADERS
+        def default
+          render atomic_design.atoms.table TABLE, headers: HEADERS
         end
 
-        # @param caption
-        def block(caption: 'caption')
-          render Table.new caption: caption do |table|
-            table.with_thead do |head|
-              head.with_trow do |trow|
-                HEADERS.each do |element|
-                  trow.with_th(element[0], **element[1])
-                end
-              end
-            end
-            table.with_tbody do |body|
-              TABLE.each do |record|
-                body.with_trow do |row|
-                  record.each do |col|
-                    row.with_td(col[0], **col[1])
-                  end
-                end
-              end
-            end
-          end
+        def headless
+          render atomic_design.atoms.table TABLE
         end
 
-        private
-
-        HEADERS = [['header1', {}], ['header2', {}], ['header3', {}], ['header4', {}], ['header5', {}]]
+        HEADERS = %w[言語 ホームページ 更新日時 作成日時]
         TABLE = [
-          [['1-1', {}], ['1-2', {}], ['1-3', {}], ['1-4', {}], ['1-5', {}]],
-          [['2-1', {}], ['2-2', {}], ['2-3', {}], ['2-4', {}], ['2-5', {}]],
-          [['3-1', {}], ['3-2', {}], ['3-3', {}], ['3-4', {}], ['3-5', {}]],
-          [['4-1', {}], ['4-2', {}], ['4-3', {}], ['4-4', {}], ['4-5', {}]]
+          ['Ruby', 'https://www.ruby-lang.org/', '2024-06-01 10:00', '2024-05-01 09:00'],
+          ['Python', 'https://www.python.org/', '2024-06-02 11:00', '2024-05-02 10:00'],
+          ['JavaScript', 'https://developer.mozilla.org/docs/Web/JavaScript', '2024-06-03 12:00', '2024-05-03 11:00'],
+          ['Go', 'https://golang.org/', '2024-06-04 13:00', '2024-05-04 12:00'],
+          ['Java', 'https://www.java.com/', '2024-06-05 14:00', '2024-05-05 13:00'],
+          ['PHP', 'https://www.php.net/', '2024-06-06 15:00', '2024-05-06 14:00'],
+          ['C++', 'https://isocpp.org/', '2024-06-07 16:00', '2024-05-07 15:00'],
+          ['C#', 'https://learn.microsoft.com/dotnet/csharp/', '2024-06-08 17:00', '2024-05-08 16:00'],
+          ['TypeScript', 'https://www.typescriptlang.org/', '2024-06-09 18:00', '2024-05-09 17:00'],
+          ['Kotlin', 'https://kotlinlang.org/', '2024-06-10 19:00', '2024-05-10 18:00']
         ]
       end
     end

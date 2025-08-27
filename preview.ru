@@ -40,6 +40,8 @@ module PreviewApp
     config.log_level = :warn
 
     # rack
+    config.middleware.use Rack::Static, urls: ['/assets/fonts'],
+                                        root: File.expand_path('lib/atomic_design', __dir__)
     config.middleware.use Rack::Static, urls: ['/assets/javascripts'],
                                         root: File.expand_path('lib/atomic_design', __dir__)
     config.middleware.use Rack::Static, urls: ['/assets/stylesheets'],
@@ -61,15 +63,7 @@ module PreviewApp
     # preview
     config.lookbook.preview_inspector.enabled = true
     config.lookbook.preview_inspector.sidebar_panels = %i[previews pages]
-    config.lookbook.preview_collection_label = 'Previews'
-    config.lookbook.preview_paths = [File.expand_path('preview/', __dir__)]
-    config.lookbook.page_collection_label = 'Documents'
-    config.lookbook.page_paths = [File.expand_path('docs/', __dir__)]
-    config.lookbook.page_route = 'docs'
-
-    # preview_inspector
     config.lookbook.preview_inspector.drawer_panels = %i[source params]
-    # sections
     config.lookbook.preview_params_options = {
       enabled: true,
       viewport: {
@@ -77,6 +71,11 @@ module PreviewApp
         width: '100%'
       }
     }
+    config.lookbook.preview_collection_label = 'Previews'
+    config.lookbook.preview_paths = [File.expand_path('preview/', __dir__)]
+    config.lookbook.page_collection_label = 'Documents'
+    config.lookbook.page_paths = [File.expand_path('docs/', __dir__)]
+    config.lookbook.page_route = 'docs'
 
     initializer 'preview.setup_helpers', before: :load_config_initializers do |app|
       ActiveSupport.on_load(:action_controller_base) do
@@ -92,26 +91,31 @@ module PreviewApp
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+            <link rel="stylesheet" href="/assets/stylesheets/fontawesome-free-7.0.0_all.min.css">
             <link rel="stylesheet" href="/assets/stylesheets/bootstrap_5_3_0.min.css">
+            <link rel="stylesheet" href="/assets/fonts/bootstrap-icons_1_13_1.min.css">
           </head>
           <body >
             <div class="container-xl">
               <%= yield %>
             </div>
+            <script src="/assets/javascripts/fontawesome-free-7.0.0_all.min.js"></script>
             <script src="/assets/javascripts/bootstrap_5_3_0.min.js"></script>
           </body>
         </html>
       ERB
 
       config.to_prepare do
-        resolver = ActionView::FixtureResolver.new(
-          'layouts/default.html.erb' => layout_erb
-        )
-        ActionController::Base.prepend_view_path(resolver) unless ActionController::Base.view_paths.include?(resolver)
+        resolver = ActionView::FixtureResolver.new('layouts/default.html.erb' => layout_erb)
+        unless ActionController::Base.view_paths.include?(resolver)
+          ActionController::Base.prepend_view_path(resolver)
+        end
+
         PreviewApp::Application.routes_reloader.execute_if_updated
         PreviewApp::Application.routes.draw do
-          root to: redirect('/preview')
-          mount ::Lookbook::Engine, at: 'preview'
+          # root to: redirect('/preview')
+          # mount ::Lookbook::Engine, at: 'preview'
+          mount ::Lookbook::Engine, at: '/'
         end
       end
     end
@@ -121,8 +125,9 @@ end
 PreviewApp::Application.initialize!
 
 PreviewApp::Application.routes.draw do
-  root to: redirect('/preview')
-  mount ::Lookbook::Engine, at: 'preview'
+  # root to: redirect('/preview')
+  # mount ::Lookbook::Engine, at: 'preview'
+  mount ::Lookbook::Engine, at: '/'
 end
 
 run(PreviewApp::Application)

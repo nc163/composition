@@ -4,39 +4,39 @@ module AtomicDesign
   module Modules
     module Atoms
       class ButtonPreview < ::AtomicDesign::Modules::Preview # :nodoc:
-        # @!group default
-
-        # @param context
-        # @param color select :colors
-        def default(context: 'Example', color: :primary)
-          render atomic_design.atoms.button(context, color: color)
-        end
-
         # @!group colors
 
-        def primary
-          render atomic_design.atoms.button('primary', color: :primary)
+        # @param context
+        def primary(context: 'Example')
+          render atomic_design.atoms.button(context, color: :primary)
         end
 
-        def secondary
-          render atomic_design.atoms.button('secondary', color: :secondary)
+        # @param context
+        def secondary(context: 'Example')
+          render atomic_design.atoms.button(context, color: :secondary)
         end
 
-        def success
-          render atomic_design.atoms.button('success', color: :success)
+        # @param context
+        def success(context: 'Example')
+          render atomic_design.atoms.button(context, color: :success)
         end
 
-        def danger
-          render atomic_design.atoms.button('danger', color: :danger)
+        # @param context
+        def danger(context: 'Example')
+          render atomic_design.atoms.button(context, color: :danger)
         end
 
-        def warning
-          render atomic_design.atoms.button('warning', color: :warning)
+        # @param context
+        def warning(context: 'Example')
+          render atomic_design.atoms.button(context, color: :warning)
         end
 
-        def info
-          render atomic_design.atoms.button('info', color: :info)
+        # @param context
+        def info(context: 'Example')
+          render atomic_design.atoms.button(context, color: :info)
         end
+
+        # @endgroup
 
         private
 

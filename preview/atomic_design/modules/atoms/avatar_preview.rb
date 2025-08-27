@@ -4,10 +4,18 @@ module AtomicDesign
   module Modules
     module Atoms
       class AvatarPreview < ::AtomicDesign::Modules::Preview # :nodoc:
-        # @!group default
+        CONTEXT = '/assets/images/60x60.png'
+        # @!group Sizes
 
-        def default(url = '/assets/images/60x60.png')
-          render atomic_design.atoms.avatar(url)
+        # @param size select :sizes
+        def default
+          render atomic_design.atoms.avatar(CONTEXT)
+        end
+
+        # @!endgroup
+
+        def sizes
+          Avatar.sizes
         end
       end
     end

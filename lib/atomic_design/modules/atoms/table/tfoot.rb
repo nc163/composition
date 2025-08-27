@@ -4,10 +4,8 @@ module AtomicDesign
   module Modules
     module Atoms
       class Table::Tfoot < Base # :nodoc:
-        # == Slots
         renders_one :trow, Table::Trow
 
-        # == Attributes
         attr_accessor :row
 
         def call

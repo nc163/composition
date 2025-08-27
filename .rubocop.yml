@@ -5,3 +5,10 @@ Style/IfInsideElse:
   Enabled: false
 Style/GuardClause:
   Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+  Max: 15
+
+Style/IfUnlessModifier:
+  Enabled: false

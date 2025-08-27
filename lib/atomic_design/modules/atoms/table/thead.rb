@@ -4,10 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       class Table::Thead < Base # :nodoc:
-        # == Slots
         renders_one :trow, Table::Trow
-
-        # == Methods
 
         def call
           content_tag :thead, options do

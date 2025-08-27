@@ -16,12 +16,15 @@ module AtomicDesign
         # autoload :Metadata
         # autoload :Pagination
         # Module
+        autoload :Indicators
         autoload :Icons
         autoload :Maps
       end
 
       AVATAR_SIZES = {
-        #
+        sm: {},
+        md: { style: 'width: 60px; height: 60px;' },
+        lg: {}
       }.freeze
 
       ALERT_LEVELS = {

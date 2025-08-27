@@ -80,7 +80,7 @@ module AtomicDesign
         html_attrs << @kwargs.slice(*(@kwargs.keys - self.class.status))
         html_attrs << self.class.defaults if self.class.defaults.any?
         html_attrs << state_html_values
-        html_attrs.flatten.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
+        html_attrs.flatten.compact.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
       end
 
       private
@@ -90,13 +90,11 @@ module AtomicDesign
         raise ArgumentError, 'Key must be a Symbol' unless key.is_a?(Symbol)
 
         case key
-        when :id
-          [old_value, new_value].compact.join(' ')
-        when :class
+        when :id, :class
           [old_value, new_value].compact.join(' ')
         when :style
           [old_value, new_value].compact.join('; ')
-        when :data
+        when :data, :arel
           old_value.to_h.merge(new_value.to_h)
         else
           [old_value, new_value].compact.join(' ')

@@ -8,20 +8,19 @@ module AtomicDesign
         renders_one :body, Body
         renders_one :foot, Foot
 
-        # == Layout
         defaults class: 'card'
 
-        def call
-          content_tag :aside, options do
-            if content?
-              concat(head) if head?
-              concat(body) if body?
-              concat(foot) if foot?
-            else
-              concat with_body(context)
-            end
-          end
-        end
+        # def call
+        #   content_tag :aside, options do
+        #     if content?
+        #       concat(head) if head?
+        #       concat(body) if body?
+        #       concat(foot) if foot?
+        #     else
+        #       concat with_body(context)
+        #     end
+        #   end
+        # end
       end
     end
   end

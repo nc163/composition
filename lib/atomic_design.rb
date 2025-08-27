@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'action_view'
 require 'hashie'
 require 'view_component'
 require_relative 'atomic_design/version'
@@ -7,8 +8,6 @@ require_relative 'atomic_design/version'
 module AtomicDesign # :nodoc:
   extend ActiveSupport::Autoload
 
-  # Rails::Engineに登録しているので、Rails環境ではZeitwerkによって宣言時に名前解決できている
-  # rspecなどZeitwerkがない環境のために、eager_autoloadしている
   eager_autoload do
     autoload :Modules
     autoload :Helpers

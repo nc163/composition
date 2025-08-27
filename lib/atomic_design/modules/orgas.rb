@@ -6,7 +6,7 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
-        # TBD
+        autoload :Indicators
       end
     end
   end

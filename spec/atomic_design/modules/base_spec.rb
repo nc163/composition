@@ -25,7 +25,7 @@ describe AtomicDesign::Modules::Base, type: :component do # :nodoc:
         class: 'dummy',
         order?: true,
         title: 'タイトル',
-        src: '/assets/images/60x60.png',
+        src: '/images/60x60.png',
         color: :danger,
         age: 20
       }
@@ -38,7 +38,7 @@ describe AtomicDesign::Modules::Base, type: :component do # :nodoc:
       expect(dummy.send(:options)).to eq(
         id: 'dummy-1',
         class: "dummy list-group list-group-flush btn-sm #{Dummy::COLORS[options[:color]][:class]}",
-        src: '/assets/images/60x60.png' #         ^^^^^^-- 初期値
+        src: '/images/60x60.png' #         ^^^^^^-- 初期値
       )
     end
   end

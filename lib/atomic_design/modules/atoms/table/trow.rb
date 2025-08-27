@@ -4,14 +4,10 @@ module AtomicDesign
   module Modules
     module Atoms
       class Table::Trow < Base # :nodoc:
-        # == Slots
         renders_many :tds, Table::Trow::Td
         renders_many :ths, Table::Trow::Th
 
-        # == Attributes
-        attr_accessor :head
-
-        # == Methods
+        state :header?, default: false
 
         def call
           content_tag :tr, options do
@@ -24,10 +20,10 @@ module AtomicDesign
               end
             else
               (context || []).each do |item|
-                if head
-                  concat with_th(item[0], **item[1])
+                if state(:header?)
+                  concat with_th(item)
                 else
-                  concat with_td(item[0], **item[1])
+                  concat with_td(item)
                 end
               end
             end

@@ -12,19 +12,19 @@ module AtomicDesign
           # == Attributes
           attr_accessor :only, :except
 
+          state :title
+
           # == Methods
 
           def call
-            with_card attributes do |card|
-              raise if content?
-
-              concat card.with_head("#{context.model_name.human} 一覧")
+            with_card options do |card|
+              concat card.with_head(state(:title)) unless state(:title).nil?
               concat(card.with_body do
-                concat with_table(context_for_table, options_for_table)
+                concat with_table(context)
               end)
-              concat card.with_foot(class: 'd-flex justify-content-center') {
-                concat with_pagination(context, {})
-              }
+              # concat card.with_foot(class: 'd-flex justify-content-center') {
+              #   concat with_pagination(context, {})
+              # }
             end
           end
 

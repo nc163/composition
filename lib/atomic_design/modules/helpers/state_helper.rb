@@ -8,8 +8,9 @@ module AtomicDesign
         extend ActiveSupport::Concern
 
         ALLOW_STATE_OPTION_KEYS = %i[role values mapping required default].freeze
-        ALLOW_STATE_OPTIONS_ROLES = %i[html value]
-        ALLOW_STATE_OPTIONS_ROLE_DEFAULT = :value
+        ALLOW_STATE_OPTIONS_ROLES = %i[html value].freeze
+
+        private_constant :ALLOW_STATE_OPTION_KEYS, :ALLOW_STATE_OPTIONS_ROLES
 
         included do
           extend ClassMethods
@@ -87,11 +88,7 @@ module AtomicDesign
 
             prop_arg = { name => options }
 
-            if options.any? # rubocop:disable all
-              hashie_options = to_hashie_options(**options)
-            else
-              hashie_options = {}
-            end
+            hashie_options = to_hashie_options(**options)
 
             @__atomic_design__modules__helpers__state_helper__class_methods__state_options ||= {}
             @__atomic_design__modules__helpers__state_helper__class_methods__state_options.merge!(prop_arg)
@@ -103,7 +100,7 @@ module AtomicDesign
           private
 
           def allow_name?(name)
-            !name.nil? && name.is_a?(Symbol) && !instance_methods.include?(name.to_sym)
+            !name.nil? && name.is_a?(Symbol) # && !instance_methods.include?(name.to_sym)
           end
 
           def allow_options?(**options)
@@ -115,10 +112,9 @@ module AtomicDesign
 
           def to_hashie_options(**options)
             # from :mapping to :values
-            if options.keys.include?(:mapping) && options[:mapping].is_a?(Hash)
+            if options.any? && options.keys.include?(:mapping) && options[:mapping].is_a?(Hash)
               options[:values] = options[:mapping].keys
             end
-
             options
           end
 
@@ -143,8 +139,7 @@ module AtomicDesign
         def self.state_helper_initializer(klass)
           prop_helper_initializer = Module.new do
             define_method(:initialize) do |*args, **kwargs, &block|
-              # @__atomic_design__modules__helpers__state_helper__set_state = Class.new(State).new(**kwargs)
-              set_state(**kwargs)
+              @__atomic_design__modules__helpers__state_helper__set_state = self.class.state_class.new(**kwargs)
 
               super(*args, **kwargs, &block)
             end
@@ -156,28 +151,32 @@ module AtomicDesign
         protected
 
         # 状態を返す
-        def state(name)
+        def state(name, through: false)
           hashie_value = @__atomic_design__modules__helpers__state_helper__set_state.send(name.to_sym)
 
-          if state_role_is_html?(name)
-            if state_func_is_mapping?(name)
-              self.class.state_options[name.to_sym][:mapping][hashie_value]
+          if through
+            if state_role_is_html?(name)
+              if state_func_is_mapping?(name)
+                self.class.state_options[name.to_sym][:mapping][hashie_value]
+              else
+                { name.to_sym => hashie_value }
+              end
             else
-              { name.to_sym => hashie_value }
+              if state_func_is_mapping?(name)
+                self.class.state_options[name.to_sym][:mapping][hashie_value]
+              else
+                hashie_value
+              end
             end
           else
-            if state_func_is_mapping?(name)
-              self.class.state_options[name.to_sym][:mapping][hashie_value]
-            else
-              hashie_value
-            end
+            hashie_value
           end
         end
 
         # role: :html の値を全て取得する
         def state_html_values
           (self.class.state_options || {}).select { |_k, v| v[:role] == :html }.map do |n, _|
-            state(n)
+            state(n, through: true)
           end
         end
 
@@ -191,14 +190,10 @@ module AtomicDesign
           (self.class.state_options || {}).dig(name.to_sym, :role) == :html
         end
 
-        def set_state(**options)
-          @__atomic_design__modules__helpers__state_helper__set_state = self.class.state_class.new(**options)
-        end
-
         # 一度propのメソッドを参照、ない場合は再度method_missingを呼び出す
         def method_missing(called, *args, **kwargs, &block) # rubocop:disable Style/MissingRespondToMissing
           if self.class.status&.include?(called)
-            state(called)
+            state(called, through: true)
           else
             super(called, *args, **kwargs, &block)
           end

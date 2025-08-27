@@ -6,10 +6,10 @@ module AtomicDesign
     module Orgas
       class CardRecord < Base # :nodoc:
         # == Slots
-        renders_one :card, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Card)
-        renders_many :fields, lambda_slots_component_handler(AtomicDesign::Modules::Moles::Field)
-        renders_many :tables, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Table)
-        renders_many :buttons, lambda_slots_component_handler(AtomicDesign::Modules::Atoms::Button)
+        renders_one :card, lambda_slots_component_handler(Moles::Card)
+        renders_many :fields, lambda_slots_component_handler(Moles::Field)
+        renders_many :tables, lambda_slots_component_handler(Atoms::Table)
+        renders_many :buttons, lambda_slots_component_handler(Atoms::Button)
 
         attr_accessor :only, :except, :refarences, :actions
 

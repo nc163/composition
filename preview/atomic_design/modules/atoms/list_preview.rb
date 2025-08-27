@@ -4,35 +4,25 @@ module AtomicDesign
   module Modules
     module Atoms
       class ListPreview < ::AtomicDesign::Modules::Preview # :nodoc:
-        # @!group default
-
-        # @param order select :order
-        def context(order: true)
-          render atomic_design.atoms.list LIST, order?: order
+        def un_ordered_list
+          render atomic_design.atoms.list LIST
         end
 
-        def block
-          render List.new do |list|
-            LIST.each do |item|
-              list.with_item do
-                content_tag(:span, item[0], class: 'row', **item[1])
-              end
-            end
-          end
-        end
-
-        private
-
-        def order
-          [true, false]
+        def ordered_list
+          render atomic_design.atoms.list LIST, order?: true
         end
 
         LIST = [
-          ['item1', {}],
-          ['item2', {}],
-          ['item3', {}],
-          ['item4', {}],
-          ['item5', {}]
+          'Ruby',
+          'Python',
+          'JavaScript',
+          'Go',
+          'Java',
+          'PHP',
+          'C++',
+          'C#',
+          'TypeScript',
+          'Kotlin'
         ]
       end
     end
