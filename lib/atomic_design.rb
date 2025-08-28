@@ -9,8 +9,9 @@ module AtomicDesign # :nodoc:
   extend ActiveSupport::Autoload
 
   eager_autoload do
-    autoload :Modules
     autoload :Helpers
+    autoload :Modules
+    autoload(:ModulePreviews) if defined?(Lookbook)
   end
 
   # = AtomicDesign Configuration
@@ -29,4 +30,4 @@ module AtomicDesign # :nodoc:
   end
 end
 
-require 'atomic_design/engine' if defined?(Rails)
+# require 'atomic_design/engine' if defined?(Rails)
