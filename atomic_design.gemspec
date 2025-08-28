@@ -21,6 +21,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir[
     'README.md',
     'lib/**/*.js',
+    'lib/**/*.woff',
+    'lib/**/*.woff2',
     'lib/**/*.css',
     'lib/**/*.map',
     'lib/**/*.rb',
