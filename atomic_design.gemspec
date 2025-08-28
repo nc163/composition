@@ -31,8 +31,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   # Dependencies
-  spec.add_dependency 'actionview', '~> 7.0'
-  spec.add_dependency 'activesupport', '~> 7.0'
+  spec.add_dependency 'actionview', '> 7.0'
+  spec.add_dependency 'activesupport', '> 7.0'
   spec.add_dependency 'hashie', '~> 5.0'
   # spec.add_dependency 'pagy', '~> 9.4'
   # spec.add_dependency 'kaminari', '~> 1.2', '>= 1.2.2'

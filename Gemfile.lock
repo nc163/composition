@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     atomic_design (0.5.2)
-      actionview (~> 7.0)
-      activesupport (~> 7.0)
+      actionview (> 7.0)
+      activesupport (> 7.0)
       hashie (~> 5.0)
       view_component (~> 4.0)
 
