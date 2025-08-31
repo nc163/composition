@@ -1,10 +1,9 @@
 PATH
   remote: .
   specs:
-    atomic_design (0.6.0)
+    atomic_design (0.7.0)
       actionview (> 7.0)
       activesupport (> 7.0)
-      hashie (~> 5.0)
       view_component (~> 4.0)
 
 GEM
@@ -121,7 +120,6 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    hashie (5.0.0)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     i18n (1.14.7)

@@ -5,8 +5,8 @@ require_relative 'lib/atomic_design/version'
 Gem::Specification.new do |spec|
   spec.name          = 'atomic_design'
   spec.version       = AtomicDesign::VERSION
-  spec.authors       = ['nc163']
-  spec.email         = ['kou1992@gmail.com']
+  spec.authors       = [ 'nc163' ]
+  spec.email         = [ 'kou1992@gmail.com' ]
 
   spec.summary       = 'Rails UI Components with ViewComponent'
   spec.description   = 'Confining the presentation layer of a Ruby on Rails application.'
@@ -30,12 +30,11 @@ Gem::Specification.new do |spec|
   ]
   # spec.bindir        = "exe"
   # spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
-  spec.require_paths = ['lib']
+  spec.require_paths = [ 'lib' ]
 
   # Dependencies
   spec.add_dependency 'actionview', '> 7.0'
   spec.add_dependency 'activesupport', '> 7.0'
-  spec.add_dependency 'hashie', '~> 5.0'
   # spec.add_dependency 'pagy', '~> 9.4'
   spec.add_dependency 'view_component', '~> 4.0'
 

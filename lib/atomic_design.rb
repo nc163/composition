@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'action_view'
-require 'hashie'
-require 'view_component'
-require_relative 'atomic_design/version'
+require "view_component"
+require "active_support/concern"
+require "active_support/dependencies/autoload"
+require_relative "atomic_design/version"
 
 module AtomicDesign # :nodoc:
   extend ActiveSupport::Autoload
 
   eager_autoload do
+    autoload :Extensions
     autoload :Helpers
     autoload :Modules
     autoload(:ModulePreviews) if defined?(Lookbook)

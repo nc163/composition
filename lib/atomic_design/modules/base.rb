@@ -4,7 +4,8 @@ module AtomicDesign
   module Modules
     # AtomicDesign コンポーネント基底クラス
     class Base < ::ViewComponent::Base
-      include Helpers
+      # include Helpers
+      include Extensions::Property
 
       attr_accessor :form
 
@@ -73,33 +74,6 @@ module AtomicDesign
       def args
         @args || []
       end
-
-      # # HTML属性のハッシュ
-      # def options
-      #   html_attrs = [ {} ]
-      #   html_attrs << @kwargs.slice(*(@kwargs.keys - self.class.property.keys))
-      #   html_attrs << self.class.defaults if self.class.defaults.any?
-      #   html_attrs << state_html_values
-      #   html_attrs.flatten.compact.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
-      # end
-      #
-      # private
-      #
-      # # 色々なHTML属性のマージを頑張る
-      # def merge_html_attributes(key, old_value, new_value)
-      #   raise ArgumentError, "Key must be a Symbol" unless key.is_a?(Symbol)
-      #
-      #   case key
-      #   when :id, :class
-      #     [ old_value, new_value ].compact.join(" ")
-      #   when :style
-      #     [ old_value, new_value ].compact.join("; ")
-      #   when :data, :arel
-      #     old_value.to_h.merge(new_value.to_h)
-      #   else
-      #     [ old_value, new_value ].compact.join(" ")
-      #   end
-      # end
     end
   end
 end
