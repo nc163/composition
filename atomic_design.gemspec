@@ -37,7 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport', '> 7.0'
   spec.add_dependency 'hashie', '~> 5.0'
   # spec.add_dependency 'pagy', '~> 9.4'
-  # spec.add_dependency 'kaminari', '~> 1.2', '>= 1.2.2'
   spec.add_dependency 'view_component', '~> 4.0'
 
   # For more information and examples about making a new gem, checkout our

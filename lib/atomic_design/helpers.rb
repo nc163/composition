@@ -6,6 +6,7 @@ module AtomicDesign
     extend ActiveSupport::Autoload
 
     eager_autoload do
+      #
       autoload :Components
       autoload :ModuleHelpers
       autoload :FormHelper

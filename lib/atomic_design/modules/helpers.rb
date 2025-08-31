@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "forwardable"
+
 module AtomicDesign
   module Modules
     # コンポーネント用の内部ヘルパーの名前空間
@@ -7,16 +9,15 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
-        autoload :ContextHelper
-        autoload :DefaultHelper
-        autoload :StateHelper
+        # Class
+        autoload :Property
+        # Module
+        autoload :PropertyHelpers
         autoload :ModuleRefHelper
       end
 
       extend ActiveSupport::Concern
-      include ContextHelper
-      include DefaultHelper
-      include StateHelper
+      include PropertyHelpers
       include ModuleRefHelper
     end
   end
