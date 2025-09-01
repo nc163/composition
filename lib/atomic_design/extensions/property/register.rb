@@ -7,7 +7,7 @@ module AtomicDesign
   module Extensions
     module Property
       #
-      class Registry
+      class Register
         def initialize
           @functions = {}
         end
@@ -18,7 +18,7 @@ module AtomicDesign
 
         def add(name, function)
           raise ArgumentError, "Invalid name" unless name.is_a?(Symbol) && !@functions.key?(name)
-          raise ArgumentError, "Invalid function" unless function.is_a?(Functions::Base)
+          raise ArgumentError, "Invalid function" unless function.is_a?(Property::Function)
 
           @functions[name] = function
         end

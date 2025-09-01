@@ -4,13 +4,7 @@ module AtomicDesign
   module Extensions
     module Property
       module Functions
-        class Effect < Base # :nodoc:
-          def initialize(proc: nil, **options)
-            super(**options)
-
-            self[:proc] = proc
-          end
-
+        class Effect < Function # :nodoc:
           def proc
             self[:proc]
           end
@@ -21,6 +15,10 @@ module AtomicDesign
             # options[:to].is_a?(Proc) ? options[:to].call(value) :
             #   options[:to].is_a?(Hash) ? options[:to][value] : raise
             proc.call(value)
+          end
+
+          def allow_options
+            [ :proc ]
           end
 
           # def allow_options?(**options)

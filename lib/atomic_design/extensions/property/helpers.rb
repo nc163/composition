@@ -18,13 +18,9 @@ module AtomicDesign
         def self.initializer
           Module.new do
             define_method(:initialize) do |*args, **kwargs, &block|
-              property_handler = AtomicDesign::Extensions::Property::Handler.new
-              property_handler.registry = self.class.property_registry
-              even, odd = kwargs.partition { |k, _| @property_handler.exist?(k) }
-              results = even.map { |k, v| @property_handler.invoke(k, v) }
-              @html_options = []
-              @html_options << odd
-              @html_options << results
+              property_resolver  = Property::Resolver.new(register: self.class.property_register)
+              property_dispacher = Property::Dispacher.new(register: self.class.property_register)
+              property_handler   = Property::Handler.new(register: property_resolver, resolver: property_resolver, dispacher: property_dispacher)
 
               super(*args, **kwargs, &block) if defined?(super)
             end
@@ -32,7 +28,7 @@ module AtomicDesign
         end
 
         included do
-          @property_registry ||= Registry.new
+          @property_register ||= Register.new
 
           unless instance_variable_defined?(:@property_helper_included)
             instance_variable_set(:@property_helper_included, true)
@@ -43,19 +39,19 @@ module AtomicDesign
         module ClassMethods
           def inherited(klass)
             super
-            klass.instance_variable_set(:@property_registry, @property_registry.clone)
+            klass.instance_variable_set(:@property_register, @property_register.clone)
             klass.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
           end
 
-          def property_registry
-            @property_registry
+          def property_register
+            @property_register
           end
 
           extend Forwardable
-          def_delegator :@property_registry, :list, :properties
-          def_delegator :@property_registry, :find, :get_property
+          def_delegator :@property_register, :list, :properties
+          def_delegator :@property_register, :find, :get_property
           protected
-          def_delegator :@property_registry, :add,  :def_property
+          def_delegator :@property_register, :add,  :def_property
         end
 
         # HTML属性

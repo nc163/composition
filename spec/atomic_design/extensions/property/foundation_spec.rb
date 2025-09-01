@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe AtomicDesign::Extensions::Property::Registry do # :nodoc:
-  class Dummy < AtomicDesign::Extensions::Property::Functions::Base; end
+describe AtomicDesign::Extensions::Property::Register do # :nodoc:
+  class Dummy < AtomicDesign::Extensions::Property::Function; end
 
 
   it 'initialize' do

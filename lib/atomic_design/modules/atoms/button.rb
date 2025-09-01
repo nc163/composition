@@ -6,8 +6,8 @@ module AtomicDesign
       # ボタンコンポーネント
       # `<span class='btn'>{{content}}</span>`
       class Button < Base # :nodoc:
-        constant value: { class: "btn" }, to: :html
-        state :color, map: BUTTON_COLORS, default: :primary, to: :html
+        state         default: { class: "btn" },                  to: :html
+        state :color, map: BUTTON_COLORS,     default: :primary,  to: :html
 
         def self.colors
           BUTTON_COLORS.keys

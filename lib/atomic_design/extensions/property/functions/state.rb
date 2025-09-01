@@ -4,13 +4,7 @@ module AtomicDesign
   module Extensions
     module Property
       module Functions
-        class State < Base  # :nodoc:
-          def initialize(map: nil, **options)
-            super(**options)
-
-            self[:map] = map
-          end
-
+        class State < Function  # :nodoc:
           def map
             self[:map]
           end
@@ -23,6 +17,10 @@ module AtomicDesign
             else
               value
             end
+          end
+
+          def allow_options
+            [ :map ]
           end
         end
       end

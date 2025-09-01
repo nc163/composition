@@ -5,6 +5,7 @@ require 'spec_helper'
 describe AtomicDesign::Extensions::Property::Helpers do # :nodoc:
   class Dummy
     include AtomicDesign::Extensions::Property::Helpers
+    BASIC_HTML_ATTRS = { id: 'dummy1' }
 
     COLORS = {
       primary: { class: 'bg-primary' },
@@ -15,30 +16,34 @@ describe AtomicDesign::Extensions::Property::Helpers do # :nodoc:
       info: { class: 'bg-info' }
     }.freeze
 
-    state :title, default: true
-    effect :color, to: COLORS, default: :primary
+    basic value: BASIC_HTML_ATTRS,                                      to: :html
+    state :color,   map: COLORS,                      required: true,   to: :html
+    state :title,                 default: true
   end
 
   class SubDummy < Dummy
     state :size, default: true
   end
 
-  it 'Dummy has a properties (forwardable)' do
-    expect(Dummy.properties).to eq [ :title, :color ]
-    expect(SubDummy.properties).to eq [ :title, :color, :size ]
+  it 'is return defined properties' do
+    expect(Dummy.properties).to match_array([ :basic, :title, :color ])
+    expect(SubDummy.properties).to match_array([ :basic, :title, :color, :size ])
   end
 
-  it 'Dummy has a get_property (forwardable)' do
-    expect(Dummy.get_property(:title)).to be_a AtomicDesign::Extensions::Property::Functions::State
-    expect(Dummy.get_property(:color)).to be_a AtomicDesign::Extensions::Property::Functions::Effect
-    expect(SubDummy.get_property(:title)).to be_a AtomicDesign::Extensions::Property::Functions::State
-    expect(SubDummy.get_property(:color)).to be_a AtomicDesign::Extensions::Property::Functions::Effect
-    expect(SubDummy.get_property(:size)).to be_a AtomicDesign::Extensions::Property::Functions::State
+  # it 'is return paramas of mapping property' do
+  #   expect(Dummy.colors).to match_array([ :primary, :secondary, :success, :danger, :warning, :info ])
+  # end
+
+  it 'is raises error for missing required property params' do
+    expect { Dummy.new }.to raise_error(ArgumentError)
+    expect { Dummy.new(title: 'Test Title') }.to raise_error(ArgumentError)
   end
 
-  it 'Dummy can access html_options' do
-    expect { Dummy.new(color: :secondary).send(:html_options) }.to raise_error
+  it 'is correct property' do
+    expect { Dummy.new(color: :primary, title: 'Test Title') }.not_to raise_error
   end
+
+  # it 'is '
 
   # it 'Dummy can access html_options' do
   #   expect { Dummy.new.send(:html_options) }.not_to raise_error

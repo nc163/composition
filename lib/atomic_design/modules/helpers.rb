@@ -9,15 +9,13 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
-        # Class
-        autoload :Property
         # Module
-        autoload :PropertyHelpers
+        autoload :DefaultHelper
         autoload :ModuleRefHelper
       end
 
       extend ActiveSupport::Concern
-      include PropertyHelpers
+      include DefaultHelper
       include ModuleRefHelper
     end
   end

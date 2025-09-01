@@ -5,9 +5,17 @@ module AtomicDesign
     module Property
       extend ActiveSupport::Autoload
 
+      PROPERTY_FUNCTION_TYPES = [
+        :value,
+        :html
+      ]
+
       eager_autoload do
         # Class
-        autoload :Registry
+        autoload :Function
+        autoload :Register
+        autoload :Dispacher
+        autoload :Resolver
         autoload :Handler
         # Module
         autoload :Functions
