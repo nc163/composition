@@ -54,6 +54,10 @@ module AtomicDesign
           def_delegator :@property_register, :add,  :def_property
         end
 
+        def state(name)
+          @property_handler.invoke(name)
+        end
+
         # HTML属性
         def html_options
           @property_handler.html_options

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 module AtomicDesign
-  module ModulePreviews
+  module Modules
     # @hidden
-    class Base < ::Lookbook::Preview # :nodoc:
+    class BasePreview < ::Lookbook::Preview # :nodoc:
       include AtomicDesign::Helpers
     end
   end
