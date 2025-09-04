@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     # AtomicDesign コンポーネント基底クラス
     class Base < ::ViewComponent::Base
-      # include Helpers
+      include Extensions::Context
       include Extensions::Property
 
       attr_accessor :form
@@ -31,11 +31,6 @@ module AtomicDesign
       end
 
       class << self
-        def nesting
-          namespace = name.underscore
-          @nesting ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new(namespace)
-        end
-
         # 後方互換性
         def lambda_slots_component_handler(component_class)
           raise ArgumentError unless component_class < AtomicDesign::Modules::Base
@@ -54,10 +49,6 @@ module AtomicDesign
       #   helpers.form_with(**options, &block)
       # end
 
-      def nesting
-        self.class.nesting
-      end
-
       protected
 
       # コンテキストが存在するか
@@ -70,9 +61,9 @@ module AtomicDesign
         @args&.first
       end
 
-      # 引数を取得する
-      def args
-        @args || []
+      # HTMLオプションを取得する
+      def options
+        html_options
       end
     end
   end

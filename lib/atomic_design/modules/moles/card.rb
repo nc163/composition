@@ -8,7 +8,7 @@ module AtomicDesign
         renders_one :body, Body
         renders_one :foot, Foot
 
-        defaults class: 'card'
+        basic class: 'card'
 
         # def call
         #   content_tag :aside, options do

@@ -5,44 +5,65 @@ module AtomicDesign
     module Property
       # プロパティ機能の基底クラス
       class Function < ::Hash
-        ALLOW_OPTIONS = [ :to, :required, :default ]
+        # REQUIRED_OPTIONS = [ :name, :type ]
+        ALLOW_OPTIONS = [ :name, :type, :to, :required, :default ]
 
-        def initialize(*args, **kwargs)
-          invalid_keys = kwargs.keys - allowed_options
-          raise ArgumentError, "Invalid option(s): #{invalid_keys.join(', ')}" unless invalid_keys.empty?
+        def initialize(**kwargs)
+          unless skip_option_check
+            invalid_keys = kwargs.keys - allowed_options
+            raise ArgumentError, "Invalid options: #{invalid_keys.join(', ')}" unless invalid_keys.empty?
+            # raise ArgumentError, "Missing required options: #{REQUIRED_OPTIONS.join(', ')}" unless kwargs.include?(*REQUIRED_OPTIONS)
+          end
 
-          super(**kwargs)
+          super
+          self.default = nil
+          self.update(**kwargs)
         end
 
+        def name
+          self[:name]
+        end
+
+        def type
+          self[:type]
+        end
+
+        # TODO: メソッド名として使え無さそうだからコメントアウト
+        # def default
+        #   self[:default]
+        # end
+
+        def required?
+          !!self[:required]
+        end
+
+        # def required
+        #   self[:required]
+        # end
+
+        # HTMLを返す場合は、html_options へ展開される
+        # => initialize -> handler -> dispacher -> resolver を確認
+        # :html
         def to
           self[:to] || :value
         end
 
-        def required?
-          self[:required] || false
-        end
-
-        def default
-          self[:default]
-        end
-
-        def call(value)
-          send_value = value || default
-          if required? && send_value.nil?
-            raise ArgumentError, "Missing required property: #{self[:name]}"
-          end
-
-          resolve(send_value)
+        # true の場合、メソッドとして利用できる
+        # component = Component.new(color: :red)
+        # component.color
+        # # => :red
+        def use_method
+          false
         end
 
         protected
 
-        def resolve(value)
+        def allow_options
           raise NotImplementedError
         end
 
-        def allow_options
-          raise NotImplementedError
+        def skip_option_check
+          false
         end
 
         private

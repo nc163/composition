@@ -4,7 +4,7 @@ module AtomicDesign
   module ModulePreviews
     module Atoms
       class AvatarPreview < Base # :nodoc:
-        CONTEXT = '/assets/images/60x60.png'
+        CONTEXT = "/assets/images/60x60.png"
         # @!group Sizes
 
         # @param size select :sizes
@@ -14,8 +14,10 @@ module AtomicDesign
 
         # @!endgroup
 
+        private
+
         def sizes
-          Avatar.sizes
+          { choices: Avatar.sizes }
         end
       end
     end

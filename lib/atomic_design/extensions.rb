@@ -6,13 +6,9 @@ module AtomicDesign
     extend ActiveSupport::Autoload
 
     eager_autoload do
-      #
+      # Module
       autoload :Property
       autoload :Context
     end
-
-    extend ActiveSupport::Concern
-    include Property
-    include Context
   end
 end

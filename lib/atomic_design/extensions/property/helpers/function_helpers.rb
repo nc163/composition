@@ -13,15 +13,19 @@ module AtomicDesign
             # instance.time
             # # => "2025年04月26日 12:34"
             def basic(**options)
-              def_property(:basic, Property::Functions::Basic.new(**options))
+              def_property Property::Functions::Basic.new(name: :basic, value: options)
             end
 
-            def state(name, **options)
-              def_property(name, Property::Functions::State.new(**options))
+            def state(name, map = nil, **options)
+              if !map.nil? && map.is_a?(Array)
+                def_property Property::Functions::State.new(name: name, map: map, **options)
+              else
+                def_property Property::Functions::State.new(name: name, **options)
+              end
             end
 
             def effect(name, **options)
-              def_property(name, Property::Functions::Effect.new(**options))
+              def_property Property::Functions::Effect.new(name: name, **options)
             end
           end
         end

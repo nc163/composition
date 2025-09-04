@@ -19,37 +19,40 @@ module AtomicDesign
         autoload :Indicators
         autoload :Icons
         autoload :Maps
+        if defined?(::Lookbook)
+
+        end
       end
 
       AVATAR_SIZES = {
         sm: {},
-        md: { style: 'width: 60px; height: 60px;' },
+        md: { style: "width: 60px; height: 60px;" },
         lg: {}
       }.freeze
 
       ALERT_LEVELS = {
-        info: { class: 'alert-info' },
-        success: { class: 'alert-success' },
-        warning: { class: 'alert-warning' },
-        danger: { class: 'alert-danger' }
+        info: { class: "alert-info" },
+        success: { class: "alert-success" },
+        warning: { class: "alert-warning" },
+        danger: { class: "alert-danger" }
       }.freeze
 
       BADGE_COLORS = {
-        primary: { class: 'text-bg-primary' },
-        secondary: { class: 'text-bg-secondary' },
-        success: { class: 'text-bg-success' },
-        danger: { class: 'text-bg-danger' },
-        warning: { class: 'text-bg-warning' },
-        info: { class: 'text-bg-info' }
+        primary: { class: "text-bg-primary" },
+        secondary: { class: "text-bg-secondary" },
+        success: { class: "text-bg-success" },
+        danger: { class: "text-bg-danger" },
+        warning: { class: "text-bg-warning" },
+        info: { class: "text-bg-info" }
       }.freeze
 
       BUTTON_COLORS = {
-        primary: { class: 'bg-primary' },
-        secondary: { class: 'bg-secondary' },
-        success: { class: 'btn-outline-success' },
-        danger: { class: 'bg-danger' },
-        warning: { class: 'bg-warning' },
-        info: { class: 'bg-info' }
+        primary: { class: "bg-primary" },
+        secondary: { class: "bg-secondary" },
+        success: { class: "btn-outline-success" },
+        danger: { class: "bg-danger" },
+        warning: { class: "bg-warning" },
+        info: { class: "bg-info" }
       }.freeze
     end
   end

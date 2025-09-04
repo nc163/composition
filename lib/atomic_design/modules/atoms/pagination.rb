@@ -5,33 +5,33 @@ module AtomicDesign
     module Atoms
       class Pagination < Base # :nodoc:
         # == Layout
-        defaults class: '', aria: { label: 'Pages navigation' }
+        basic class: "", aria: { label: "Pages navigation" }
 
         # == Methods
 
         def call
           content_tag :nav, options do
             if context.total_pages >= 1
-              concat(content_tag(:ul, class: 'pagination') do
-                concat(content_tag(:li, class: 'page-item') do
-                  concat(link_to(url_for(page: 1), class: 'page-link', aria: { label: 'Start' }) do
-                    content_tag(:span, '«', aria: { hidden: true })
+              concat(content_tag(:ul, class: "pagination") do
+                concat(content_tag(:li, class: "page-item") do
+                  concat(link_to(url_for(page: 1), class: "page-link", aria: { label: "Start" }) do
+                    content_tag(:span, "«", aria: { hidden: true })
                   end)
                 end)
                 display_pages.each do |page|
-                  html_class = 'page-item'
-                  html_class += ' active' if page == context.current_page
+                  html_class = "page-item"
+                  html_class += " active" if page == context.current_page
                   concat(content_tag(:li, class: html_class) do
                     if page == context.current_page
-                      concat(content_tag(:span, page, class: 'page-link'))
+                      concat(content_tag(:span, page, class: "page-link"))
                     else
-                      concat(link_to(page, url_for(page: page), class: 'page-link', aria: { label: 'Next' }))
+                      concat(link_to(page, url_for(page: page), class: "page-link", aria: { label: "Next" }))
                     end
                   end)
                 end
-                concat(content_tag(:li, class: 'page-item') do
-                  concat(link_to(url_for(page: context.total_pages), class: 'page-link', aria: { label: 'End' }) do
-                    content_tag(:span, '»', aria: { hidden: true })
+                concat(content_tag(:li, class: "page-item") do
+                  concat(link_to(url_for(page: context.total_pages), class: "page-link", aria: { label: "End" }) do
+                    content_tag(:span, "»", aria: { hidden: true })
                   end)
                 end)
               end)

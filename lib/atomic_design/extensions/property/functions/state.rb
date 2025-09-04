@@ -4,20 +4,17 @@ module AtomicDesign
   module Extensions
     module Property
       module Functions
-        class State < Function  # :nodoc:
+        class State < Property::Function  # :nodoc:
+          def initialize(**options)
+            options[:type] = :state
+            super(**options)
+          end
+
           def map
             self[:map]
           end
 
           protected
-
-          def resolve(value)
-            if !!map && map.is_a?(Hash)
-              map[value.to_sym]
-            else
-              value
-            end
-          end
 
           def allow_options
             [ :map ]

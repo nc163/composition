@@ -5,7 +5,7 @@ module AtomicDesign
     module Moles
       module Layouts
         class Footer < Base # :nodoc:
-          defaults class: 'container-xl'
+          basic class: "container-xl"
 
           # def call
           #   content_tag :header, options do

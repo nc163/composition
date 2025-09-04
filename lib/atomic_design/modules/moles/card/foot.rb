@@ -5,7 +5,7 @@ module AtomicDesign
     module Moles
       class Card::Foot < Base # :nodoc:
         # == Layout
-        defaults class: 'card-footer'
+        basic class: "card-footer"
 
         def call
           content_tag :footer, options do

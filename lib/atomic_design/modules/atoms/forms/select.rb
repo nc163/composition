@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class Select < Base # :nodoc:
           # == Layout
-          defaults class: 'form-group'
+          basic class: "form-group"
 
           # == Attributes
           # attr_accessor :placeholder
@@ -18,9 +18,9 @@ module AtomicDesign
 
           def call
             content_tag :div, options do
-              concat form.label(context, class: 'fw-bold')
+              concat form.label(context, class: "fw-bold")
               # concat form.select(context, form.object.select_options, class: 'form-select', use_default: true)
-              concat form.select(context, options_for_select(form.object.select_options), class: 'form-select',
+              concat form.select(context, options_for_select(form.object.select_options), class: "form-select",
                                                                                           use_default: true)
             end
           end

@@ -10,7 +10,7 @@ module AtomicDesign
           renders_many :fields, lambda_slots_component_handler(Moles::Field)
           renders_many :badges, lambda_slots_component_handler(Atoms::Badge)
 
-          defaults class: 'sidebar'
+          basic class: "sidebar"
 
           # def call
           #   # with_card attributes do |card|

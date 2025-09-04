@@ -1,4 +1,21 @@
 // https://containers.dev/implementors/json_reference/
 {
-    "name": "AtomicDesign Dev Container"
+    "name": "AtomicDesign Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "..",
+        "args": {
+            "REMOTE_USER": "${localEnv:USER}"
+        }
+    },
+    "mounts": [   "source=./,target=/home/${localEnv:USER}/atomic_design,type=bind,consistency=cached" ],
+    "workspaceFolder": "/home/${localEnv:USER}/atomic_design",
+    "forwardPorts": [3000],
+    "containerUser": "${localEnv:USER}",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+            ]
+        }
+    }
 }

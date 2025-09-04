@@ -18,9 +18,10 @@ module AtomicDesign
         def self.initializer
           Module.new do
             define_method(:initialize) do |*args, **kwargs, &block|
-              property_resolver  = Property::Resolver.new(register: self.class.property_register)
-              property_dispacher = Property::Dispacher.new(register: self.class.property_register)
-              property_handler   = Property::Handler.new(register: property_resolver, resolver: property_resolver, dispacher: property_dispacher)
+              @property_resolver  = Property::Resolver.new(register: property_register)
+              @property_dispacher = Property::Dispacher.new(register: property_register)
+              @property_handler   = Property::Handler.new(register: property_register, resolver: @property_resolver, dispacher: @property_dispacher)
+              @property_handler.dispatch(**kwargs)
 
               super(*args, **kwargs, &block) if defined?(super)
             end
@@ -28,7 +29,7 @@ module AtomicDesign
         end
 
         included do
-          @property_register ||= Register.new
+          @property_register ||= Property::Register.new
 
           unless instance_variable_defined?(:@property_helper_included)
             instance_variable_set(:@property_helper_included, true)
@@ -49,43 +50,32 @@ module AtomicDesign
 
           extend Forwardable
           def_delegator :@property_register, :list, :properties
-          def_delegator :@property_register, :find, :get_property
           protected
           def_delegator :@property_register, :add,  :def_property
         end
 
         # HTML属性
         def html_options
-          @html_options.flatten.compact.reduce { _1.merge(_2, &method(:merge_html_attributes)) }
+          @property_handler.html_options
         end
 
         private
 
-        # 色々なHTML属性のマージを頑張る
-        def merge_html_attributes(key, old_value, new_value)
-          raise ArgumentError, "Key must be a Symbol" unless key.is_a?(Symbol)
-
-          case key
-          when :id, :class
-            [ old_value, new_value ].compact.join(" ")
-          when :style
-            [ old_value, new_value ].compact.join("; ")
-          when :data, :arel
-            old_value.to_h.merge(new_value.to_h)
+        # プロパティではない場合は、再度method_missingを呼び出す
+        def method_missing(called, *args, **kwargs, &block)
+          if @property_handler.invokable?(called)
+            if args.empty? && kwargs.empty? && !block_given?
+              @property_handler.invoke(called.to_sym)
+            else
+              raise ArgumentError, "Invalid arguments for property #{called}"
+            end
           else
-            [ old_value, new_value ].compact.join(" ")
+            super(called, *args, **kwargs, &block)
           end
         end
 
-        private
-
-        # 一度propのメソッドを参照、ない場合は再度method_missingを呼び出す
-        def method_missing(called, *args, **kwargs, &block)
-          # if self.class.properties.include?(called)
-          #   return property_resolve(called, *args, **kwargs, &block)
-          # end
-
-          super(called, *args, **kwargs, &block)
+        def property_register
+          self.class.property_register
         end
       end
     end

@@ -10,16 +10,21 @@ describe AtomicDesign::Extensions::Property::Functions::State do # :nodoc:
   }.freeze
 
   it 'initialize' do
-    expect { described_class.new }.not_to raise_error
-    expect { described_class.new(required: true) }.not_to raise_error
-    expect { described_class.new(map: SIZES, required: true) }.not_to raise_error
+    expect { described_class.new(name: :dummy) }.not_to raise_error
+    expect { described_class.new(name: :dummy, required: true) }.not_to raise_error
+    expect { described_class.new(name: :dummy, map: SIZES, required: true) }.not_to raise_error
   end
 
-  it 'resolve' do
-    state = described_class.new(default: :info)
-    expect(state.call("sm")).to eq("sm")
+  it 'hashable' do
+    state = described_class.new(name: :dummy, default: :info)
+    expect(state[:name]).to eq(:dummy)
+    expect(state[:default]).to eq(:info)
+  end
 
-    state = described_class.new(map: SIZES, default: :info)
-    expect(state.call(:md)).to eq(SIZES[:md])
+  it 'method access' do
+    state = described_class.new(name: :dummy, map: SIZES, default: :info)
+    expect(state.name).to eq(:dummy)
+    expect(state.map).to eq(SIZES)
+    expect(state.respond_to?(:default)).to eq true
   end
 end

@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Atoms
       class Breadcrumb < Base # :nodoc:
-        defaults class: 'breadcrumb'
+        basic class: "breadcrumb"
       end
     end
   end

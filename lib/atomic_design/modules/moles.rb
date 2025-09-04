@@ -6,7 +6,9 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
-        # TBD
+        if defined?(::Lookbook)
+
+        end
       end
     end
   end

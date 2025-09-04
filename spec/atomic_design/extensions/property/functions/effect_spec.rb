@@ -4,16 +4,19 @@ require 'spec_helper'
 
 describe AtomicDesign::Extensions::Property::Functions::Effect do # :nodoc:
   it 'initialize' do
-    expect { described_class.new }.not_to raise_error
-    expect { described_class.new(required: true) }.not_to raise_error
+    expect { described_class.new(name: :dummy) }.not_to raise_error
+    expect { described_class.new(name: :dummy, required: true) }.not_to raise_error
 
     proc = Proc.new { |v| "#{((Time.now - v) / 3600).floor}時間前" }
-    expect { described_class.new(proc: proc, required: true) }.not_to raise_error
+    expect { described_class.new(name: :dummy, proc: proc, required: true) }.not_to raise_error
   end
 
   it 'resolve' do
     proc = Proc.new { |v| "#{((Time.now - v) / 3600).floor}時間前" }
-    effect = described_class.new(proc: proc, default: :info)
-    expect { effect.call(Time.now) }.not_to raise_error
+    effect = described_class.new(name: :dummy, proc: proc, required: true)
+    # expect { effect.call(Time.now) }.not_to raise_error
+    expect(effect.name).to eq(:dummy)
+    expect(effect.proc).to eq(proc)
+    expect(effect.required?).to eq true
   end
 end

@@ -4,15 +4,17 @@ module AtomicDesign
   module Extensions
     module Property
       module Functions
-        class Basic < Function # :nodoc:
-          protected
-
-          def resolve(_)
-            self[:value]
+        class Basic < Property::Function # :nodoc:
+          def initialize(**options)
+            options[:type] = :basic
+            options[:to]   = :html
+            super(**options)
           end
 
-          def allow_options
-            [ :value ]
+          protected
+
+          def skip_option_check
+            true
           end
         end
       end

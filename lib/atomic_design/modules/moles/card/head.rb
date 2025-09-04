@@ -5,7 +5,7 @@ module AtomicDesign
     module Moles
       class Card::Head < Base # :nodoc:
         # == Layout
-        defaults class: 'card-header fw-bold'
+        basic class: 'card-header fw-bold'
 
         def call
           content_tag :header, options do

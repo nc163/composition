@@ -4,7 +4,7 @@ module AtomicDesign
   module Modules
     module Moles
       class Section < Base # :nodoc:
-        defaults class: 'section'
+        basic class: 'section'
       end
     end
   end

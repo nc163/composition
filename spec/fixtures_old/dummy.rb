@@ -15,7 +15,7 @@ class Dummy < ::AtomicDesign::Modules::Base
     small: { class: 'btn-sm' }
   }.freeze
 
-  defaults class: 'list-group list-group-flush'
+  basic class: 'list-group list-group-flush'
 
   #     key     |                        options
   #     name    |     role         |  func            | required      |   default

@@ -12,7 +12,7 @@ module AtomicDesign # :nodoc:
     autoload :Extensions
     autoload :Helpers
     autoload :Modules
-    autoload(:ModulePreviews) if defined?(Lookbook)
+    autoload(:ModulePreviews) if defined?(::Lookbook)
   end
 
   # = AtomicDesign Configuration

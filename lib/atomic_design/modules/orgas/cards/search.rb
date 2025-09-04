@@ -6,7 +6,7 @@ module AtomicDesign
       module Cards
         class Search < Base # :nodoc:
           # == Layout
-          defaults class: 'card'
+          basic class: "card"
 
           # == Slots
           renders_one :head,  AtomicDesign::Modules::Moles::Card::Head
@@ -26,15 +26,15 @@ module AtomicDesign
                   concat body
                   concat foot
                 else
-                  concat with_head('検索')
+                  concat with_head("検索")
                   concat(with_body do
                     form.object.class.attribute_types.each do |name, model_type|
                       concat form.any_field(model_type.type, name.to_sym)
                     end
                   end)
                   concat(with_foot do
-                    concat form.submit('確認', color: :primary, class: 'me-2')
-                    concat link_to('リセット', url_for, class: 'btn text-bg-danger me-2', method: :get)
+                    concat form.submit("確認", color: :primary, class: "me-2")
+                    concat link_to("リセット", url_for, class: "btn text-bg-danger me-2", method: :get)
                   end)
                 end
               end

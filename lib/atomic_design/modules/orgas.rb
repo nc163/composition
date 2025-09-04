@@ -7,6 +7,10 @@ module AtomicDesign
 
       eager_autoload do
         autoload :Indicators
+
+        if defined?(::Lookbook)
+
+        end
       end
     end
   end

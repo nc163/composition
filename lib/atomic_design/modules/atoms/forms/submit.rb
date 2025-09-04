@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class Submit < Base # :nodoc:
           # == Layout
-          defaults class: 'btn'
+          basic class: "btn"
 
           # attrs :color, primary: { class: 'btn-primary' },
           #               secondary: { class: 'btn-secondary' },

@@ -6,7 +6,7 @@ module AtomicDesign
       module Cards
         class Record < Base # :nodoc:
           # == Layout
-          defaults class: 'card'
+          basic class: "card"
 
           # == Slots
           renders_one :head,  AtomicDesign::Modules::Moles::Card::Head
@@ -27,14 +27,14 @@ module AtomicDesign
                   concat body
                   concat foot
                 else
-                  concat with_head('新規作成')
+                  concat with_head("新規作成")
                   concat(with_body do
                     form.object.class.attribute_types.each do |name, model_type|
                       concat form.any_field(model_type.type, name.to_sym)
                     end
                   end)
                   concat(with_foot do
-                    concat form.submit('確認', color: :primary)
+                    concat form.submit("確認", color: :primary)
                   end)
                 end
               end

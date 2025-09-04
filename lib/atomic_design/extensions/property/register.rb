@@ -12,15 +12,18 @@ module AtomicDesign
           @functions = {}
         end
 
+        def all
+          @functions.values
+        end
+
         def list
           @functions.keys
         end
 
-        def add(name, function)
-          raise ArgumentError, "Invalid name" unless name.is_a?(Symbol) && !@functions.key?(name)
+        def add(function)
           raise ArgumentError, "Invalid function" unless function.is_a?(Property::Function)
 
-          @functions[name] = function
+          @functions[function.name] = function
         end
 
         def exist?(name)

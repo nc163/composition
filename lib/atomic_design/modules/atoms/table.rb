@@ -7,7 +7,7 @@ module AtomicDesign
         renders_one :thead,   Table::Thead
         renders_one :tbody,   Table::Tbody
 
-        defaults class: 'table'
+        basic class: "table"
 
         state :headers
         state :caption

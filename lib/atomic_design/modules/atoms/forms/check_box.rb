@@ -6,7 +6,7 @@ module AtomicDesign
       module Forms
         class CheckBox < Base # :nodoc:
           # == Layout
-          defaults class: 'form-group'
+          basic class: "form-group"
 
           # == Attributes
           # attr_accessor :placeholder
@@ -18,8 +18,8 @@ module AtomicDesign
 
           def call
             content_tag :div, options do
-              concat form.label(context, class: 'fw-bold')
-              concat form.check_box(context, class: 'form-control', use_default: true)
+              concat form.label(context, class: "fw-bold")
+              concat form.check_box(context, class: "form-control", use_default: true)
             end
           end
         end

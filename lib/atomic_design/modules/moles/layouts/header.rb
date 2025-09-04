@@ -5,8 +5,8 @@ module AtomicDesign
     module Moles
       module Layouts
         class Header < Base # :nodoc:
-          renders_one :title, ->(context: 'Example') { render atomic_design.moles.layouts.header(context) }
-          defaults class: 'container-xl'
+          renders_one :title, ->(context: "Example") { render atomic_design.moles.layouts.header(context) }
+          basic class: "container-xl"
         end
       end
     end
