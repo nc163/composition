@@ -6,7 +6,9 @@ module AtomicDesign
       extend ActiveSupport::Autoload
 
       eager_autoload do
+        autoload :Cards
         autoload :Indicators
+
 
         if defined?(::Lookbook)
 
