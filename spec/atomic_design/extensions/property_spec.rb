@@ -3,40 +3,31 @@
 require 'spec_helper'
 
 describe AtomicDesign::Extensions::Property do # :nodoc:
-  class Dummy
-    include AtomicDesign::Extensions::Property
+  colors = {
+    primary: { class: 'bg-primary' },
+    secondary: { class: 'bg-secondary' },
+    success: { class: 'btn-outline-success' },
+    danger: { class: 'bg-danger' },
+    warning: { class: 'bg-warning' },
+    info: { class: 'bg-info' }
+  }.freeze
 
-    COLORS = {
-      primary: { class: 'bg-primary' },
-      secondary: { class: 'bg-secondary' },
-      success: { class: 'btn-outline-success' },
-      danger: { class: 'bg-danger' },
-      warning: { class: 'bg-warning' },
-      info: { class: 'bg-info' }
-    }.freeze
+  let(:dummy_class) {
+    Class.new do
+      include AtomicDesign::Extensions::Property
+      state :title,               default: true
+      state :color, map: colors,  default: :primary
 
-    state :title, default: true
-    state :color, map: COLORS, default: :primary
-    effect :time, proc: ->(v) { Time.now }
+      def initialize(*args, **kwargs, &block); end
+    end
+  }
+
+  let(:sub_dummy_class) {
+    Class.new(dummy_class)
+  }
+
+  it 'initialize' do
+    expect { dummy_class.new(color: :secondary) }.not_to raise_error
+    expect { sub_dummy_class.new(color: :secondary) }.not_to raise_error
   end
-
-  class SubDummy < Dummy
-  end
-
-  it 'Dummy has a properties' do
-    expect(Dummy.properties).to eq [ :title, :color, :time ]
-  end
-
-  # it 'Dummy has a get_property' do
-  #   expect(Dummy.get_property(:title)).to be_a AtomicDesign::Extensions::Property::Functions::State
-  #   expect(Dummy.get_property(:color)).to be_a AtomicDesign::Extensions::Property::Functions::Effect
-  # end
-
-  # it 'Dummy can access html_options' do
-  #   expect { Dummy.new(color: :secondary).send(:html_options) }.to raise_error
-  # end
-
-  # it 'Dummy can access html_options' do
-  #   expect { Dummy.new.send(:html_options) }.not_to raise_error
-  # end
 end

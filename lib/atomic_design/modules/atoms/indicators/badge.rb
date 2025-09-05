@@ -6,9 +6,8 @@ module AtomicDesign
       module Indicators
         class Badge < Base # :nodoc:
           basic class: "badge"
-
-          state :size,  role: :html, mapping: BADGE_SIZES,  default: :sm
-          state :alert, role: :html, mapping: ALERT_LEVELS, default: :info
+          state :size,  map: BADGE_SIZES,  default: :sm,   to: :html
+          state :alert, map: ALERT_LEVELS, default: :info, to: :html
 
           def self.alerts
             ALERT_LEVELS.keys

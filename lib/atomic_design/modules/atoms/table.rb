@@ -8,22 +8,13 @@ module AtomicDesign
         renders_one :tbody,   Table::Tbody
 
         basic class: "table"
-
         state :headers
         state :caption
 
         def call
           content_tag :table, options do
-            # concat(content_tag(:caption, caption)) if !!caption
-            if content?
-              concat(thead) if thead?
-              concat(tbody) if tbody?
-            else
-              if state(:headers)
-                concat with_thead(state(:headers))
-              end
-              concat with_tbody(context)
-            end
+            concat with_thead(state(:headers)) if state(:headers)
+            concat with_tbody(context)
           end
         end
       end

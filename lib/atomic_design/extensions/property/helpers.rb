@@ -18,10 +18,12 @@ module AtomicDesign
         def self.initializer
           Module.new do
             define_method(:initialize) do |*args, **kwargs, &block|
-              @property_resolver  = Property::Resolver.new(register: property_register)
-              @property_dispacher = Property::Dispacher.new(register: property_register)
-              @property_handler   = Property::Handler.new(register: property_register, resolver: @property_resolver, dispacher: @property_dispacher)
-              @property_handler.dispatch(**kwargs)
+              if respond_to?(:property_register)
+                @property_resolver  = Property::Resolver.new(register: property_register)
+                @property_dispacher = Property::Dispacher.new(register: property_register)
+                @property_handler   = Property::Handler.new(register: property_register, resolver: @property_resolver, dispacher: @property_dispacher)
+                @property_handler.dispatch(**kwargs)
+              end
 
               super(*args, **kwargs, &block) if defined?(super)
             end
@@ -29,8 +31,6 @@ module AtomicDesign
         end
 
         included do
-          @property_register ||= Property::Register.new
-
           unless instance_variable_defined?(:@property_helper_included)
             instance_variable_set(:@property_helper_included, true)
             self.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
@@ -40,18 +40,8 @@ module AtomicDesign
         module ClassMethods
           def inherited(klass)
             super
-            klass.instance_variable_set(:@property_register, @property_register.clone)
             klass.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
           end
-
-          def property_register
-            @property_register
-          end
-
-          extend Forwardable
-          def_delegator :@property_register, :list, :properties
-          protected
-          def_delegator :@property_register, :add,  :def_property
         end
 
         def state(name)
@@ -76,10 +66,6 @@ module AtomicDesign
           else
             super(called, *args, **kwargs, &block)
           end
-        end
-
-        def property_register
-          self.class.property_register
         end
       end
     end

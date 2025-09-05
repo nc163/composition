@@ -8,7 +8,6 @@ module AtomicDesign
     eager_autoload do
       # Module
       autoload :Property
-      autoload :Context
     end
   end
 end

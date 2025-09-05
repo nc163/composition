@@ -4,7 +4,6 @@ module AtomicDesign
   module Modules
     # AtomicDesign コンポーネント基底クラス
     class Base < ::ViewComponent::Base
-      include Extensions::Context
       include Extensions::Property
 
       attr_accessor :form
