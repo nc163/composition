@@ -9,6 +9,7 @@ module AtomicDesign
 
           included do
             @property_register ||= Property::Register.new
+            # class_attribute :property_register, default: Property::Register.new
           end
 
           module ClassMethods # :nodoc:
