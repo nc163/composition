@@ -23,13 +23,16 @@ module AtomicDesign
       class ModuleBuilder # :nodoc:
         def initialize(namespace_snake_case)
           @namespace = namespace_snake_case
+          @constantized_cache = {}
         end
 
         attr_reader :namespace
 
         def arbit(names_snake_case, *args, **kwargs, &block)
           klass_or_module_string = "#{namespace}/#{names_snake_case}"
-          klass_or_module = klass_or_module_string.camelize.safe_constantize
+          
+          klass_or_module = @constantized_cache[klass_or_module_string] ||= 
+            klass_or_module_string.camelize.safe_constantize
 
           return build!(klass_or_module, *args, **kwargs, &block) if klass_or_module.is_a?(Class)
           return recall!(klass_or_module_string, *args, **kwargs, &block) if klass_or_module.is_a?(Module)

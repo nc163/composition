@@ -7,22 +7,28 @@ module AtomicDesign
       class Base < Modules::Base
         #
         def atoms
-          @atoms ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new('atomic_design/modules/atoms')
+          @atoms ||= module_proxy.atoms
         end
 
         #
         def moles
-          @moles ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new('atomic_design/modules/moles')
+          @moles ||= module_proxy.moles
         end
 
         #
         def orgas
-          @orgas ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new('atomic_design/modules/orgas')
+          @orgas ||= module_proxy.orgas
         end
 
         #
         def temps
-          @temps ||= AtomicDesign::Helpers::ModuleHelper::ModuleBuilder.new('atomic_design/modules/temps')
+          @temps ||= module_proxy.temps
+        end
+
+        private
+
+        def module_proxy
+          @module_proxy ||= AtomicDesign::Helpers::ModuleHelpers::ModuleProxy.new
         end
       end
     end
