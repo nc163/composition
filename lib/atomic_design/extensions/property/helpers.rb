@@ -14,33 +14,38 @@ module AtomicDesign
         extend ActiveSupport::Concern
         include FunctionHelpers
 
-        # 初期化処理
-        def self.initializer
-          Module.new do
-            define_method(:initialize) do |*args, **kwargs, &block|
-              if respond_to?(:property_register)
-                @property_resolver  = Property::Resolver.new(register: property_register)
-                @property_dispacher = Property::Dispacher.new(register: property_register)
-                @property_handler   = Property::Handler.new(register: property_register, resolver: @property_resolver, dispacher: @property_dispacher)
-                @property_handler.dispatch(**kwargs)
-              end
+        included do
+          prepend InstanceMethods
 
-              super(*args, **kwargs, &block) if defined?(super)
+          # unless instance_variable_defined?(:@property_helper_included)
+          #   instance_variable_set(:@property_helper_included, true)
+          #   self.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
+          # end
+          class << self
+            def inherited(klass)
+              klass.prepend(AtomicDesign::Extensions::Property::Helpers::InstanceMethods)
+              super
             end
           end
         end
 
-        included do
-          unless instance_variable_defined?(:@property_helper_included)
-            instance_variable_set(:@property_helper_included, true)
-            self.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
-          end
+        module ClassMethods
+          # def inherited(klass)
+          #   super
+          #   klass.prepend(AtomicDesign::Extensions::Property::Helpers::InstanceMethods)
+          # end
         end
 
-        module ClassMethods
-          def inherited(klass)
+        module InstanceMethods
+          def initialize(*args, **kwargs, &block)
+            if respond_to?(:property_register)
+              @property_resolver  = Property::Resolver.new(register: property_register)
+              @property_dispacher = Property::Dispacher.new(register: property_register)
+              @property_handler   = Property::Handler.new(register: property_register, resolver: @property_resolver, dispacher: @property_dispacher)
+              @property_handler.dispatch(**kwargs)
+            end
+
             super
-            klass.prepend(AtomicDesign::Extensions::Property::Helpers.initializer)
           end
         end
 
