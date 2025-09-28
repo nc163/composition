@@ -1,1 +1,0 @@
-require 'atomic_design'

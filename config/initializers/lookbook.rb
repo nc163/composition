@@ -1,7 +1,7 @@
 require "lookbook"
 
 Lookbook.configure do |config|
-  config.project_name = "Atomic Design #{AtomicDesign::Version.gem_version} Preview"
+  config.project_name = "Functional View #{FunctionalView::Version.gem_version} Preview"
   config.preview_display_options = {
     theme: %w[light dark],
     resizable: false
@@ -22,12 +22,12 @@ Lookbook.configure do |config|
     }
   }
   config.preview_collection_label = "Previews"
-  config.preview_paths = [
-    Rails.root.join("lib/atomic_design/module_previews")
-  ]
-  config.page_collection_label = "Documents"
-  config.page_paths = [
-    Rails.root.join("lib/atomic_design/documents")
-  ]
+  # config.preview_paths = [
+  #   Rails.root.join("lib/atomic_design/module_previews")
+  # ]
+  # config.page_collection_label = "Documents"
+  # config.page_paths = [
+  #   Rails.root.join("lib/atomic_design/documents")
+  # ]
   config.page_route = "docs"
 end

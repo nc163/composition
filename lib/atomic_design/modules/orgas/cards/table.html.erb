@@ -1,6 +1,0 @@
-<%= with_card options do |card| %>
-  <% card.with_head(state(:title)) %>
-  <% card.with_body do %>
-    <%= with_table(context, headers: state(:headers)) %>
-  <% end %>
-<% end %>

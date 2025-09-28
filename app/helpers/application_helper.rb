@@ -1,4 +1,4 @@
 module ApplicationHelper
   include ::Pagy::Frontend
-  include ::AtomicDesign::Helpers
+  include ::FunctionalView::Helper
 end

@@ -1,3 +1,4 @@
 <%#= component 'card/form/search', @search_form, class: 'my-4' %>
 <%#= component 'card/table', @resources, class: 'my-4', **index_table_attributes %>
-<%= render atomic_design.orgas.cards.table @resources.to_a, class: 'my-4' %>
+<%#= render atomic_design.orgas.cards.table @resources.to_a, class: 'my-4' %>
+<%= render Table.new @resources.to_a, class: 'my-4', headers: User.attribute_names, table: @resources.to_a %>

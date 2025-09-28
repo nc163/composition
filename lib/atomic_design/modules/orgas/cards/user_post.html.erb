@@ -1,8 +1,0 @@
-<%= with_card options do |card| %>
-  <% card.with_body do %>
-    <%= content_tag :div, class: 'user-post' do %>
-      <h2><%= state(:title) %></h2>
-      <p><%= state(:body) %></p>
-    <% end %>
-  <% end %>
-<% end %>
