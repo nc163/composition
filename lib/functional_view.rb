@@ -9,11 +9,17 @@ module FunctionalView
   extend ActiveSupport::Autoload
   eager_autoload do
     # Class
+    autoload :Function
     autoload :Component
     # Module
     autoload :Helper
     autoload :Property
-    # autoload :Propatiable
+    autoload :Propartiable
+    autoload :Resolver
+
+    autoload :CreateState
+    autoload :CreateContext
+    autoload :UseHtmlOptions
   end
 
   class Configuration

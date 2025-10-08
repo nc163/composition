@@ -15,4 +15,7 @@ describe FunctionalView::Property::Functions::Prototype do # :nodoc:
     options = { name: :dummy, type: :action, argv: ->(v) { v }, to: :props }
     expect { described_class.new(**options) }.not_to raise_error
   end
+
+  it 'required?' do
+  end
 end

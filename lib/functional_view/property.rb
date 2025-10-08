@@ -1,94 +1,102 @@
 # frozen_string_literal: true
 
 require "forwardable"
+require "active_support/core_ext/object/deep_dup"
 
 module FunctionalView
-  module Property
-    extend ActiveSupport::Autoload
-    eager_autoload do
-      # Class
-      autoload :FunctionRegister
-      autoload :FunctionBuilder
-      autoload :Context
-      autoload :State
-      # Module
-      autoload :Functions
-      autoload :Contextable
-      autoload :Statable
+  class Property
+    include Enumerable
+    attr_reader :functions
+    # attr_accessor :functions
+
+    def initialize
+      @functions = {}
     end
 
-    extend ActiveSupport::Concern
-    include Contextable
-    include Statable
-    included do
-      @function_register ||= FunctionRegister.new
+    # def all
+    #   functions.values
+    # end
 
-      prepend InstanceMethods
-      class << self
-        def inherited(klass)
-          klass.prepend(Property::InstanceMethods)
-          super
-        end
+    def add(function)
+      # raise ArgumentError, "Invalid function" unless function.is_a?(Functional::Functions::Definition)
+
+      functions[function.name] = function
+    end
+
+    # def find(name)
+    #   @functions[name.to_sym]
+    # end
+
+    def pluck(attribute)
+      functions.map { |function| function.send(attribute) }
+    end
+
+    # def select_method(f)
+    #   self.class.new.tap do |register|
+    #     functions.select { |_, func| func.to == f }.each { |_, func| register.add(func) }
+    #   end
+    # end
+
+    def select(k = nil, v = nil, &block)
+      if block_given?
+        filtered_functions = functions.values.select(&block)
+      elsif k && v
+        filtered_functions = functions.values.select { |function| function.send(k) == v }
+      else
+        raise ArgumentError, "Either provide k, v parameters or a block"
+      end
+
+      # 新しいFunctionRegisterインスタンスを作成してチェーンメソッドに対応
+      self.class.new.tap do |register|
+        filtered_functions.each { |func| register.add(func) }
       end
     end
 
-    extend Forwardable
-    attr_accessor :function_resolver
-
-    module InstanceMethods
-      def initialize(*args, **kwargs, &block)
-        missing_required = function_register.select(&:required?).pluck(:name) - kwargs.keys
-        raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
-
-        @function_resolver ||= FunctionResolver.new(function_register, kwargs)
-
-        super if defined?(super)
+    def clone
+      self.class.new.tap do |clone|
+        clone.instance_variable_set(:@functions, @functions.deep_dup)
       end
     end
 
-    module ClassMethods # :nodoc:
-      def inherited(klass)
-        super
-        klass.instance_variable_set(:@function_register, function_register.clone)
-      end
 
-      attr_accessor :function_register
-
-      protected
-
-      def def_function(**function_options)
-        function = Functions::Spec.new(**function_options)
-        function_register.add function
-        define_action_method function
-        define_access_method function
-      end
-
-      private
-
-      def define_action_method(function)
-        return unless method_type = function.type
-
-        define_method(method_type) do |method_name|
-          function_resolver.action_resolve(method_type, method_name)
-        end unless method_defined?(method_type)
-      end
-
-      def define_access_method(function)
-        return unless method_name = function.to
-
-        define_method(method_name) do
-          function_resolver.access_resolve(method_name)
-        end unless method_defined?(method_name)
-      end
-    end
-
-    def without_property(**options)
-      function_resolver.without(**options)
-    end
-
-    #
-    def function_register
-      self.class.function_register
-    end
+    private
   end
+
+
+  # #
+  # class Resolver # :nodoc:
+  #   extend Forwardable
+  #   attr_accessor :function_register, :user_property, :actions
+  #
+  #   def initialize(function_spec_register, user_property = {})
+  #     @function_register = function_spec_register
+  #     @user_property = user_property
+  #     @actions = {}
+  #     function_register.functions.transform_values do |function|
+  #       # actions[function.name] = Builder.build(function, user_property)
+  #       actions[function.name] = function.clone
+  #     end
+  #   end
+  #
+  #   def action_resolve(action_type, action_name)
+  #     action = actions[action_name]
+  #     action.call
+  #   end
+  #
+  #   def access_resolve(access_name)
+  #     actions.select { |_, action| action.to == access_name }
+  #            .map { |_, action| action.call }
+  #   end
+  #
+  #   def user_property
+  #     user_property
+  #   end
+  #
+  #   def without_user_property
+  #     required_property_names = {}
+  #     function_register.functions.each do |name, spec|
+  #       required_property_names[name] = spec.required_properties
+  #     end
+  #   end
+  # end
 end
