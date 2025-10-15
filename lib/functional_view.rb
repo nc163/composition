@@ -13,13 +13,10 @@ module FunctionalView
     autoload :Component
     # Module
     autoload :Helper
+    autoload :Modules
     autoload :Property
     autoload :Propartiable
     autoload :Resolver
-
-    autoload :CreateState
-    autoload :CreateContext
-    autoload :UseHtmlOptions
   end
 
   class Configuration

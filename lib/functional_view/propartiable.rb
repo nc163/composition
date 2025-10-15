@@ -29,6 +29,8 @@ module FunctionalView
       end
     end
 
+    include Modules
+
     module ClassMethods # :nodoc:
       def inherited(klass)
         super
@@ -42,7 +44,7 @@ module FunctionalView
       def def_function(function)
         raise unless function.is_a?(Function)
 
-        property.add function
+        property.append function
         define_action_method function
         # define_action_method function
       end

@@ -5,52 +5,80 @@ require "active_support/core_ext/object/deep_dup"
 
 module FunctionalView
   class Property
-    include Enumerable
     attr_reader :functions
-    # attr_accessor :functions
 
     def initialize
       @functions = {}
     end
 
-    # def all
-    #   functions.values
-    # end
+    def any?
+      functions.any?
+    end
 
-    def add(function)
-      # raise ArgumentError, "Invalid function" unless function.is_a?(Functional::Functions::Definition)
+    def none?
+      functions.none?
+    end
+
+    def append(function)
+      raise ArgumentError, "Function must have a name" unless function.is_a?(Function)
 
       functions[function.name] = function
     end
 
-    # def find(name)
-    #   @functions[name.to_sym]
-    # end
-
-    def pluck(attribute)
-      functions.map { |function| function.send(attribute) }
+    def count
+      functions.size
     end
 
-    # def select_method(f)
+    # def select(k = nil, v = nil, &block)
+    #   if block_given?
+    #     filtered_functions = functions.values.select(&block)
+    #   elsif k && v
+    #     filtered_functions = functions.values.select { |function| function.send(k) == v }
+    #   else
+    #     raise ArgumentError, "Either provide k, v parameters or a block"
+    #   end
+
+    #   # 新しいFunctionRegisterインスタンスを作成してチェーンメソッドに対応
     #   self.class.new.tap do |register|
-    #     functions.select { |_, func| func.to == f }.each { |_, func| register.add(func) }
+    #     filtered_functions.each { |func| register.append(func) }
     #   end
     # end
 
-    def select(k = nil, v = nil, &block)
-      if block_given?
-        filtered_functions = functions.values.select(&block)
-      elsif k && v
-        filtered_functions = functions.values.select { |function| function.send(k) == v }
-      else
-        raise ArgumentError, "Either provide k, v parameters or a block"
-      end
+    def pluck(attribute)
+      functions.values.map { |f| f.send(attribute.to_sym) }
+    end
 
-      # 新しいFunctionRegisterインスタンスを作成してチェーンメソッドに対応
-      self.class.new.tap do |register|
-        filtered_functions.each { |func| register.add(func) }
+    def find(name)
+      functions[name.to_sym]
+    end
+
+    # def collect(&block)
+    #   functions.collect(&block)
+    # end
+
+    # def detect(&block)
+    #   functions.detect(&block)
+    # end
+
+    def select(&block)
+      self.class.new.tap do |property|
+        functions.each_value { |func| property.append(func) if block.call(func) }
       end
     end
+
+    def map(&block)
+      self.class.new.tap do |property|
+        functions.each_value { |func| property.append(block.call(func)) }
+      end
+    end
+
+    #
+    #   def without_user_property()
+    #     without_property = {}
+    #     functions.each do |name, f|
+    #       without_property[name] = f
+    #     end
+    #   end
 
     def clone
       self.class.new.tap do |clone|
@@ -58,8 +86,11 @@ module FunctionalView
       end
     end
 
-
     private
+
+    def each(&block)
+      functions.each(&block)
+    end
   end
 
 
