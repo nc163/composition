@@ -24,7 +24,7 @@ module FunctionalView
         missing_required = property.select(&:required?).pluck(:name) - kwargs.keys
         raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
 
-        @function_resolver ||= Resolver.new(property, kwargs)
+        @function_resolver ||= PropertyResolver.new(property, kwargs)
         super if defined?(super)
       end
     end

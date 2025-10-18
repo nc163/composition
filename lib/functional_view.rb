@@ -15,6 +15,8 @@ module FunctionalView
     autoload :Helper
     autoload :Modules
     autoload :Property
+    autoload :PropertyRegister
+    autoload :PropertyResolver
     autoload :Propartiable
     autoload :Resolver
   end

@@ -44,7 +44,8 @@ module ApplicationHelper
 ```
 
 ## TODO
-jsを使い回すようになったら、manifest.js に 追加するジェネレーターを作らないとかも。。
+
+- [ ] JavaScriptコンポーネントの自動manifest.js追加ジェネレーター
 ```javascript
 //= link_tree ../../../app/components .js
 ```
