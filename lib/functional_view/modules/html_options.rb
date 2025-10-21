@@ -2,7 +2,7 @@
 
 module FunctionalView # :nodoc:
   module Modules
-    module ToHtmlOptions
+    module HtmlOptions
       extend ActiveSupport::Concern
 
       #
@@ -20,10 +20,10 @@ module FunctionalView # :nodoc:
         raise ArgumentError, "Key must be a Symbol" unless key.is_a?(Symbol)
 
         case key
-        when :id, :class
+        when :id, :class, :style
           [ old_value, new_value ].compact.join(" ")
-        when :style
-          [ old_value, new_value ].compact.join("; ")
+        # when :style
+        #   [ old_value, new_value ].compact.join("; ")
         when :data, :arel
           old_value.to_h.merge(new_value.to_h)
         else

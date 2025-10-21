@@ -1,133 +1,51 @@
 # frozen_string_literal: true
 
-require "forwardable"
-require "active_support/core_ext/object/deep_dup"
-
 module FunctionalView
-  class Property
-    attr_reader :functions
+  class Property # :nodoc:
+    REQUIRED_KEYS = [ :name, :params, :required, :default, :to ].freeze
+    attr_accessor(*REQUIRED_KEYS)
 
-    def initialize
-      @functions = {}
-    end
+    def initialize(**kwargs)
+      options = default_kwargs.merge(kwargs)
+      missing_keys = REQUIRED_KEYS - options.keys
+      raise ArgumentError, "missing options: #{missing_keys.join(', ')}" unless missing_keys.empty?
 
-    def any?
-      functions.any?
-    end
-
-    def none?
-      functions.none?
-    end
-
-    def append(function)
-      raise ArgumentError, "Function must have a name" unless function.is_a?(Function)
-
-      functions[function.name] = function
-    end
-
-    def count
-      functions.size
-    end
-
-    # def select(k = nil, v = nil, &block)
-    #   if block_given?
-    #     filtered_functions = functions.values.select(&block)
-    #   elsif k && v
-    #     filtered_functions = functions.values.select { |function| function.send(k) == v }
-    #   else
-    #     raise ArgumentError, "Either provide k, v parameters or a block"
-    #   end
-
-    #   # 新しいFunctionRegisterインスタンスを作成してチェーンメソッドに対応
-    #   self.class.new.tap do |register|
-    #     filtered_functions.each { |func| register.append(func) }
-    #   end
-    # end
-
-    def pluck(attribute)
-      functions.values.map { |f| f.send(attribute.to_sym) }
-    end
-
-    def find(name)
-      functions[name.to_sym]
-    end
-
-    # def collect(&block)
-    #   functions.collect(&block)
-    # end
-
-    # def detect(&block)
-    #   functions.detect(&block)
-    # end
-
-    def select(&block)
-      self.class.new.tap do |property|
-        functions.each_value { |func| property.append(func) if block.call(func) }
-      end
-    end
-
-    def map(&block)
-      self.class.new.tap do |property|
-        functions.each_value { |func| property.append(block.call(func)) }
+      REQUIRED_KEYS.each do |k|
+        send("#{k}=", options[k])
       end
     end
 
     #
-    #   def without_user_property()
-    #     without_property = {}
-    #     functions.each do |name, f|
-    #       without_property[name] = f
-    #     end
-    #   end
-
-    def clone
-      self.class.new.tap do |clone|
-        clone.instance_variable_set(:@functions, @functions.deep_dup)
-      end
+    def type
+      raise NotImplementedError, "You must implement #{self.class}##{__method__}"
     end
 
-    private
+    def required?
+      !!@required
+    end
 
-    def each(&block)
-      functions.each(&block)
+    def action(val = nil)
+      function(val || @default)
+    end
+
+    def close
+      clone_options = {}
+      self.class.new(**clone_options)
+    end
+
+    protected
+
+    def function(val = nil)
+      raise NotImplementedError, "You must implement #{self.class}##{__method__}"
+    end
+
+    def default_kwargs
+      {
+        params: nil,
+        required: false,
+        default: nil,
+        to: nil
+      }
     end
   end
-
-
-  # #
-  # class Resolver # :nodoc:
-  #   extend Forwardable
-  #   attr_accessor :function_register, :user_property, :actions
-  #
-  #   def initialize(function_spec_register, user_property = {})
-  #     @function_register = function_spec_register
-  #     @user_property = user_property
-  #     @actions = {}
-  #     function_register.functions.transform_values do |function|
-  #       # actions[function.name] = Builder.build(function, user_property)
-  #       actions[function.name] = function.clone
-  #     end
-  #   end
-  #
-  #   def action_resolve(action_type, action_name)
-  #     action = actions[action_name]
-  #     action.call
-  #   end
-  #
-  #   def access_resolve(access_name)
-  #     actions.select { |_, action| action.to == access_name }
-  #            .map { |_, action| action.call }
-  #   end
-  #
-  #   def user_property
-  #     user_property
-  #   end
-  #
-  #   def without_user_property
-  #     required_property_names = {}
-  #     function_register.functions.each do |name, spec|
-  #       required_property_names[name] = spec.required_properties
-  #     end
-  #   end
-  # end
 end

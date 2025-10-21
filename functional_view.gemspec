@@ -30,7 +30,6 @@ Gem::Specification.new do |spec|
   # Dependencies
   spec.add_dependency "actionview", "> 7.0"
   spec.add_dependency "activesupport", "> 7.0"
-  spec.add_dependency "dry-validation", '~> 1.11'
   spec.add_dependency "view_component", "~> 4.0"
 
   # For more information and examples about making a new gem, checkout our

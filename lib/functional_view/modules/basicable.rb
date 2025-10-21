@@ -2,7 +2,7 @@
 
 module FunctionalView # :nodoc:
   module Modules
-    module Contextable
+    module Basicable
       extend ActiveSupport::Concern
 
       module ClassMethods # :nodoc:
@@ -11,7 +11,7 @@ module FunctionalView # :nodoc:
         # renders_one :foot, FooterComponent
         # context :head, [ :title ]
         # context :foot, [ :note ]
-        def context(name, options = nil, default: nil, required: false, to: nil)
+        def basic(name, options = nil, default: nil, required: false, to: nil)
           def_property Context.new(
             name: name.to_sym,
             params: options,

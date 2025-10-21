@@ -5,6 +5,6 @@ class Card < ApplicationComponent # :nodoc:
   renders_one :body, Card::Body
   renders_one :foot, Card::Foot
 
-  state :basic, { class: "card" }, to: :html_options
-  context :head, [ :title ]
+  state :basic, { class: [ "card" ] }, to: :html_options
+  # context :head, [ :title ]
 end

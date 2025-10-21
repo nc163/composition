@@ -6,7 +6,7 @@ module FunctionalView
   module Propartiable
     extend ActiveSupport::Concern
     included do
-      @property ||= Property.new
+      @property_set ||= PropertySet.new
 
       prepend InstanceMethods
       class << self
@@ -21,10 +21,10 @@ module FunctionalView
 
     module InstanceMethods
       def initialize(*args, **kwargs, &block)
-        missing_required = property.select(&:required?).pluck(:name) - kwargs.keys
+        missing_required = property_set.select(&:required?).pluck(:name) - kwargs.keys
         raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
 
-        @function_resolver ||= PropertyResolver.new(property, kwargs)
+        @function_resolver ||= Resolver.new(property_set, kwargs)
         super if defined?(super)
       end
     end
@@ -32,27 +32,28 @@ module FunctionalView
     include Modules
 
     module ClassMethods # :nodoc:
+      attr_accessor :property_set
+
       def inherited(klass)
         super
-        klass.instance_variable_set(:@property, property.clone)
+        klass.instance_variable_set(:@property_set, property_set.clone)
       end
 
-      attr_accessor :property
+      def property
+        property_set.pluck(:name)
+      end
 
-      protected
+      def def_property(property)
+        raise unless property.is_a?(Property)
 
-      def def_function(function)
-        raise unless function.is_a?(Function)
-
-        property.append function
-        define_action_method function
-        # define_action_method function
+        property_set.append(property)
+        define_action_method property
       end
 
       private
 
-      def define_action_method(function)
-        return unless method_type = function.type
+      def define_action_method(property)
+        return unless method_type = property.type
 
         define_method(method_type) do |method_name|
           function_resolver.action_resolve(method_type, method_name)
@@ -61,8 +62,8 @@ module FunctionalView
     end
 
     #
-    def property
-      self.class.property
+    def property_set
+      self.class.property_set
     end
 
     def without_property(**options)

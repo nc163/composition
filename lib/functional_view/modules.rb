@@ -5,16 +5,19 @@ module FunctionalView
     extend ActiveSupport::Autoload
     eager_autoload do
       # Module
+      autoload :Basic
+      autoload :Basicable
       autoload :Context
       autoload :Contextable
       autoload :State
       autoload :Statable
-      autoload :ToHtmlOptions
+      autoload :HtmlOptions
     end
 
     extend ActiveSupport::Concern
+    include Basicable
     include Contextable
     include Statable
-    include ToHtmlOptions
+    include HtmlOptions
   end
 end

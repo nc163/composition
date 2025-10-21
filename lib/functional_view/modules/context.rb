@@ -2,9 +2,24 @@
 
 module FunctionalView
   module Modules
-    class Context < Function # :nodoc:
-      def call
-        argv.map { |v| params[v] }
+    class Context < Property # :nodoc:
+      #
+      def type
+        :context
+      end
+
+      def function(val = nil)
+        # params.map { |v| params[val] }
+        # case params
+        # when Proc
+        #   raise NotImplementedError
+        # when Hash
+        #   params.keys.include?(val) ? params[val] : {}
+        # when Array
+        #   raise NotImplementedError
+        # else
+        #   params
+        # end
       end
     end
   end

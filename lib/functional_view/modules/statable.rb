@@ -10,16 +10,14 @@ module FunctionalView # :nodoc:
         # state :title,               default: 'Hello World'
         # state :color, COLORS,       default: :primary, to: :html
         # state :time,  (time)=> { "#{((Time.zone.now - time) / 3600).floor}時間前" }
-        def state(name, argv = nil, default: nil, required: false, to: nil)
-          function = State.new(
-            type: :state,
+        def state(name, options = nil, default: nil, required: false, to: nil)
+          def_property State.new(
             name: name.to_sym,
-            argv: argv,
-            to: to,
+            params: options,
             default: default,
-            required: required
+            required: required,
+            to: to,
           )
-          def_function(function)
         end
       end
     end

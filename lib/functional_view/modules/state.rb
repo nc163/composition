@@ -2,19 +2,22 @@
 
 module FunctionalView
   module Modules
-    class State < Function # :nodoc:
-      def call
-        case argv.class.name
-        when "Proc"
-          argv.call(params[name])
-        when "Hash"
-          if params[name].nil?
-            argv
-          else
-            argv[params[name].to_sym]
-          end
+    class State < Property # :nodoc:
+      #
+      def type
+        :state
+      end
+
+      def function(val = nil)
+        case params
+        when Proc
+          params.call(val)
+        when Hash
+          params.keys.include?(val) ? params[val] : {}
+        when Array
+          raise NotImplementedError
         else
-          raise ArgumentError, "Invalid argv type: #{argv.class}"
+          val
         end
       end
     end

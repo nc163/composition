@@ -13,10 +13,10 @@ module FunctionalView
       functions.none?
     end
 
-    def append(function)
-      raise ArgumentError, "Function must have a name" unless function.is_a?(Function)
+    def append(property)
+      raise ArgumentError, "Property must have a name" unless property.is_a?(Property)
 
-      functions[function.name] = function
+      functions[property.name] = property
     end
 
     def count
@@ -56,13 +56,13 @@ module FunctionalView
 
     def select(&block)
       self.class.new.tap do |property|
-        functions.each_value { |func| property.append(func) if block.call(func) }
+        functions.each_value { |func| property.append(func) if block.action(func) }
       end
     end
 
     def map(&block)
       self.class.new.tap do |property|
-        functions.each_value { |func| property.append(block.call(func)) }
+        functions.each_value { |func| property.append(block.action(func)) }
       end
     end
 

@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-# require 'bundler/setup'
-# require 'rails'
-# require 'action_controller'
-# require 'view_component'
-# require 'view_component/test_helpers'
-# require 'view_component/system_test_helpers'
-# require 'capybara/rspec'
+require 'rails_helper'
 require 'functional_view'
 
 # ENV['RAILS_ENV'] = 'test'
@@ -27,8 +21,8 @@ RSpec.configure do |config|
   # config.infer_spec_type_from_file_location!
   # config.filter_rails_from_backtrace!
 
-  # config.include ViewComponent::TestHelpers, type: :component
-  # config.include ViewComponent::SystemTestHelpers, type: :component
+  config.include ViewComponent::TestHelpers, type: :component
+  config.include ViewComponent::SystemTestHelpers, type: :component
   # config.include Capybara::RSpecMatchers, type: :component
 
   # config.before(:each, type: :component) do
