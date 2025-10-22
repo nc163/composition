@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    functional_view (0.2.2)
+    functional_view (0.2.3)
       actionview (> 7.0)
       activesupport (> 7.0)
       view_component (~> 4.0)

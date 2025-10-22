@@ -67,6 +67,11 @@ module FunctionalView
     end
 
     #
+    def property?(property_name)
+      !!function_resolver.action_resolve(property_name)
+    end
+
+    #
     def property_set
       self.class.property_set
     end
