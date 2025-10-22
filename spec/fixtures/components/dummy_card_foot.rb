@@ -7,7 +7,7 @@ class DummyCardFoot < ::FunctionalView::Component # :nodoc:
   state :basic, { class: "card-footer" }, to: :html_options
 
   def call
-    content_tag :footer, html_options do
+    content_tag :footer, options do
       content
     end
   end

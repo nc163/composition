@@ -46,19 +46,24 @@ module FunctionalView
       def def_property(property)
         raise unless property.is_a?(Property)
 
-        property_set.append(property)
-        define_action_method property
+        property_set.append property
+        define_property_access_method property
       end
 
       private
 
-      def define_action_method(property)
-        return unless method_type = property.type
+      def define_property_access_method(property)
+        return unless method_type = property.to
 
-        define_method(method_type) do |method_name|
-          function_resolver.action_resolve(method_type, method_name)
+        define_method(method_type) do
+          function_resolver.access_resolve(method_type)
         end unless method_defined?(method_type)
       end
+    end
+
+    #
+    def property(property_name)
+      function_resolver.action_resolve(property_name)
     end
 
     #
@@ -66,8 +71,8 @@ module FunctionalView
       self.class.property_set
     end
 
-    def without_property(**options)
-      function_resolver.without(**options)
+    def without_property
+      function_resolver.without_property
     end
   end
 end

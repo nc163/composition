@@ -7,10 +7,10 @@ module FunctionalView
 
     def initialize(**kwargs)
       options = default_kwargs.merge(kwargs)
-      missing_keys = REQUIRED_KEYS - options.keys
+      missing_keys = required_keys - options.keys
       raise ArgumentError, "missing options: #{missing_keys.join(', ')}" unless missing_keys.empty?
 
-      REQUIRED_KEYS.each do |k|
+      required_keys.each do |k|
         send("#{k}=", options[k])
       end
     end
@@ -34,6 +34,10 @@ module FunctionalView
     end
 
     protected
+
+    def required_keys
+      REQUIRED_KEYS
+    end
 
     def function(val = nil)
       raise NotImplementedError, "You must implement #{self.class}##{__method__}"

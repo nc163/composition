@@ -9,25 +9,23 @@ module FunctionalView # :nodoc:
       def html_options
         options = []
         options = function_resolver.access_resolve(:html_options)
+
         # options = options + [ without_property(**@kwargs) ]
-        options.flatten.compact.reduce { _1.merge(_2, &method(:merge_to_html_options)) }
+        options.reduce { _1.merge(_2, &method(:merge_html_options)) }
       end
 
       private
 
-      # 色々なHTML属性のマージを頑張る
-      def merge_to_html_options(key, old_value, new_value)
-        raise ArgumentError, "Key must be a Symbol" unless key.is_a?(Symbol)
+      def merge_html_options(key, a, b)
+        raise ArgumentError, "Incompatible types #{a.class} and #{b.class}" unless a.class == b.class
 
-        case key
-        when :id, :class, :style
-          [ old_value, new_value ].compact.join(" ")
-        # when :style
-        #   [ old_value, new_value ].compact.join("; ")
-        when :data, :arel
-          old_value.to_h.merge(new_value.to_h)
-        else
-          [ old_value, new_value ].compact.join(" ")
+        case a
+        when String
+          (Array(a) + Array(b)).join(" ")
+        when Array
+          (a + b).join(" ")
+        when Hash
+          [ a, b ]
         end
       end
     end

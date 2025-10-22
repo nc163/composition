@@ -6,7 +6,7 @@ class DummyCardBody < ::FunctionalView::Component # :nodoc:
   state :basic, { class: "card-body" }, to: :html_options
 
   def call
-    content_tag :div, html_options do
+    content_tag :div, options do
       concat content
     end
   end

@@ -2,10 +2,10 @@
 
 module FunctionalView
   module Modules
-    class Basic < Property # :nodoc:
+    class Const < Property # :nodoc:
       #
       def type
-        :basic
+        :const
       end
 
       protected
