@@ -1,13 +1,12 @@
-# AtomicDesign
+# Composition
 
-AtomicDesignは、Railsアプリケーション用の再利用可能なUIコンポーネントライブラリです。
+Compositionは、Railsアプリケーション用の再利用可能なUIコンポーネントライブラリです。
 
 ## Preview
 ```bash
-# bundle exec rackup preview.ru -o 0.0.0.0
-bundle exec rackup preview.ru -o 0.0.0.0 -s Puma
+bundle exec rails s
 ```
-ブラウザで開く http://0.0.0.0:9292
+ブラウザで開く http://0.0.0.0:3000
 
 ## Test
 ```bash
@@ -31,7 +30,7 @@ gem "atomic_design", git: "https://gitlab.com/nc163/atomic_design.git", branch: 
 2. ApplicationHelper に追加
 ```ruby
 module ApplicationHelper
-  include AtomicDesign::Helpers
+  include Composition::Helper
   ...
 ```
 
