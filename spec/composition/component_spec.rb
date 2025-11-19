@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FunctionalView::Component do # :nodoc:
+describe Composition::Component do # :nodoc:
   let(:dummy_class) {
     Class.new(described_class) do
       colors = {

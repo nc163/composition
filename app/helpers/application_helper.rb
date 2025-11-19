@@ -1,4 +1,4 @@
 module ApplicationHelper
   include ::Pagy::Frontend
-  include ::FunctionalView::Helper
+  include ::Composition::Helper
 end

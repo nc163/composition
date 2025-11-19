@@ -3,7 +3,7 @@
 require "forwardable"
 require "active_support/core_ext/object/deep_dup"
 
-module FunctionalView
+module Composition
   class PropertySet
     attr_reader :functions
 

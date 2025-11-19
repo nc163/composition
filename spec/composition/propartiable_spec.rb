@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe FunctionalView::Propartiable do # :nodoc:
+describe Composition::Propartiable do # :nodoc:
   let(:dummy_class) {
     Class.new do
-      include FunctionalView::Propartiable
+      include Composition::Propartiable
 
       colors = {
         primary: { class: 'bg-primary' },
@@ -39,7 +39,7 @@ describe FunctionalView::Propartiable do # :nodoc:
   }
 
   it 'include' do
-    expect(dummy_class.ancestors).to include(FunctionalView::Propartiable)
+    expect(dummy_class.ancestors).to include(Composition::Propartiable)
     expect { dummy_class.new(title: 'hoge') }.not_to raise_error
   end
 

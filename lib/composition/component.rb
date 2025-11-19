@@ -3,8 +3,8 @@
 require "view_component"
 require "active_support/all"
 
-module FunctionalView
-  # FunctionalView コンポーネント基底クラス
+module Composition
+  # Composition コンポーネント基底クラス
   class Component < ::ViewComponent::Base
     include Propartiable
 

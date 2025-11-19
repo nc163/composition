@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FunctionalView # :nodoc:
+module Composition # :nodoc:
   module Modules
     module Contextable
       extend ActiveSupport::Concern

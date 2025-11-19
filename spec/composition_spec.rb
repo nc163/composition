@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FunctionalView, type: :component do # :nodoc:
+describe Composition, type: :component do # :nodoc:
   it 'initialize' do
     expect { DummyCard.new }.not_to raise_error
   end

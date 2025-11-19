@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'functional_view'
+require 'composition'
 require_relative 'dummy_card_head'
 require_relative 'dummy_card_body'
 require_relative 'dummy_card_foot'
 
-class DummyCard < ::FunctionalView::Component # :nodoc:
+class DummyCard < ::Composition::Component # :nodoc:
   BACKGROUND = {
     primary: { class: 'bg-primary' },
     secondary: { class: 'bg-secondary' },

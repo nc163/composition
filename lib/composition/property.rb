@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FunctionalView
+module Composition
   class Property # :nodoc:
     REQUIRED_KEYS = [ :name, :params, :required, :default, :to ].freeze
     attr_accessor(*REQUIRED_KEYS)

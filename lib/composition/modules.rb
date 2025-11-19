@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FunctionalView
+module Composition
   module Modules
     extend ActiveSupport::Autoload
     eager_autoload do

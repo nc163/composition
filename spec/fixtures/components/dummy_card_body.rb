@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'functional_view'
+require 'composition'
 
-class DummyCardBody < ::FunctionalView::Component # :nodoc:
+class DummyCardBody < ::Composition::Component # :nodoc:
   state :basic, { class: "card-body" }, to: :html_options
 
   def call

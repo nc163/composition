@@ -1,7 +1,7 @@
 require "lookbook"
 
 Lookbook.configure do |config|
-  config.project_name = "Functional View #{FunctionalView::Version.gem_version} Preview"
+  config.project_name = "Composition #{Composition::Version.gem_version} Preview"
   config.preview_display_options = {
     theme: %w[light dark],
     resizable: false

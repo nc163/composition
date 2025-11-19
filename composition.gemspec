@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/functional_view/version"
+require_relative "lib/composition/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "functional_view"
-  spec.version       = FunctionalView::VERSION
+  spec.name          = "Composition"
+  spec.version       = Composition::VERSION
   spec.authors       = [ "nc163" ]
   spec.email         = [ "kou1992@gmail.com" ]
 
@@ -20,6 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir[
     "README.md",
+    "AGENTS.md",
+    ".rubocop.yml",
     "lib/**/*.rb",
     "lib/**/*.erb"
   ]

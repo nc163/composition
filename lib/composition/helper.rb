@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FunctionalView
+module Composition
   module Helper
     def view_component
       module_proxy
@@ -46,7 +46,7 @@ module FunctionalView
     end
 
     class ModuleProxy # :nodoc:
-      MODULES_PATH = 'atomic_design/modules'
+      MODULES_PATH = "atomic_design/modules"
 
       # Returns the atoms modules
       def atoms

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'functional_view'
+require 'composition'
 
-class DummyCardHead < ::FunctionalView::Component # :nodoc:
+class DummyCardHead < ::Composition::Component # :nodoc:
   const :basic, { class: "card-header fw-bold" }, to: :html_options
   state :title
 

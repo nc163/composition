@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module FunctionalView
+module Composition
   module Version # :nodoc:
     VERSION = "0.2.3"
 

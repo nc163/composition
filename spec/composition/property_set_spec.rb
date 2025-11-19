@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe FunctionalView::PropertySet do # :nodoc:
-  let(:property_class) { FunctionalView::Property }
+describe Composition::PropertySet do # :nodoc:
+  let(:property_class) { Composition::Property }
 
   it 'initialize' do
     expect { described_class.new }.not_to raise_error

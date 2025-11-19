@@ -2,10 +2,10 @@
 
 require "active_support/concern"
 require "active_support/dependencies/autoload"
-require_relative "functional_view/version"
+require_relative "composition/version"
 
 #
-module FunctionalView
+module Composition
   extend ActiveSupport::Autoload
   eager_autoload do
     # Class

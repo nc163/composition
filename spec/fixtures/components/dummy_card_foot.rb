@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'functional_view'
+require 'composition'
 
-class DummyCardFoot < ::FunctionalView::Component # :nodoc:
+class DummyCardFoot < ::Composition::Component # :nodoc:
   # == Layout
   state :basic, { class: "card-footer" }, to: :html_options
 

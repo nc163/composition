@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FunctionalView::Property do # :nodoc:
+describe Composition::Property do # :nodoc:
   let(:args) {
     {
       type: :helper,

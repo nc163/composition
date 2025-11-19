@@ -3,7 +3,7 @@
 require "forwardable"
 require "active_support/core_ext/object/deep_dup"
 
-module FunctionalView
+module Composition
   class Resolver # :nodoc:
     extend Forwardable
     attr_accessor :property_set, :user_property, :actions

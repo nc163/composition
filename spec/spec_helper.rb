@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'functional_view'
+require 'composition'
 
 # ENV['RAILS_ENV'] = 'test'
 

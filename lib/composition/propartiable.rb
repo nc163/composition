@@ -2,7 +2,7 @@
 
 require "forwardable"
 
-module FunctionalView
+module Composition
   module Propartiable
     extend ActiveSupport::Concern
     included do
