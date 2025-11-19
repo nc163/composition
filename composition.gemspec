@@ -3,7 +3,7 @@
 require_relative "lib/composition/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "Composition"
+  spec.name          = "composition"
   spec.version       = Composition::VERSION
   spec.authors       = [ "nc163" ]
   spec.email         = [ "kou1992@gmail.com" ]

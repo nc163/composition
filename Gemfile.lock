@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Composition (0.2.3)
+    composition (0.2.3)
       actionview (> 7.0)
       activesupport (> 7.0)
       view_component (~> 4.0)
@@ -346,10 +346,10 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  Composition!
   aasm (~> 5.5)
   bootsnap
   brakeman
+  composition!
   debug
   faker
   importmap-rails
