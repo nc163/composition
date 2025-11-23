@@ -25,10 +25,10 @@ RSpec.configure do |config|
   config.include ViewComponent::SystemTestHelpers, type: :component
   # config.include Capybara::RSpecMatchers, type: :component
 
-  # config.before(:each, type: :component) do
-  #   # 各テスト前にビューコンテキストをリセット
-  #   @vc_test_controller = nil
-  # end
+  config.before(:each, type: :component) do
+    # Disable action_view annotations in component tests
+    Rails.application.config.action_view.annotate_rendered_view_with_filenames = false
+  end
 
   Dir[File.join(File.dirname(__FILE__), 'fixtures', '**', '*.rb')].sort.each { |f| require f }
 end

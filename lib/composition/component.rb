@@ -7,28 +7,24 @@ module Composition
   # Composition コンポーネント基底クラス
   class Component < ::ViewComponent::Base
     include Propartiable
+    include Util
 
     def initialize(*args, **kwargs, &block)
     end
 
+    protected
+
+    def default_params
+      [ nil, nil, nil ]
+    end
 
     def options
-      [ html_options, without_property ].reduce { _1.merge(_2, &method(:merge_html_options)) }
+      merged_html_options = html_options.reduce({}) do |acc, h|
+        acc.merge(h, &method(:merge_html_options))
+      end
+      [ merged_html_options, without_property ].reduce { _1.merge(_2, &method(:merge_html_options)) }
     end
 
     private
-
-    def merge_html_options(key, a, b)
-      raise ArgumentError, "Incompatible types #{a.class} and #{b.class}" unless a.class == b.class
-
-      case a
-      when String
-        (Array(a) + Array(b)).join(" ")
-      when Array
-        (a + b).join(" ")
-      when Hash
-        [ a, b ]
-      end
-    end
   end
 end

@@ -18,6 +18,7 @@ module Composition
     autoload :Propartiable
     autoload :PropertySet
     autoload :Resolver
+    autoload :Util
   end
 
   class Configuration

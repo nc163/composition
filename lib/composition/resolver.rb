@@ -28,7 +28,6 @@ module Composition
               user_params = user_property[action.name]
               action.action(user_params)
             }
-            .reduce { _1.merge(_2, &method(:merge_html_options)) }
     end
 
     # user_propertyからproperty_setに定義されているキー以外を返す
@@ -38,18 +37,5 @@ module Composition
     end
 
     private
-
-    def merge_html_options(key, a, b)
-      raise ArgumentError, "Incompatible types #{a.class} and #{b.class}" unless a.class == b.class
-
-      case a
-      when String
-        (Array(a) + Array(b)).join(" ")
-      when Array
-        (a + b).join(" ")
-      when Hash
-        [ a, b ]
-      end
-    end
   end
 end

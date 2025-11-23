@@ -9,8 +9,6 @@ module Composition # :nodoc:
       def html_options
         options = []
         options = function_resolver.access_resolve(:html_options)
-
-        # options = options + [ without_property(**@kwargs) ]
         options.reduce { _1.merge(_2, &method(:merge_html_options)) }
       end
 
@@ -26,6 +24,8 @@ module Composition # :nodoc:
           (a + b).join(" ")
         when Hash
           [ a, b ]
+        else
+          raise ArgumentError, "Unsupported type #{a.class}"
         end
       end
     end

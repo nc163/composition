@@ -5,16 +5,12 @@ require "forwardable"
 module Composition
   module Propartiable
     extend ActiveSupport::Concern
+    include Util
+
     included do
       @property_set ||= PropertySet.new
 
       prepend InstanceMethods
-      class << self
-        def inherited(klass)
-          klass.prepend(InstanceMethods)
-          super
-        end
-      end
     end
 
     attr_accessor :function_resolver
@@ -34,9 +30,9 @@ module Composition
     module ClassMethods # :nodoc:
       attr_accessor :property_set
 
-      def inherited(klass)
+      def inherited(subclass)
         super
-        klass.instance_variable_set(:@property_set, property_set.clone)
+        subclass.instance_variable_set(:@property_set, property_set.clone)
       end
 
       def property

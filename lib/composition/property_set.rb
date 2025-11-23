@@ -5,10 +5,16 @@ require "active_support/core_ext/object/deep_dup"
 
 module Composition
   class PropertySet
+    include Enumerable
+
     attr_reader :functions
 
     def initialize
       @functions = {}
+    end
+
+    def each(&block)
+      functions.each_value(&block)
     end
 
     def any?
@@ -43,12 +49,6 @@ module Composition
       end
     end
 
-    def map(&block)
-      self.class.new.tap do |property|
-        functions.each_value { |func| property.append(block.call(func)) }
-      end
-    end
-
     #
     #   def without_user_property()
     #     without_property = {}
@@ -61,12 +61,6 @@ module Composition
       self.class.new.tap do |clone|
         clone.instance_variable_set(:@functions, @functions.deep_dup)
       end
-    end
-
-    private
-
-    def each(&block)
-      functions.each(&block)
     end
   end
 end

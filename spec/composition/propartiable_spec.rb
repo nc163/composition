@@ -56,6 +56,9 @@ describe Composition::Propartiable do # :nodoc:
 
   it 'property_access_method' do
     ins = dummy_class.new(title: 'hoge', alert: :secondary)
-    expect(ins.html_options).to eq({ class: 'bg-primary alert-secondary' })
+    expect(ins.html_options).to eq([
+      { class: 'bg-primary' },
+      { class: 'alert-secondary' }
+    ])
   end
 end
