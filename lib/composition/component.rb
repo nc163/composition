@@ -5,10 +5,13 @@ require "active_support/all"
 
 module Composition
   # Composition コンポーネント基底クラス
+  # ViewComponent::Base を継承し、プロパティ管理機能（Propartiable）を提供する
   class Component < ::ViewComponent::Base
     include Propartiable
     include Util
 
+    # コンポーネントを初期化する
+    # 定義されたプロパティは自動的に処理される
     def initialize(*args, **kwargs, &block)
     end
 
@@ -19,7 +22,8 @@ module Composition
     end
 
     def options
-      merged_html_options = html_options.reduce({}) do |acc, h|
+      opts = respond_to?(:html_options) ? html_options : []
+      merged_html_options = opts.reduce({}) do |acc, h|
         acc.merge(h, &method(:merge_html_options))
       end
       [ merged_html_options, without_property ].reduce { _1.merge(_2, &method(:merge_html_options)) }

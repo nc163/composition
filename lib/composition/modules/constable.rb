@@ -6,11 +6,17 @@ module Composition # :nodoc:
       extend ActiveSupport::Concern
 
       module ClassMethods # :nodoc:
-        # 状態管理を移譲する
-        # renders_one :head, HeaderComponent
-        # renders_one :foot, FooterComponent
-        # context :head, [ :title ]
-        # context :foot, [ :note ]
+        # 定数プロパティを定義する
+        # 変更されない固定値や、デフォルトのHTML属性などを定義する場合に使用する
+        #
+        # @param name [Symbol] プロパティ名
+        # @param options [Object] 定数値
+        # @param default [Object] デフォルト値（optionsと同じ扱い）
+        # @param required [Boolean] 必須かどうか
+        # @param to [Symbol] 値の展開先（例: :html_options）
+        #
+        # @example
+        #   const :basic, { class: "table" }, to: :html_options
         def const(name, options = nil, default: nil, required: false, to: nil)
           def_property Const.new(
             name: name.to_sym,

@@ -8,7 +8,8 @@ class DummyCardHead < ::Composition::Component # :nodoc:
 
   def call
     content_tag :header, options do
-      content if content?
+      concat property(:title) if property?(:title)
+      concat content if content?
     end
   end
 end

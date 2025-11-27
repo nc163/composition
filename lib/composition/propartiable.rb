@@ -17,6 +17,7 @@ module Composition
 
     module InstanceMethods
       def initialize(*args, **kwargs, &block)
+        # puts "Propartiable#initialize: #{self.class.name}, kwargs=#{kwargs.keys}"
         missing_required = property_set.select(&:required?).pluck(:name) - kwargs.keys
         raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
 
@@ -57,12 +58,21 @@ module Composition
       end
     end
 
+    # プロパティの値を取得する
+    # 引数がない場合は、定義されているプロパティ名の配列を返す
     #
-    def property(property_name)
+    # @param property_name [Symbol, String, nil] プロパティ名
+    # @return [Object, Array<Symbol>] プロパティの値、またはプロパティ名の配列
+    def property(property_name = nil)
+      return self.class.property if property_name.nil?
+
       function_resolver.action_resolve(property_name)
     end
 
+    # プロパティが存在するかどうかを判定する
     #
+    # @param property_name [Symbol, String] プロパティ名
+    # @return [Boolean] プロパティが存在する場合はtrue
     def property?(property_name)
       !!function_resolver.action_resolve(property_name)
     end
@@ -72,6 +82,10 @@ module Composition
       self.class.property_set
     end
 
+    # 定義されていないプロパティ（余剰な引数）を取得する
+    # HTML属性などをそのままタグに渡す場合に利用する
+    #
+    # @return [Hash] 定義外のプロパティのハッシュ
     def without_property
       function_resolver.without_property
     end

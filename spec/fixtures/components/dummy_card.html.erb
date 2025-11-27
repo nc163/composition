@@ -1,8 +1,8 @@
 <%= content_tag :aside, options do %>
-  <%= with_head if head? %>
+  <%= head %>
   <%= with_body do %>
   <%#= with_body context(:head) do %>
     <%= content %>
   <% end %>
-  <%= with_foot if foot? %>
+  <%= foot %>
 <% end %>

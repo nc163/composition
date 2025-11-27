@@ -21,5 +21,5 @@ class DummyCard < ::Composition::Component # :nodoc:
 
   const :basic, { class: "card" },  to: :html_options
   state :bg, BACKGROUND,            to: :html_options
-  # context :head, [ :title ]
+  context :head, [ :title ]
 end

@@ -5,6 +5,7 @@ class Table::Trow < ApplicationComponent # :nodoc:
   renders_many :ths, Table::Trow::Th
 
   state :header?, default: false
+  state :items, default: []
 
   def call
     content_tag :tr, options do
@@ -16,13 +17,13 @@ class Table::Trow < ApplicationComponent # :nodoc:
           concat th
         end
       else
-        # (context || []).each do |item|
-        #   if state(:header?)
-        #     concat with_th(item)
-        #   else
-        #     concat with_td(item)
-        #   end
-        # end
+        property(:items).each do |item|
+          if property(:header?)
+            concat with_th(value: item)
+          else
+            concat with_td(value: item)
+          end
+        end
       end
     end
   end

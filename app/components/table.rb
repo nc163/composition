@@ -6,17 +6,16 @@ class Table < ApplicationComponent
   renders_one :head,      Table::Thead
   renders_one :body,      Table::Tbody
 
-  state :basic, { class: "table" }
-  # context :head, [ :headers ]
-  # context :body, [ :table ]
+  const :basic, { class: "table" }, to: :html_options
+  context :head, [ :headers ]
+  context :body, [ :table, :headers ]
 
   def call
-    # content_tag :table, html_options do
     content_tag :table, options do
-      concat with_caption
-      concat with_colgroup
-      concat with_head
-      concat with_body if state?(:table)
+      concat caption if caption?
+      concat colgroup if colgroup?
+      concat head if head?
+      concat body if body?
     end
   end
 end

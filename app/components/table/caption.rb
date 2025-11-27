@@ -5,6 +5,6 @@ class Table::Caption < ApplicationComponent # :nodoc:
 
   def call
     # content_tag :caption, caption, html_options
-    content_tag :caption, caption, options
+    content_tag :caption, property(:caption), options
   end
 end

@@ -10,7 +10,7 @@ class Table::Thead < ApplicationComponent # :nodoc:
       if content?
         concat trow
       else
-        concat with_trow(headers, head: true)
+        concat with_trow(items: property(:headers), header?: true)
       end
     end
   end
