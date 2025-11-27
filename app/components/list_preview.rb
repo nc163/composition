@@ -2,11 +2,11 @@
 
 class ListPreview < ApplicationComponentPreview # :nodoc:
   def un_ordered_list
-    render atomic_design.atoms.list LIST
+    render composition.atoms.list LIST
   end
 
   def ordered_list
-    render atomic_design.atoms.list LIST, order?: true
+    render composition.atoms.list LIST, order?: true
   end
 
   LIST = [

@@ -1,5 +1,5 @@
 <% @resources.each do |post| %>
-  <%= render atomic_design.orgas.cards.user_post(title: post.title, body: post.body) %>
+  <%= render composition.orgas.cards.user_post(title: post.title, body: post.body) %>
 <% end %>
 
 <%== pagy_nav(@page) if @page.pages > 1 %>

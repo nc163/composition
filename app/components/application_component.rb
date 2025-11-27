@@ -4,7 +4,7 @@ class ApplicationComponent < ::Composition::Component
   # def form_with(options = {}, &block)
   #   options[:class] ||= "form"
   #   options[:local] ||= true
-  #   options[:builder] ||= ::AtomicDesign::Helpers::FormHelper::FormBuilder
+  #   options[:builder] ||= ::Composition::Helpers::FormHelper::FormBuilder
   #   helpers.form_with(**options, &block)
   # end
 end

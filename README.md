@@ -24,7 +24,7 @@ bundle exec yard server --reload --no-private
 ## 使い方(rails)
 1. Gemfile
 ```ruby
-gem "atomic_design", git: "https://gitlab.com/nc163/atomic_design.git", branch: "main"
+gem "composition", git: "https://gitlab.com/nc163/composition.git", branch: "main"
 ```
 
 2. ApplicationHelper に追加
@@ -39,7 +39,7 @@ module ApplicationHelper
 
 4. Viewで生成
 ```erb
-  <%= render atomic_design.atoms.button 'ボタン' %>
+  <%= render composition.atoms.button 'ボタン' %>
 ```
 
 ## TODO
