@@ -2,7 +2,7 @@
 
 module Composition
   module Helper
-    def view_component
+    def composition
       module_proxy
     end
 
@@ -46,7 +46,7 @@ module Composition
     end
 
     class ModuleProxy # :nodoc:
-      MODULES_PATH = "atomic_design/modules"
+      MODULES_PATH = "composition/modules"
 
       # Returns the atoms modules
       def atoms

@@ -23,11 +23,11 @@ Lookbook.configure do |config|
   }
   config.preview_collection_label = "Previews"
   # config.preview_paths = [
-  #   Rails.root.join("lib/atomic_design/module_previews")
+  #   Rails.root.join("lib/composition/module_previews")
   # ]
   # config.page_collection_label = "Documents"
   # config.page_paths = [
-  #   Rails.root.join("lib/atomic_design/documents")
+  #   Rails.root.join("lib/composition/documents")
   # ]
   config.page_route = "docs"
 end

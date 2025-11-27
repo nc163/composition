@@ -1,11 +1,5 @@
-<%= content_tag (state(:order?) ? :ol : :ul), options do %>
-  <% if content? %>
-    <% items.each do |item| %>
-      <%= concat item %>
-    <% end %>
-  <% else %>
-    <% (context || []).each do |c| %>
-      <%= with_item(c) %>
-    <% end %>
+<%= content_tag (property(:order?) ? :ol : :ul), options do %>
+  <% items.each do |item| %>
+    <%= item %>
   <% end %>
 <% end %>
