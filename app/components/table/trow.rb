@@ -4,8 +4,8 @@ class Table::Trow < ApplicationComponent # :nodoc:
   renders_many :tds, Table::Trow::Td
   renders_many :ths, Table::Trow::Th
 
-  state :header?, default: false
-  state :items, default: []
+  effect :header?, default: false
+  effect :items, default: []
 
   def call
     content_tag :tr, options do

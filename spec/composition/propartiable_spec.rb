@@ -25,9 +25,9 @@ describe Composition::Propartiable do # :nodoc:
         info: { class: 'alert-info' }
       }.freeze
 
-      state :color, colors,                 default: :primary, to: :html_options
-      state :alert, alert,                  default: :primary, to: :html_options
-      state :title,         required: true
+      state :color, colors,                 default: :primary
+      state :alert, alert,                  default: :primary
+      effect :title,         required: true
 
       def initialize(*args, **kwargs, &block)
       end

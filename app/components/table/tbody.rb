@@ -3,8 +3,8 @@
 class Table::Tbody < ApplicationComponent # :nodoc:
   renders_many :trows, Table::Trow
 
-  state :table
-  state :headers
+  effect :table
+  effect :headers
 
   def call
     content_tag :tbody, options do

@@ -14,8 +14,8 @@ describe Composition::Component do # :nodoc:
         info: { class: 'bg-info' }
       }.freeze
 
-      state :color, colors,                 default: :primary, to: :html_options
-      state :title,         required: true
+      state :color, colors,                 default: :primary
+      effect :title,         required: true
 
       def self.name
         "DummyClass"
@@ -80,9 +80,9 @@ describe Composition::Component do # :nodoc:
     context 'with multiple properties mapped to html_options' do
       let(:complex_class) {
         Class.new(described_class) do
-          state :size, { small: { class: 'text-sm' }, large: { class: 'text-lg' } }, default: :small, to: :html_options
-          state :theme, { dark: { class: 'theme-dark', data: { theme: 'dark' } }, light: { class: 'theme-light' } }, default: :light, to: :html_options
-          state :label, required: true
+          state :size, { small: { class: 'text-sm' }, large: { class: 'text-lg' } }, default: :small
+          state :theme, { dark: { class: 'theme-dark', data: { theme: 'dark' } }, light: { class: 'theme-light' } }, default: :light
+          effect :label, required: true
 
           def self.name; "ComplexClass"; end
         end
@@ -125,8 +125,8 @@ describe Composition::Component do # :nodoc:
 
         # Let's define a class with nested hash property
         nested_class = Class.new(described_class) do
-          state :meta, { default: { data: { values: { role: 'admin' }, controller: 'b' } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :meta, { default: { data: { values: { role: 'admin' }, controller: 'b' } } }, default: :default
+          effect :title, required: true
           def self.name; "NestedClass"; end
         end
 
@@ -147,8 +147,8 @@ describe Composition::Component do # :nodoc:
 
       it 'concatenates arrays' do
         array_class = Class.new(described_class) do
-          state :tags, { default: { data: { tags: [ 'a', 'b' ] } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :tags, { default: { data: { tags: [ 'a', 'b' ] } } }, default: :default
+          effect :title, required: true
           def self.name; "ArrayClass"; end
         end
 
@@ -163,8 +163,8 @@ describe Composition::Component do # :nodoc:
 
       it 'handles mixed types (String and Array) by converting to Array and joining' do
         mixed_class = Class.new(described_class) do
-          state :cls, { default: { class: 'base' } }, default: :default, to: :html_options
-          state :title, required: true
+          state :cls, { default: { class: 'base' } }, default: :default
+          effect :title, required: true
           def self.name; "MixedClass"; end
         end
 
@@ -178,8 +178,8 @@ describe Composition::Component do # :nodoc:
 
       it 'raises ArgumentError for incompatible types' do
         error_class = Class.new(described_class) do
-          state :prop, { default: { data: { id: 123 } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :prop, { default: { data: { id: 123 } } }, default: :default
+          effect :title, required: true
           def self.name; "ErrorClass"; end
         end
 
@@ -195,9 +195,9 @@ describe Composition::Component do # :nodoc:
     let(:child_class) {
       Class.new(dummy_class) do
         # Override default of existing property
-        state :color, { primary: { class: 'bg-primary-new' } }, default: :primary, to: :html_options
+        state :color, { primary: { class: 'bg-primary-new' } }, default: :primary
         # Add new property
-        state :size, { small: { class: 'p-2' }, large: { class: 'p-4' } }, default: :small, to: :html_options
+        state :size, { small: { class: 'p-2' }, large: { class: 'p-4' } }, default: :small
 
         def self.name; "ChildClass"; end
       end
@@ -224,7 +224,7 @@ describe Composition::Component do # :nodoc:
       let(:grandchild_class) {
         Class.new(child_class) do
           # Override size default
-          state :size, { small: { class: 'p-2' }, large: { class: 'p-4' } }, default: :large, to: :html_options
+          state :size, { small: { class: 'p-2' }, large: { class: 'p-4' } }, default: :large
           def self.name; "GrandchildClass"; end
         end
       }
@@ -244,7 +244,7 @@ describe Composition::Component do # :nodoc:
       let(:optional_title_class) {
         Class.new(dummy_class) do
           # Override title to be optional
-          state :title, required: false
+          effect :title, required: false
           def self.name; "OptionalTitleClass"; end
         end
       }
@@ -257,7 +257,7 @@ describe Composition::Component do # :nodoc:
             primary: { class: 'bg-primary' },
             secondary: { class: 'bg-secondary' }
           }.freeze
-          state :color, colors, default: :primary, required: true, to: :html_options
+          state :color, colors, default: :primary, required: true
           def self.name; "RequiredColorClass"; end
         end
       }
@@ -280,7 +280,7 @@ describe Composition::Component do # :nodoc:
           include Composition::Propartiable
 
           included do
-            state :mixin_prop, { on: { class: 'mixin-on' } }, default: :on, to: :html_options
+            state :mixin_prop, { on: { class: 'mixin-on' } }, default: :on
           end
         end
       }
@@ -308,6 +308,32 @@ describe Composition::Component do # :nodoc:
         component = mixed_in_class.new(title: 'Mixin')
         expect(component.send(:options)).to include(class: include('mixin-on'))
       end
+    end
+  end
+
+  describe 'Default behavior' do
+    let(:default_to_class) {
+      Class.new(described_class) do
+        state :foo, { bar: { class: 'bar' } }, default: :bar
+        def self.name; "DefaultToClass"; end
+      end
+    }
+
+    it 'defaults to :html_options' do
+      component = default_to_class.new
+      expect(component.send(:options)).to eq({ class: 'bar' })
+    end
+
+    let(:default_nil_class) {
+      Class.new(described_class) do
+        effect :foo
+        def self.name; "DefaultNilClass"; end
+      end
+    }
+
+    it 'defaults to nil when options missing' do
+      component = default_nil_class.new(foo: 'bar')
+      expect(component.send(:options)).to eq({})
     end
   end
 end

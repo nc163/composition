@@ -4,7 +4,7 @@ require 'composition'
 
 class DummyCardFoot < ::Composition::Component # :nodoc:
   # == Layout
-  state :basic, { class: "card-footer" }, to: :html_options
+  state :basic, { class: "card-footer" }
 
   def call
     content_tag :footer, options do

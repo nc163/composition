@@ -3,7 +3,7 @@
 require 'composition'
 
 class DummyCardBody < ::Composition::Component # :nodoc:
-  state :basic, { class: "card-body" }, to: :html_options
+  state :basic, { class: "card-body" }
 
   def call
     content_tag :div, options do

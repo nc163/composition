@@ -21,7 +21,7 @@ class DummyList < ::Composition::Component
 end
 
 class DummyListItem < ::Composition::Component
-  state :text
+  effect :text
 
   def call
     content_tag :li, property(:text)

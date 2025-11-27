@@ -83,7 +83,7 @@ describe Composition::Modules::Contextable do
       renders_one :head, Class.new(ViewComponent::Base)
 
       # Define state with default first
-      state :title, default: "Default Title"
+      effect :title, default: "Default Title"
       context :head, [ :title ]
 
       attr_reader :head_args

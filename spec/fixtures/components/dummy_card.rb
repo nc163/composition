@@ -20,6 +20,6 @@ class DummyCard < ::Composition::Component # :nodoc:
   renders_one :foot, DummyCardFoot
 
   const :basic, { class: "card" },  to: :html_options
-  state :bg, BACKGROUND,            to: :html_options
+  state :bg, BACKGROUND
   context :head, [ :title ]
 end
