@@ -2,11 +2,11 @@
 
 class TablePreview < ApplicationComponentPreview # :nodoc:
   def default
-    render composition.atoms.table(table: TABLE, headers: HEADERS)
+    render Table.new(table: TABLE, headers: HEADERS)
   end
 
   def headless
-    render composition.atoms.table(table: TABLE)
+    render Table.new(table: TABLE)
   end
 
   HEADERS = %w[言語 ホームページ 更新日時 作成日時]

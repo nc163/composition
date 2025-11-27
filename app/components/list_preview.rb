@@ -2,11 +2,15 @@
 
 class ListPreview < ApplicationComponentPreview # :nodoc:
   def un_ordered_list
-    render composition.atoms.list LIST
+    render List.new do |list|
+      LIST.each { |item| list.with_item { item } }
+    end
   end
 
   def ordered_list
-    render composition.atoms.list LIST, order?: true
+    render List.new(order?: true) do |list|
+      LIST.each { |item| list.with_item { item } }
+    end
   end
 
   LIST = [
