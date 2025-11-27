@@ -15,7 +15,7 @@ describe Composition::Component do # :nodoc:
       }.freeze
 
       state :color, colors,                 default: :primary, to: :html_options
-      state :title,         required: true
+      state :title,         required: true, to: nil
 
       def self.name
         "DummyClass"
@@ -82,7 +82,7 @@ describe Composition::Component do # :nodoc:
         Class.new(described_class) do
           state :size, { small: { class: 'text-sm' }, large: { class: 'text-lg' } }, default: :small, to: :html_options
           state :theme, { dark: { class: 'theme-dark', data: { theme: 'dark' } }, light: { class: 'theme-light' } }, default: :light, to: :html_options
-          state :label, required: true
+          state :label, required: true, to: nil
 
           def self.name; "ComplexClass"; end
         end
@@ -126,7 +126,7 @@ describe Composition::Component do # :nodoc:
         # Let's define a class with nested hash property
         nested_class = Class.new(described_class) do
           state :meta, { default: { data: { values: { role: 'admin' }, controller: 'b' } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :title, required: true, to: nil
           def self.name; "NestedClass"; end
         end
 
@@ -148,7 +148,7 @@ describe Composition::Component do # :nodoc:
       it 'concatenates arrays' do
         array_class = Class.new(described_class) do
           state :tags, { default: { data: { tags: [ 'a', 'b' ] } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :title, required: true, to: nil
           def self.name; "ArrayClass"; end
         end
 
@@ -164,7 +164,7 @@ describe Composition::Component do # :nodoc:
       it 'handles mixed types (String and Array) by converting to Array and joining' do
         mixed_class = Class.new(described_class) do
           state :cls, { default: { class: 'base' } }, default: :default, to: :html_options
-          state :title, required: true
+          state :title, required: true, to: nil
           def self.name; "MixedClass"; end
         end
 
@@ -179,7 +179,7 @@ describe Composition::Component do # :nodoc:
       it 'raises ArgumentError for incompatible types' do
         error_class = Class.new(described_class) do
           state :prop, { default: { data: { id: 123 } } }, default: :default, to: :html_options
-          state :title, required: true
+          state :title, required: true, to: nil
           def self.name; "ErrorClass"; end
         end
 
@@ -244,7 +244,7 @@ describe Composition::Component do # :nodoc:
       let(:optional_title_class) {
         Class.new(dummy_class) do
           # Override title to be optional
-          state :title, required: false
+          state :title, required: false, to: nil
           def self.name; "OptionalTitleClass"; end
         end
       }
@@ -308,6 +308,20 @@ describe Composition::Component do # :nodoc:
         component = mixed_in_class.new(title: 'Mixin')
         expect(component.send(:options)).to include(class: include('mixin-on'))
       end
+    end
+  end
+
+  describe 'Default behavior' do
+    let(:default_to_class) {
+      Class.new(described_class) do
+        state :foo, { bar: { class: 'bar' } }, default: :bar
+        def self.name; "DefaultToClass"; end
+      end
+    }
+
+    it 'defaults to :html_options' do
+      component = default_to_class.new
+      expect(component.send(:options)).to eq({ class: 'bar' })
     end
   end
 end

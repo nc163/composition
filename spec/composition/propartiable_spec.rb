@@ -27,7 +27,7 @@ describe Composition::Propartiable do # :nodoc:
 
       state :color, colors,                 default: :primary, to: :html_options
       state :alert, alert,                  default: :primary, to: :html_options
-      state :title,         required: true
+      state :title,         required: true, to: nil
 
       def initialize(*args, **kwargs, &block)
       end

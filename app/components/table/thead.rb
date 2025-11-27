@@ -3,7 +3,7 @@
 class Table::Thead < ApplicationComponent # :nodoc:
   renders_one :trow, Table::Trow
 
-  state :headers
+  state :headers, to: nil
 
   def call
     content_tag :thead, options do

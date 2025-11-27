@@ -18,7 +18,7 @@ module Composition # :nodoc:
         #   state :title, default: 'Hello World'
         #   state :color, COLORS, default: :primary, to: :html
         #   state :time, ->(time) { "#{((Time.zone.now - time) / 3600).floor}時間前" }
-        def state(name, options = nil, default: nil, required: false, to: nil)
+        def state(name, options = nil, default: nil, required: false, to: :html_options)
           def_property State.new(
             name: name.to_sym,
             params: options,

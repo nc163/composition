@@ -21,7 +21,7 @@ class DummyList < ::Composition::Component
 end
 
 class DummyListItem < ::Composition::Component
-  state :text
+  state :text, to: nil
 
   def call
     content_tag :li, property(:text)

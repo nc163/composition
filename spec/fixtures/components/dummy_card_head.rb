@@ -4,7 +4,7 @@ require 'composition'
 
 class DummyCardHead < ::Composition::Component # :nodoc:
   const :basic, { class: "card-header fw-bold" }, to: :html_options
-  state :title
+  state :title, to: nil
 
   def call
     content_tag :header, options do
