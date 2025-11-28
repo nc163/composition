@@ -5,9 +5,9 @@ require "active_support/all"
 
 module Composition
   # Composition コンポーネント基底クラス
-  # ViewComponent::Base を継承し、プロパティ管理機能（Propartiable）を提供する
+  # ViewComponent::Base を継承し、プロパティ管理機能（Propertiable）を提供する
   class Component < ::ViewComponent::Base
-    include Propartiable
+    include Propertiable
     include Util
 
     # コンポーネントを初期化する

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Composition # :nodoc:
-  module Modules
+  module Properties
     module Constable
       extend ActiveSupport::Concern
 

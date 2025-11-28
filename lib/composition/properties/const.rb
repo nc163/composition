@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Composition
-  module Modules
-    class Const < Property # :nodoc:
+  module Properties
+    class Const < Base # :nodoc:
       #
       def type
         :const

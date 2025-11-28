@@ -3,7 +3,7 @@
 require "forwardable"
 
 module Composition
-  module Propartiable
+  module Propertiable
     extend ActiveSupport::Concern
     include Util
 
@@ -17,7 +17,7 @@ module Composition
 
     module InstanceMethods
       def initialize(*args, **kwargs, &block)
-        # puts "Propartiable#initialize: #{self.class.name}, kwargs=#{kwargs.keys}"
+        # puts "Propertiable#initialize: #{self.class.name}, kwargs=#{kwargs.keys}"
         missing_required = property_set.select(&:required?).pluck(:name) - kwargs.keys
         raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
 
@@ -26,7 +26,7 @@ module Composition
       end
     end
 
-    include Modules
+    include Properties
 
     module ClassMethods # :nodoc:
       attr_accessor :property_set
@@ -41,7 +41,7 @@ module Composition
       end
 
       def def_property(property)
-        raise unless property.is_a?(Property)
+        raise unless property.is_a?(Properties::Base)
 
         property_set.append property
         define_property_access_method property

@@ -13,9 +13,8 @@ module Composition
     autoload :Component
     # Module
     autoload :Helper
-    autoload :Modules
-    autoload :Property
-    autoload :Propartiable
+    autoload :Properties
+    autoload :Propertiable
     autoload :PropertySet
     autoload :Resolver
     autoload :Util

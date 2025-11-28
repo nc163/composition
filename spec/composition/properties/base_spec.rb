@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Composition::Property do # :nodoc:
+describe Composition::Properties::Base do # :nodoc:
   let(:args) {
     {
       type: :helper,

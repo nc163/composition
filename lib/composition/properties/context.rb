@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Composition
-  module Modules
-    class Context < Property # :nodoc:
+  module Properties
+    class Context < Base # :nodoc:
       attr_reader :slot_name
 
       def initialize(name:, params:, **kwargs)
