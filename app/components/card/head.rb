@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Card::Head < ApplicationComponent # :nodoc:
-  state :basic, { class: "card-header fw-bold" }, to: :html_options
+  state :basic, { class: "card-header fw-bold" }
   state :title
 
   def call
