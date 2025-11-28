@@ -7,8 +7,8 @@ class Record < ApplicationComponent
   renders_one :body,      Table::Tbody
 
   basic class: "table"
-  state :headers
-  state :caption
+  effect :headers
+  effect :caption
 
   def call
     content_tag :table, html_options do

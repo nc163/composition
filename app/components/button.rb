@@ -12,7 +12,7 @@ class Button < ApplicationComponent
     info: { class: "bg-info" }
   }.freeze
 
-  state :basic, class: "btn",                                     to: :html_options
-  state :color, COLORS,                       default: :primary,  to: :html_options
+  state :basic, class: "btn"
+  state :color, COLORS,                       default: :primary
   state :link_to,             required: true,                     to: :link_to_options
 end

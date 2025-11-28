@@ -3,16 +3,16 @@
 class Table::Tbody < ApplicationComponent # :nodoc:
   renders_many :trows, Table::Trow
 
-  state :table
-  state :headers
+  effect :table
+  effect :headers
 
   def call
     content_tag :tbody, options do
-      property(:table).each do |row|
+      table.each do |row|
         items = if row.is_a?(Array)
                   row
         elsif property?(:headers)
-                  property(:headers).map { |header| row.public_send(header) }
+                  headers.map { |header| row.public_send(header) }
         else
                   [ row ]
         end

@@ -9,6 +9,8 @@ module Composition
       autoload :Constable
       autoload :Context
       autoload :Contextable
+      autoload :Effect
+      autoload :Effectable
       autoload :State
       autoload :Statable
       # autoload :HtmlOptions
@@ -17,6 +19,7 @@ module Composition
     extend ActiveSupport::Concern
     include Constable
     include Contextable
+    include Effectable
     include Statable
     # include HtmlOptions
   end

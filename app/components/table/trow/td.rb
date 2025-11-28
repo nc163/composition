@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class Table::Trow::Td < ApplicationComponent # :nodoc:
-  state :value
+  effect :value
 
   def call
     content_tag :td, options do
-      content? ? content : property(:value)
+      content? ? content : value
     end
   end
 end
