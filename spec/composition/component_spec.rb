@@ -277,7 +277,7 @@ describe Composition::Component do # :nodoc:
       let(:mixin_module) {
         Module.new do
           extend ActiveSupport::Concern
-          include Composition::Propartiable
+          include Composition::Propertiable
 
           included do
             state :mixin_prop, { on: { class: 'mixin-on' } }, default: :on, to: :html_options
@@ -292,13 +292,13 @@ describe Composition::Component do # :nodoc:
         end
       }
 
-      # This test might fail if Propartiable logic doesn't handle module inclusion perfectly yet
-      # specifically if `included` hook in Propartiable doesn't fire for modules included in classes
+      # This test might fail if Propertiable logic doesn't handle module inclusion perfectly yet
+      # specifically if `included` hook in Propertiable doesn't fire for modules included in classes
       # or if property_set isn't shared/merged correctly.
       it 'includes properties defined in modules' do
         # Pending check if this is supported by current implementation
         # Current implementation uses @property_set on the class.
-        # When including a module that also includes Propartiable,
+        # When including a module that also includes Propertiable,
         # the module's @property_set needs to be merged into the class's @property_set.
 
         # Let's see if it works or if we need to implement `included` hook for merging.

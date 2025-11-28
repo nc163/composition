@@ -26,7 +26,7 @@ module Composition
     end
 
     def append(property)
-      raise ArgumentError, "Property must have a name" unless property.is_a?(Property)
+      raise ArgumentError, "Property must have a name" unless property.is_a?(Properties::Base)
 
       functions[property.name] = property
     end

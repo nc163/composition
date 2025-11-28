@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Composition
-  module Modules
+  module Properties
     module Effectable
       extend ActiveSupport::Concern
 

@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Composition::PropertySet do # :nodoc:
-  let(:property_class) { Composition::Property }
+  let(:property_class) { Composition::Properties::Base }
 
   it 'initialize' do
     expect { described_class.new }.not_to raise_error

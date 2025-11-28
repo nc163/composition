@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-describe Composition::Propartiable do # :nodoc:
+describe Composition::Propertiable do # :nodoc:
   let(:dummy_class) {
     Class.new do
-      include Composition::Propartiable
+      include Composition::Propertiable
 
       colors = {
         primary: { class: 'bg-primary' },
@@ -39,7 +39,7 @@ describe Composition::Propartiable do # :nodoc:
   }
 
   it 'include' do
-    expect(dummy_class.ancestors).to include(Composition::Propartiable)
+    expect(dummy_class.ancestors).to include(Composition::Propertiable)
     expect { dummy_class.new(title: 'hoge') }.not_to raise_error
   end
 

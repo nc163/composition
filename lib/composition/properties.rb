@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 module Composition
-  module Modules
+  module Properties
     extend ActiveSupport::Autoload
     eager_autoload do
+      # Class
+      autoload :Base
+
       # Module
       autoload :Const
       autoload :Constable

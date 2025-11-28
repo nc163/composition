@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module Composition
-  module Modules
-    class Effect < Property # :nodoc:
+  module Properties
+    class State < Base # :nodoc:
       #
       def type
-        :effect
+        :state
       end
 
       def function(val = nil)

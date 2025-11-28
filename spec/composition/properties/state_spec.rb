@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Composition::Modules::State do # :nodoc:
+describe Composition::Properties::State do # :nodoc:
   SIZES = {
     sm: { style: 'width: 25px; height: 25px;' },
     md: { style: 'width: 60px; height: 60px;' },

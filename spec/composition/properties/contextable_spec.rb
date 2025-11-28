@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Composition::Modules::Contextable do
+describe Composition::Properties::Contextable do
   let(:head_component_class) {
     Class.new(ViewComponent::Base) do
       attr_reader :title
