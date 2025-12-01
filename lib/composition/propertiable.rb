@@ -10,19 +10,25 @@ module Composition
     included do
       @property_set ||= PropertySet.new
 
-      prepend InstanceMethods
+      prepend Initialization
     end
 
     attr_accessor :function_resolver
 
-    module InstanceMethods
+    module Initialization
       def initialize(*args, **kwargs, &block)
         # puts "Propertiable#initialize: #{self.class.name}, kwargs=#{kwargs.keys}"
         missing_required = property_set.select(&:required?).pluck(:name) - kwargs.keys
         raise ArgumentError, "Missing required properties: #{missing_required.join(', ')}" if missing_required.any?
 
         @function_resolver ||= Resolver.new(property_set, kwargs)
-        super if defined?(super)
+        return unless defined?(super)
+
+        if method(__method__).super_method.arity.zero?
+          super()
+        else
+          super
+        end
       end
     end
 

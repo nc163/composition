@@ -6,12 +6,18 @@ module Composition # :nodoc:
       extend ActiveSupport::Concern
 
       included do
-        prepend InstanceMethods
+        prepend ContextInitialization
       end
 
-      module InstanceMethods
+      module ContextInitialization
         def initialize(*args, **kwargs, &block)
-          super
+          if defined?(super)
+            if method(__method__).super_method.arity.zero?
+              super()
+            else
+              super
+            end
+          end
           setup_contexts(kwargs)
         end
 
