@@ -10,11 +10,6 @@ module Composition
     include Propertiable
     include Util
 
-    # コンポーネントを初期化する
-    # 定義されたプロパティは自動的に処理される
-    def initialize(*args, **kwargs, &block)
-    end
-
     protected
 
     def default_params
