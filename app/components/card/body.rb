@@ -4,7 +4,7 @@ class Card::Body < ApplicationComponent # :nodoc:
   state :basic, { class: "card-body" }
 
   def call
-    content_tag :div, html_options do
+    content_tag :div, options do
       concat content
     end
   end

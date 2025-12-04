@@ -1,7 +1,9 @@
 
 <%#= render Button.new 'Users', class: 'my-4', color: :primary, link_to: users_path %>
-<%= render Card.new title: 'aaa', class: 'my-4', color: :primary do %>
-  <%= link_to 'Users', users_path %>
-  <%= link_to 'Posts', posts_path %>
-  <%= link_to 'lookbook', lookbook_path %>
+<%= render Card.new class: 'my-4' do |card| %>
+  <% card.with_body do %>
+    <%= link_to 'Users', users_path %>
+    <%= link_to 'Posts', posts_path %>
+    <%= link_to 'lookbook', lookbook_path %>
+  <% end %>
 <% end %>

@@ -2,11 +2,9 @@
 
 class Card::Head < ApplicationComponent # :nodoc:
   state :basic, { class: "card-header fw-bold" }
-  state :title
+  effect :title
 
   def call
-    content_tag :header, html_options do
-      content if content?
-    end
+    content_tag :header, title, **options
   end
 end

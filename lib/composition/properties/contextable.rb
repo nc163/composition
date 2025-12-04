@@ -5,9 +5,9 @@ module Composition # :nodoc:
     module Contextable
       extend ActiveSupport::Concern
 
-      included do
-        prepend ContextInitialization
-      end
+      # included do
+      #   prepend ContextInitialization
+      # end
 
       module ContextInitialization
         def initialize(*args, **kwargs, &block)
